@@ -1,0 +1,38 @@
+body, html {
+    height: 100%;
+    display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.bg {
+    /* The image used */
+    background-image: linear-gradient(rgba(156, 131, 117, 0.8), rgba(156, 131, 117, 0.8)), url("/images/bench.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-reg {
+    /* The image used */
+    background-image: linear-gradient(rgba(156, 131, 117, 0.8), rgba(156, 131, 117, 0.8)), url("/images/adeolu.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* .top{
+    margin-top: 15%;
+} */
