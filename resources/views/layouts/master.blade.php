@@ -23,6 +23,14 @@
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link rel="icon" href="{{asset('images/logo.png')}}">
 
+    <style>
+        .ion-icon {
+            font-size: 64px;
+            position: absolute;
+            transform: translate(50%, 50%);
+        }
+    </style>
+
 </head>
 
 <body>
@@ -87,7 +95,7 @@
         </nav>
         <div class="sidenav d-none d-md-block">
             <a href="/the-hub" class="{{ request()->is('the-hub') || request()->is('the-hub/*') ? 'active' : '' }}"> The Hub</a>
-            <a href="/profile/{{Auth::user()->slug}}" class="{{ request()->is('profile/*') || request()->is('profile/*/edit') ? 'active' : '' }}"></i>Profile</a>
+            <a href="/profile/{{Auth::user()->slug}}" class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"></i>Profile</a>
             <a href="/news" class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
             <a href="/admin/messages" class="{{ request()->is('sites/*/edit') ? 'active' : '' }}"></i>Conversations</a>
             <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
@@ -98,6 +106,7 @@
         </main>
     </div>
     <script src="{{ asset('js/aos.js') }}"></script>
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
 </body>
 
 </html>

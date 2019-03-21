@@ -1,28 +1,52 @@
-@extends('layouts/master') 
+@extends('layouts/master')
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
             <div class="card border-0">
-                <img class="card-img-top img-fluid" src="/storage/profile/{{$user->avatar}}" alt="Profile image">
+                <img class="card-img-top img-fluid" src="/images/{{$user->avatar}}" alt="Profile image">
                 <div class="card-body">
                     <h3 class="card-title font-weight-bold">{{$user->name}}</h3>
                     @if (Auth::user()->slug == $user->slug)
-                    <p> <i class="fas fa-map-marked-alt"> </i> {{ $user->location == null ? " Nill" : $user->location}}</p>
-                    <p> <i class="far fa-envelope"> </i> {{ $user->email == null ? " Nill" : $user->email}}</p>
+                        <p> <i class="fas fa-map-marked-alt"> </i> {{ $user->location == null ? " Nill" : $user->location}}</p>
+                        <p> <i class="far fa-envelope"> </i> {{ $user->email == null ? " Nill" : $user->email}}</p>
+                        <p><ion-icon name="globe"></ion-icon> {{$user->website == null ? "Nill" : $user->website}}</p>
+                        <p><ion-icon name="call"></ion-icon> {{$user->phone == null ? "Nill" : $user->phone}}</p>
+                        <p><ion-icon name="briefcase"></ion-icon> {{$user->businessName}}</p>
                     @endif
                 </div>
+                <a href="{{$user->slug}}/edit" class="btn btn-info">Edit</a>
             </div>
         </div>
         <div class="col-md-9">
             <div class="card border-0">
                 <div class="card-body">
                     <H1>Description</H1>
+                    <p>{{ $user->description == null ? "No description" : $user->description }}</p>
                 </div>
             </div>
             <div class="card border-0 my-3">
                 <div class="card-body">
                     <H1>Products</H1>
+                    @if($products)
+                        <div class="row">
+                        @foreach($products as $product)
+                            <div class="col-sm-3">
+                                <a href="{{route('profile.edit_product', $product->id)}}">
+                                    <img height="auto" width="150" src="/images/{{$product->image}}" alt="Product Image">
+                                </a>
+                                <div><b>Name</b>: {{str_limit($product->name, 12)}}</div>
+                                <div><b>Price</b>: ${{$product->price}}</div>
+                                <div style="padding-bottom: 5px;"><b>Desc</b>: {{str_limit($product->description, 12)}}</div>
+                            </div>
+                        @endforeach
+                            <div style="border: 1px dotted; width: 150px; height: 150px; border-radius: 4px;">
+                                <a href="{{$user->slug}}/add_product">
+                                    <ion-icon name="add" class="ion-icon"></ion-icon>
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -40,9 +64,9 @@
     <i class="fas fa-phone py-3"></i> <small class="text-muted">Please provide your phone number</small> <br> @else
     <i class="fas fa-phone py-3"></i> <strong>{{$user->phone}}</strong> <br> @endif @if ($user->website == null)
     <i class="fas fa-link py-3"></i> <small class="text-muted">Please provide your website address</strong> <br>
-                            @else 
+                            @else
                             <i class="fas fa-link py-3"></i> <strong>{{$user->website}}</strong> <br>
-                        @endif 
+                        @endif
                         <a href="/profile/{{$user->slug}}/edit" class="btn btn-primary btn-block py-3"> Edit</a>
                     @else
                         @if ($user->location != null)

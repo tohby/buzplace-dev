@@ -34,4 +34,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/news', 'newsController');
     Route::get('/profile/{user}', 'profileController@show');
     Route::get('/profile/{user}/edit', 'profileController@edit');
+    Route::resource('/profile', 'ProfileController', ['names'=>[
+        'view'=>'profile.view',
+        'edit'=>'profile.edit'
+    ]]);
+    Route::get('/profile/{user}/add_product', 'ProfileController@create_product');
+    Route::post('add_product', 'ProfileController@store_product');
+    Route::resource('/product', 'ProductsController', ['names'=>[
+        'edit'=>'profile.edit_product'
+    ]]);
 });

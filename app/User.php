@@ -33,4 +33,8 @@ class User extends Authenticatable implements MustVerifyEmail
     return 'slug';
 }
 
+    public function products(){
+        return $this->hasMany('App\Products');
+    }
+
 }

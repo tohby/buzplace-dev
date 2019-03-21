@@ -51,3 +51,13 @@ $factory->define(App\News::class, function (Faker $faker) {
         'content' => $faker->realText($maxNbChars = 2000, $indexSize = 2),
     ];
 });
+
+$factory->define(App\Products::class, function  (Faker $faker) {
+    return [
+        'user_id' => 1,
+        'name' => $faker->name,
+        'price' => $faker->randomDigit,
+        'description' => $faker->sentence,
+        'image' => 'https://via.placeholder.com/150'
+    ];
+});
