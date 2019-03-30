@@ -43,4 +43,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/product', 'ProductsController', ['names'=>[
         'edit'=>'profile.edit_product'
     ]]);
+    Route::post('comment', 'NewsController@storeComment');
+    Route::post('comment/reply', 'CommentRepliesController@store');
+    Route::get('comment/delete/{id}', 'NewsController@deleteComment');
+    Route::get('comment/edit/{id}', 'NewsController@editComment');
+    Route::get('comment/reply/delete/{id}', 'CommentRepliesController@destroy');
+    Route::get('comment/reply/edit/{id}', 'CommentRepliesController@edit');
 });

@@ -27,7 +27,9 @@
         .ion-icon {
             font-size: 64px;
             position: absolute;
-            transform: translate(50%, 50%);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 
@@ -105,8 +107,10 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    @yield('scripts')
 </body>
 
 </html>

@@ -14,10 +14,6 @@
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('price', 'Price:') !!}
-                    {!! Form::number('price', null, ['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group">
                     {!! Form::label('image', 'Image:') !!}
                     {!! Form::file('image', null, ['class'=>'form-control']) !!}
                 </div>

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\CommentReply;
 use Illuminate\Http\Request;
-use App\News;
 use Illuminate\Support\Facades\Auth;
 
-class NewsController extends Controller
+class CommentRepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,6 @@ class NewsController extends Controller
     public function index()
     {
         //
-        $news = News::simplePaginate(15);
-        return view('news/index')->with('news', $news);
     }
 
     /**
@@ -40,6 +37,15 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //
+        $user = Auth::user();
+        $data = [
+            'comment_id' => $request->comment_id,
+            'photo' => $user->avatar,
+            'author' => $user->name,
+            'body' => $request->body
+        ];
+        CommentReply::create($data);
+        return redirect()->back();
     }
 
     /**
@@ -51,9 +57,6 @@ class NewsController extends Controller
     public function show($id)
     {
         //
-        $news = News::findOrFail($id);
-        $comments = $news->comment()->get();
-        return view('news/news-item', compact('news', 'comments'));
     }
 
     /**
@@ -88,29 +91,7 @@ class NewsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function storeComment(Request $request) {
-        $user = Auth::user();
-        $data = [
-            'news_id' => $request->news_id,
-            'author' => $user->name,
-            'photo' => $user->avatar,
-            'body' => $request->body
-        ];
-        Comment::create($data);
-        return redirect('/news/'.$request->news_id.'');
-    }
-
-    public function deleteComment($id){
-        Comment::findOrFail($id)->delete();
+        CommentReply::findOrFail($id)->delete();
         return redirect()->back();
-    }
-
-    public function editComment($id, Request $request){
-        $news = News::findOrFail($request->news_id);
-        $comment = Comment::findOrFail($id);
-        $comments = $news->comment()->get();
-        return view('news/news-item', compact('comment', 'news', 'comments'));
     }
 }

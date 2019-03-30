@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('email', 'Email:') !!}
-                    {!! Form::email('email', null, ['class'=>'form-control']) !!}
+                    {!! Form::email('email', null, ['class'=>'form-control', 'readonly'=>'true']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('description', 'Description:') !!}
@@ -39,10 +39,6 @@
                 <div class="form-group">
                     {!! Form::label('businessName', 'Business Name:') !!}
                     {!! Form::text('businessName', null, ['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('password', 'Password:') !!}
-                    {!! Form::password('password', ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Update Profile', ['class'=>'btn btn-primary']) !!}
