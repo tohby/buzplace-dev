@@ -1,6 +1,25 @@
 @extends('layouts/master')
 @section('content')
     <div class="container">
+        <div class="col-lg-4">
+            <div class="share">
+                <a href="{{ $url = isset($twitter) ? $twitter : '' }}" target="_blank">
+                    <ion-icon class="icon" name="logo-twitter"></ion-icon>
+                </a>
+                <a href="{{ $url = isset($whatsapp) ? $whatsapp : '' }}" target="_blank">
+                    <ion-icon class="icon" name="logo-whatsapp"></ion-icon>
+                </a>
+                <a href="{{ $url = isset($pinterest) ? $pinterest : '' }}" target="_blank">
+                    <ion-icon class="icon" name="logo-pinterest"></ion-icon>
+                </a>
+                <a href="{{ $url = isset($linkedin) ? $linkedin : '' }}" target="_blank">
+                    <ion-icon class="icon" name="logo-linkedin"></ion-icon>
+                </a>
+                <a href="{{ $url = isset($facebook) ? $facebook : '' }}" target="_blank">
+                    <ion-icon class="icon" name="logo-facebook"></ion-icon>
+                </a>
+            </div>
+        </div>
         <div class="col-lg-8 offset-2">
             <h1 class="mt-4">{{ $news->headline }}</h1>
             <p class="lead">
@@ -17,17 +36,30 @@
             <div class="card my-4">
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
-                    {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment']) !!}
+                    @if (isset($comment))
+                        {!! Form::open(['method'=>'GET', 'action'=>['NewsController@updateComment', $comment->id]]) !!}
+                            <input type="hidden" name="news_id" value="{{$news->id}}">
+                            <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                            <div class="form-group">
+                                {!! Form::textarea('body', $comment->body, ['class'=>'form-control', 'rows'=>3]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::submit('Update Comment', ['class'=>'btn btn-primary']) !!}
+                            </div>
+                            {{csrf_field()}}
+                        {!! Form::close() !!}
+                    @else
+                        {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment']) !!}
                         <input type="hidden" name="news_id" value="{{$news->id}}">
                         <div class="form-group">
-                            <span style="display: none;">{{ $comment = isset($comment) ? $comment->body : '' }}</span>
-                            {!! Form::textarea('body', $comment, ['class'=>'form-control', 'rows'=>3]) !!}
+                            {!! Form::textarea('body', null , ['class'=>'form-control', 'rows'=>3]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}
                         </div>
                         {{csrf_field()}}
-                    {!! Form::close() !!}
+                        {!! Form::close() !!}
+                    @endif
                 </div>
             </div>
             @if(Auth::check())
@@ -54,21 +86,22 @@
                                     @endif
                                 </div>
                                 @if ($comment->reply)
-                                    @foreach($comment->reply as $reply)
+                                    @foreach($comment->reply as $replies)
                                         <div class="toggle-comment-reply">
                                             <div class="media mt-4">
-                                                <img style="height: 3.66rem; width: 3.66rem;" src="{{ $reply->photo ? '/images/'.$reply->photo : 'via.placeholder.com/50' }}" alt="" class="d-flex mr-3 rounded-circle">
+                                                <img style="height: 3.66rem; width: 3.66rem;" src="{{ $replies->photo ? '/images/'.$replies->photo : 'via.placeholder.com/50' }}" alt="" class="d-flex mr-3 rounded-circle">
                                                 <div class="media-body">
-                                                    <h5 class="mt-0">{{ $reply->author }}</h5>
-                                                    {{ $reply->body }}
+                                                    <h5 class="mt-0">{{ $replies->author }}</h5>
+                                                    {{ $replies->body }}
                                                     <div style="display: flex;">
-                                                        @if ($reply->author === Auth::user()->name)
-                                                            {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@edit', $comment->id], 'style'=>'margin-top:3px']) !!}
-                                                            <div class="form-group">
-                                                                {!! Form::submit('Edit', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
-                                                            </div>
+                                                        @if ($replies->author === Auth::user()->name)
+                                                            {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@edit', $replies->id], 'style'=>'margin-top:3px']) !!}
+                                                                <input type="hidden" name="news_id" value="{{$news->id}}">
+                                                                <div class="form-group">
+                                                                    {!! Form::submit('Edit', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+                                                                </div>
                                                             {!! Form::close() !!}
-                                                            {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@destroy', $reply->id], 'style'=>'margin-top:3px']) !!}
+                                                            {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@destroy', $replies->id], 'style'=>'margin-top:3px']) !!}
                                                                 <div class="form-group">
                                                                     {!! Form::submit('Delete', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
                                                                 </div>
@@ -81,16 +114,30 @@
                                     @endforeach
                                 @endif
                                 <div class="toggle-reply-form">
-                                    {!! Form::open(['method'=>'POST', 'action'=>'CommentRepliesController@store', 'style'=>'margin-top:15px', 'id'=>'reply']) !!}
-                                        <input type="hidden" name="comment_id" value="{{$comment->id}}">
-                                        <div class="form-group">
-                                            {!! Form::text('body', null, ['class'=>'form-control', 'autofocus'=>'true', 'id'=>'autofocus']) !!}
-                                        </div>
-                                        <div class="form-group">
-                                            {!! Form::submit('Reply', ['class'=>'btn btn-primary']) !!}
-                                        </div>
-                                        {{ csrf_field() }}
-                                    {!! Form::close() !!}
+                                    @if (isset($reply))
+                                        {!! Form::open(['method'=>'GET', 'action'=>'CommentRepliesController@update', 'style'=>'margin-top:15px', 'id'=>'reply']) !!}
+                                            <input type="hidden" name="news_id" value="{{$news->id}}">
+                                            <input type="hidden" name="reply_id" value="{{$reply->id}}">
+                                            <div class="form-group">
+                                                {!! Form::text('body', $reply->body, ['class'=>'form-control', 'id'=>'autofocus']) !!}
+                                            </div>
+                                            <div class="form-group">
+                                                {!! Form::submit('Update Reply', ['class'=>'btn btn-primary']) !!}
+                                            </div>
+                                            {{ csrf_field() }}
+                                        {!! Form::close() !!}
+                                    @else
+                                        {!! Form::open(['method'=>'POST', 'action'=>'CommentRepliesController@store', 'style'=>'margin-top:15px', 'id'=>'reply']) !!}
+                                            <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                                            <div class="form-group">
+                                                {!! Form::text('body', null, ['class'=>'form-control', 'id'=>'autofocus']) !!}
+                                            </div>
+                                            <div class="form-group">
+                                                {!! Form::submit('Reply', ['class'=>'btn btn-primary']) !!}
+                                            </div>
+                                            {{ csrf_field() }}
+                                        {!! Form::close() !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>

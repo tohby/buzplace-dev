@@ -11,7 +11,7 @@ class ProfileController extends Controller
 {
     //
     public function show(User $user){
-        $products = $user->products()->get();
+        $products = $user->products()->paginate(11);
         return view('profile/view', compact('user', 'products'));
     }
 

@@ -49,6 +49,7 @@ $factory->define(App\News::class, function (Faker $faker) {
         'Headline' => $faker->sentence,
         'image' => $faker->imageUrl($width = 640, $height = 480),
         'content' => $faker->realText($maxNbChars = 2000, $indexSize = 2),
+        'slug' => $faker->slug()
     ];
 });
 
@@ -58,5 +59,15 @@ $factory->define(App\Products::class, function  (Faker $faker) {
         'name' => $faker->name,
         'description' => $faker->sentence,
         'image' => $faker->imageUrl($width = 640, $height = 480)
+    ];
+});
+
+$factory->define(App\Posts::class, function (Faker $faker) {
+    return [
+        'user_id' => 1,
+        'image' => $faker->imageUrl($width = 400, $height = 400),
+        'title' => $faker->sentence(7, 11),
+        'content' => $faker->paragraphs(rand(3, 5), true),
+        'slug' => $faker->slug()
     ];
 });

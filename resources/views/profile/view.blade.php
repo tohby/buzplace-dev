@@ -46,6 +46,9 @@
                             </div>
                         </div>
                     @endif
+                    <div class="col-sm-6 offset-5" style="padding-top: 1rem;">
+                        {{ $products->render() }}
+                    </div>
                 </div>
             </div>
         </div>

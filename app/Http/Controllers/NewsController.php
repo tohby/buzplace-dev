@@ -52,8 +52,14 @@ class NewsController extends Controller
     {
         //
         $news = News::findOrFail($id);
+        $facebook = $news->getShareUrl();
+        $twitter = $news->getShareUrl('twitter');
+        $whatsapp = $news->getShareUrl('whatsapp');
+        $linkedin = $news->getShareUrl('linkedin');
+        $pinterest = $news->getShareUrl('pinterest');
         $comments = $news->comment()->get();
-        return view('news/news-item', compact('news', 'comments'));
+        return view('news/news-item',
+            compact('news', 'comments', 'twitter', 'whatsapp', 'facebook', 'linkedin', 'pinterest'));
     }
 
     /**
@@ -112,5 +118,12 @@ class NewsController extends Controller
         $comment = Comment::findOrFail($id);
         $comments = $news->comment()->get();
         return view('news/news-item', compact('comment', 'news', 'comments'));
+    }
+
+    public function updateComment(Request $request){
+        $input = $request->all();
+        $comment = Comment::findOrFail($request->comment_id);
+        $comment->update($input);
+        return redirect('/news/'.$request->news_id.'');
     }
 }
