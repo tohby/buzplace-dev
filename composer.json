@@ -9,6 +9,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravelcollective/html": "*",
+        "cviebrock/eloquent-sluggable": "*",
         "laravel/socialite": "^3.2",
         "laravel/tinker": "^1.0"
     },

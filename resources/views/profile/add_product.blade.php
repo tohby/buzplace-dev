@@ -10,10 +10,6 @@
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('price', 'Price:') !!}
-                    {!! Form::number('price', null, ['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group">
                     {!! Form::label('description', 'Description:') !!}
                     {!! Form::textarea('description', null, ['class'=>'form-control']) !!}
                 </div>

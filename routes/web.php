@@ -29,7 +29,9 @@ Route::group(['middleware' => 'guest'], function () {
     });
 });
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('/the-hub', 'hubController');
+    Route::resource('/the-hub', 'HubController', ['names'=>[
+        'create'=>'the-hub.create'
+    ]]);
     Route::resource('/directories', 'directoriesController');
     Route::resource('/news', 'newsController');
     Route::get('/profile/{user}', 'profileController@show');
@@ -43,4 +45,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/product', 'ProductsController', ['names'=>[
         'edit'=>'profile.edit_product'
     ]]);
+    Route::post('comment', 'NewsController@storeComment');
+    Route::post('comment/reply', 'CommentRepliesController@store');
+    Route::get('comment/delete/{id}', 'NewsController@deleteComment');
+    Route::get('comment/edit/{id}', 'NewsController@editComment');
+    Route::get('comment/reply/delete/{id}', 'CommentRepliesController@destroy');
+    Route::get('comment/reply/edit/{id}', 'CommentRepliesController@edit');
+    Route::get('comment/edit', 'NewsController@updateComment');
+    Route::get('comment/reply/edit', 'CommentRepliesController@update');
+    Route::get('/the-hub/{slug}', ['as'=>'post.view', 'uses'=>'HubController@show']);
 });

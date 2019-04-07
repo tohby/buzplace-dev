@@ -33,20 +33,22 @@
                         @foreach($products as $product)
                             <div class="col-sm-3">
                                 <a href="{{route('profile.edit_product', $product->id)}}">
-                                    <img height="auto" width="150" src="/images/{{$product->image}}" alt="Product Image">
+                                    <img height="auto" width="150" src="{{$product->image}}" alt="Product Image">
                                 </a>
                                 <div><b>Name</b>: {{str_limit($product->name, 12)}}</div>
-                                <div><b>Price</b>: ${{$product->price}}</div>
                                 <div style="padding-bottom: 5px;"><b>Desc</b>: {{str_limit($product->description, 12)}}</div>
                             </div>
                         @endforeach
-                            <div style="border: 1px dotted; width: 150px; height: 150px; border-radius: 4px;">
+                            <div style="border: 1px dotted; width: 150px; height: 150px; border-radius: 4px; position: relative;">
                                 <a href="{{$user->slug}}/add_product">
                                     <ion-icon name="add" class="ion-icon"></ion-icon>
                                 </a>
                             </div>
                         </div>
                     @endif
+                    <div class="col-sm-6 offset-5" style="padding-top: 1rem;">
+                        {{ $products->render() }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Posts;
+use App\Comment;
+use App\CommentReply;
+use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
-class HubController extends Controller
+class CommentRepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +18,6 @@ class HubController extends Controller
     public function index()
     {
         //
-        $posts = Posts::paginate(15);
-        foreach ($posts as $post) {
-            $facebook = $post->getShareUrl();
-            $twitter = $post->getShareUrl('twitter');
-            $linkedin = $post->getShareUrl('linkedin');
-        }
-        return view('the-hub/index', compact('posts', 'facebook', 'twitter', 'linkedin'));
     }
 
     /**
@@ -34,7 +28,6 @@ class HubController extends Controller
     public function create()
     {
         //
-        return view('the-hub.create');
     }
 
     /**
@@ -46,15 +39,14 @@ class HubController extends Controller
     public function store(Request $request)
     {
         //
-        $input = $request->all();
         $user = Auth::user();
-        if ($file = $request->file('image')) {
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['image'] = 'images/'.$name;
-        }
-        $user->posts()->create($input);
-        Session::flash('post_message', 'Your post has been created successfully');
+        $data = [
+            'comment_id' => $request->comment_id,
+            'photo' => $user->avatar,
+            'author' => $user->name,
+            'body' => $request->body
+        ];
+        CommentReply::create($data);
         return redirect()->back();
     }
 
@@ -64,17 +56,9 @@ class HubController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
         //
-        $posts = Posts::findBySlugOrFail($slug);
-        $facebook = $posts->getShareUrl();
-        $twitter = $posts->getShareUrl('twitter');
-        $whatsapp = $posts->getShareUrl('whatsapp');
-        $linkedin = $posts->getShareUrl('linkedin');
-        $pinterest = $posts->getShareUrl('pinterest');
-        return view('the-hub.show',
-            compact('posts', 'facebook', 'twitter', 'whatsapp', 'linkedin', 'pinterest'));
     }
 
     /**
@@ -83,9 +67,13 @@ class HubController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
+        $news = News::findOrFail($request->news_id);
+        $reply = CommentReply::findOrFail($id);
+        $comments = $news->comment()->get();
+        return view('news/news-item', compact('reply', 'news', 'comments'));
     }
 
     /**
@@ -95,9 +83,13 @@ class HubController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $input = $request->all();
+        $reply = CommentReply::findOrFail($request->reply_id);
+        $reply->update($input);
+        return redirect('/news/'.$request->news_id.'');
     }
 
     /**
@@ -109,5 +101,7 @@ class HubController extends Controller
     public function destroy($id)
     {
         //
+        CommentReply::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }
