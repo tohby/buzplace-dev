@@ -12,7 +12,7 @@
                         <p> <i class="far fa-envelope"> </i> {{ $user->email == null ? " Nill" : $user->email}}</p>
                         <p><ion-icon name="globe"></ion-icon> {{$user->website == null ? "Nill" : $user->website}}</p>
                         <p><ion-icon name="call"></ion-icon> {{$user->phone == null ? "Nill" : $user->phone}}</p>
-                        <p><ion-icon name="briefcase"></ion-icon> {{$user->businessName}}</p>
+                        <p><ion-icon name="briefcase"></ion-icon> {{$user->businessName == null ? "Nill" : $user->businessName}}</p>
                     @endif
                 </div>
                 <a href="{{$user->slug}}/edit" class="btn btn-info">Edit</a>

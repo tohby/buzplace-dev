@@ -100,6 +100,9 @@
             <a href="/admin/messages" class="{{ request()->is('sites/*/edit') ? 'active' : '' }}"></i>Conversations</a>
             <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
             <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
+            @if (Auth::user()->is_admin == true)
+                <a>admin</a>
+            @endif
         </div>
         <main class="py-4">
             @yield('content')
