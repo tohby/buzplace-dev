@@ -148,9 +148,6 @@
             <a href="/admin/messages" class="{{ request()->is('sites/*/edit') ? 'active' : '' }}"></i>Conversations</a>
             <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
             <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
-            @if (Auth::user()->is_admin == true)
-                <a>admin</a>
-            @endif
         </div>
         <main class="py-4">
             @yield('content')
@@ -160,6 +157,9 @@
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
     @yield('scripts')
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'news-content' );
+    </script>
 </body>
-
 </html>

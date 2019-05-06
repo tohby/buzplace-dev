@@ -6,12 +6,14 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "cviebrock/eloquent-sluggable": "*",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
-        "laravelcollective/html": "*",
-        "cviebrock/eloquent-sluggable": "*",
         "laravel/socialite": "^3.2",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "laravelcollective/html": "*",
+        "laravolt/avatar": "^2.2",
+        "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -24,7 +24,7 @@
             <h1 class="mt-4">{{ $news->headline }}</h1>
             <p class="lead">
                 by
-                <a href="#">News Author</a>
+                <a href="#">Admin</a>
             </p>
             <hr>
             <p>Posted {{$news->created_at->diffForHumans()}}</p>

@@ -80,6 +80,7 @@ class LoginController extends Controller
             $user->email = $google_user->getEmail();
             $user->provider_id = $google_user->getId();
             $user->slug = $slug;
+            $user->avater = "img-placeholder.png";
             $user->save();
             $id = $user->id;
         } elseif(!($user->provider_id)){
