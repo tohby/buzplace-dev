@@ -88,6 +88,9 @@
     <script>
         AOS.init();
     </script>
+    <script>
+        CKEDITOR.replace( 'summary-ckeditor' );
+    </script>
 </body>
 
 </html>

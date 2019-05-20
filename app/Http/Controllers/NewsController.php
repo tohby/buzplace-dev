@@ -41,6 +41,33 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'headline' => 'required',
+            'image' => 'required|image|max:5000',
+            'content'  => 'required',
+        ]);
+        if($request->hasFile('image')){
+            //get file name with the extension
+            $fileNameWithExt = $request->file('image')->getClientOriginalName();
+            //get just file name
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get extension
+            $extension = $request->file('image')->getClientOriginalExtension();
+            //filename to store
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //image upload
+            $path = $request->file('image')->storeAs('public/news-images', $fileNameToStore);
+        }else {
+            $fileNameToStore = "noSubmission";
+        }
+        $news = News::create([
+            'headline' => $request->input('name'),
+            'content' => $request->input('content'),
+            'image' => $fileNameToStore,
+        ]);
+
+        // return redirect('/news');
+        return $news;
     }
 
     /**
