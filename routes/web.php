@@ -54,4 +54,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('comment/edit', 'NewsController@updateComment');
     Route::get('comment/reply/edit', 'CommentRepliesController@update');
     Route::get('/the-hub/{slug}', ['as'=>'post.view', 'uses'=>'HubController@show']);
+    Route::get('/admin/messages', 'MessageController@index');
+    Route::get('/loadMessage', 'MessageController@message');
+    Route::post('/admin/messages/getMessage/{id}', 'MessageController@getMessage');
+    Route::post('/admin/messages/sendMessage/{id}', 'MessageController@sendMessage');
 });

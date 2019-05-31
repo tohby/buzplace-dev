@@ -1,6 +1,5 @@
 @extends('layouts/master')
+
 @section('content')
-    <div class="container-fluid" id="app">
-        
-    </div>
+    <div id="messages"></div>
 @endsection

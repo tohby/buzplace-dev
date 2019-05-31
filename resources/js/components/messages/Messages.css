@@ -1,0 +1,239 @@
+/*-------------------- Core Styles --------------------*/
+
+:root {
+    --border: 1px solid rgba(0, 0, 0, 0.1);
+    --light-grey: rgba(0, 0, 0, 0.05);
+    --grey-text: rgba(153, 153, 153, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.py-4 {
+    margin-top: 70px;
+    padding: 0 !important;
+}
+
+.my-column {
+    padding: 0;
+    margin: 0;
+}
+
+.no-overflow {
+    overflow: hidden;
+}
+
+/*------------- Styles for Custom Scrollbars ---------------*/
+
+.recipients-body::-webkit-scrollbar,
+.messages-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.recipients-body::-webkit-scrollbar-track,
+.messages-body::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 4px;
+    width: 3px;
+}
+
+.recipients-body::-webkit-scrollbar-thumb,
+.messages-body::-webkit-scrollbar-thumb {
+    background-color: #1da1f2;
+    border-radius: 4px;
+    width: 3px;
+}
+
+.recipients-body::-webkit-scrollbar-thumb:hover,
+.messages-body::-webkit-scrollbar-thumb:hover {
+    background-color: #0a4aac;
+    width: 8px;
+}
+
+.recipients-body::-webkit-scrollbar-track:hover {
+    background-color: #f1f1f1;
+    width: 8px;
+}
+
+/*----------------- Styles for User List -----------------*/
+
+.recipients-container {
+    border-right: var(--border);
+    overflow: hidden;
+}
+
+.recipients-container hr {
+    margin-bottom: 0.7rem;
+}
+
+.recipients-header,
+.messages-header {
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.recipients-body {
+    overflow-y: scroll;
+    height: 80vh;
+}
+
+.recipients-body ul {
+    list-style: none;
+}
+
+.recipients-list {
+    display: flex;
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.recipients-list:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+.recipients-list--selected,
+.recipients-list:hover {
+    background-color: var(--light-grey);
+}
+
+.recipients-list--img {
+    height: 3.75rem;
+    border-radius: 50%;
+    margin: 0 1rem;
+}
+
+.recipients-list--name {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.recipients-list--msg {
+    color: var(--grey-text);
+}
+
+/*---------------- Styles for Message Content -------------------- */
+
+.messages-header-text {
+    margin-top: 0.45rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: inline-block;
+    font-size: 1.125rem;
+}
+
+.green-dot,
+.red-dot {
+    border-radius: 50%;
+    height: 6px;
+    width: 6px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.green-dot {
+    background: rgb(66, 183, 42);
+}
+
+.red-dot {
+    background: red;
+}
+
+/*---------- Styles for Aligning and Viewing Message Content / History -------*/
+
+.messages-body .welcome-text {
+    text-align: center;
+    display: block;
+}
+
+.messages-body {
+    overflow-y: scroll;
+    height: 65vh;
+}
+
+.sender:first-child {
+    margin-top: 1rem;
+}
+
+.sender {
+    padding: 0.5rem 1rem;
+    max-width: 80%;
+    border-radius: 48px;
+    margin-right: 1rem;
+    float: right;
+    color: #fff;
+}
+
+.receiver {
+    display: flex;
+    margin-left: 0.5rem;
+    width: 80%;
+    position: relative;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.receiver img {
+    width: 28px;
+    height: 28px;
+    margin-right: 0.3rem;
+    margin-top: 1.5rem;
+    position: absolute;
+    bottom: 0;
+    border-radius: 50%;
+}
+
+.sender-msg,
+.receiver-msg {
+    margin-left: 2rem;
+}
+
+.sender-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.sender-msg div,
+.receiver-msg div {
+    margin-top: 0.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 48px;
+    width: fit-content;
+}
+
+.sender-msg div {  background: #2a79f2; }
+
+.receiver-msg div { background: #e6ecf0; }
+
+/*------------- Styles for Sending Message -------------*/
+
+.chat-msg {
+    position: relative;
+}
+
+.chat-msg-text {
+    border: 0;
+    outline: none;
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    margin-bottom: -0.5rem;
+}
+
+.send-button {
+    position: absolute;
+    top: 19%;
+    right: 5%;
+    font-size: 1.5rem;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.send {
+    color: #2a79f2;
+}

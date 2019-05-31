@@ -11,6 +11,16 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('new-message', function () {
+    return Auth::check();
+});
+
+Broadcast::channel('Message.{from}.{to}', function ($user, $from, $to) {
+    return $user->slug == $to;
 });
