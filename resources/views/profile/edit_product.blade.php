@@ -3,7 +3,8 @@
     <div class="container-fluid">
         Edit Product
     </div>
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
         <div class="col-md-3">
             <img style="width: 100%; border-radius: 8px;" src="/images/{{$product->image}}" alt="Profile Image">
         </div>
@@ -33,4 +34,6 @@
             {!! Form::close() !!}
         </div>
     </div>
+    </div>
+    
 @endsection

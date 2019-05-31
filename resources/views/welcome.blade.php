@@ -21,9 +21,11 @@
             Enhance your supply chain networks
         </h1>
     </div>
-    <div class="row w-100">
-        <div class="col-lg-6 seg1"></div>
-        <div class="col-lg-6 text p-5">
+    <div class="row w-100 h-100">
+        <div class="col-lg-6 segment-1 ">
+            
+        </div>
+        <div class="col-lg-6 text py-5">
             <div class="m-5">
                 <p class="font-weight-bold">
                     Need help with your next purchase?
@@ -74,7 +76,7 @@
         </div>
     </div>
     {{-- cosult segment --}}
-    <div class="row w-100 ml-0 mt-5">
+    <div class="row w-100 ml-0 mt-5 h-100">
         <div class="col-lg-6 text bg-blue p-5">
             <p class="p2 font-weight-bold mt-5">Need guiadiance? we've got you.</p>
             <h1 class="text-white">Get consultations from our professionals.</h1>
@@ -84,7 +86,9 @@
                 Let's do the worry and research, just tell us your needs. 
             </small></h4>
         </div>
-        <div class="col-lg-6 seg2"></div>
+        <div class="col-lg-6 segment-2">
+            
+        </div>
     </div>
 
     {{-- NEWS SECTION --}}
