@@ -24,6 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="icon" href="{{asset('images/logo.png')}}">
 
     <style>
@@ -82,7 +83,7 @@
 
 </head>
 
-<body>
+<body class="{{ request()->is('admin/messages') || request()->is('admin/messages/*') ? 'no-overflow' : '' }}">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light fixed-top">
             <div class="container-fluid">
@@ -146,7 +147,7 @@
             <a href="/the-hub" class="{{ request()->is('the-hub') || request()->is('the-hub/*') ? 'active' : '' }}"> The Hub</a>
             <a href="/profile/{{Auth::user()->slug}}" class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"></i>Profile</a>
             <a href="/news" class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
-            <a href="/admin/messages" class="{{ request()->is('sites/*/edit') ? 'active' : '' }}"></i>Conversations</a>
+            <a href="/admin/messages" class="{{ request()->is('admin/messages') || request()->is('admin/messages/*') ? 'active' : '' }}"></i>Conversations</a>
             <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
             <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
         </div>
@@ -164,6 +165,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+<<<<<<< HEAD
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+=======
     <script src="{{ asset('js/bs-custom-file-input.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -175,6 +179,7 @@
             })
           });
     </script>
+>>>>>>> 6671dd80f332d374d24891289dc4d5d5fd2997d9
     @yield('scripts')
 </body>
 </html>
