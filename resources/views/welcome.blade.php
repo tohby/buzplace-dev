@@ -80,7 +80,7 @@
         <div class="col-lg-6 text bg-blue p-5">
             <p class="p2 font-weight-bold mt-5">Need guiadiance? we've got you.</p>
             <h1 class="text-white">Get consultations from our professionals.</h1>
-            <h4 class="font-weight-light mt-3 text-muted font-italic"><small>From our directory, you  can now reach more businesses and services than ever.
+            <h4 class="font-weight-light mt-5 text-muted"><small>From our directory, you  can now reach more businesses and services than ever.
                  However, we acknowledge some businesses have specific needs for products/service/connection to some resources sometimes uneasy to find across the world. Let our team of 
                 experts and consultancy team locate your needs and products for you. Our goal is to contact business  Get your the best offers, research products and solve any such challenges.
                 Let's do the worry and research, just tell us your needs. 
