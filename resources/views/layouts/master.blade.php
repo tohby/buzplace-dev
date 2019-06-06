@@ -27,60 +27,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="icon" href="{{asset('images/logo.png')}}">
 
-    <style>
-        .ion-icon {
-            font-size: 64px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .share {
-            display: flex;
-            position: fixed;
-            flex-direction: column;
-            justify-content: center;
-            height: 60vh;
-        }
-
-        .icon {
-            font-size: 1.7rem;
-            cursor: pointer;
-            padding: 1rem;
-        }
-
-        .gallery {
-            cursor: pointer;
-            position: relative;
-        }
-
-        .gallery__item {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, .7);
-            opacity: 0;
-            z-index: -1;
-        }
-
-        .gallery__item a {
-            color: #fff;
-            font-size: 1.7rem;
-            cursor: pointer;
-            padding: 1rem;
-        }
-
-        .gallery:hover .gallery__item {
-            opacity: 1;
-            z-index: 1000;
-        }
-    </style>
-
 </head>
 
 <body class="{{ request()->is('admin/messages') || request()->is('admin/messages/*') ? 'no-overflow' : '' }}">
@@ -165,9 +111,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
-<<<<<<< HEAD
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-=======
     <script src="{{ asset('js/bs-custom-file-input.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -179,7 +123,6 @@
             })
           });
     </script>
->>>>>>> 6671dd80f332d374d24891289dc4d5d5fd2997d9
     @yield('scripts')
 </body>
 </html>
