@@ -16,6 +16,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
@@ -23,7 +24,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="icon" href="{{asset('images/logo.png')}}">
 
     <style>
@@ -117,7 +117,7 @@
                                 <a class="nav-link" href="/the-hub">The Hub</a>
                                 <a class="nav-link" href="/profile/{{Auth::user()->slug}}">Profile</a>
                                 <a class="nav-link" href="/news">News</a>
-                                <a class="nav-link" href="/the-hub">Conversations</a>
+                                <a class="nav-link" href="/admin/messages">Conversations</a>
                                 <a class="nav-link" href="/directories">Directories</a>
                                 <a class="nav-link" href="/the-hub">Consultation</a>
                             </div>
@@ -151,14 +151,30 @@
             <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
         </div>
         <main class="py-4">
+            <div class="container my-3">
+                @include('layouts/messages')
+            </div>
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <!-- <script>
+        CKEDITOR.replace( 'news-content' );
+    </script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/bs-custom-file-input.js') }}"></script>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            bsCustomFileInput.init()
+            var btn = document.getElementById('btnResetForm')
+            var form = document.querySelector('form')
+            btn.addEventListener('click', function () {
+              form.reset()
+            })
+          });
+    </script> -->
     @yield('scripts')
 </body>
-
 </html>

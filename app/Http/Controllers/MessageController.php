@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BroadcastMessage;
 use App\Message;
 use App\User;
+use App\Events\BroadcastMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

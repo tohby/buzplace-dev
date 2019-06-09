@@ -9,7 +9,8 @@ class Messages extends Component {
             recent_message: {},
             user: {},
             users: [],
-            userAuth: {}
+            userAuth: {},
+            tmp_msg: {}
         };
     }
 
@@ -29,8 +30,8 @@ class Messages extends Component {
 
     componentDidMount() {
         Echo.private('new-message')
-            .listen('BroadcastMessage', e => {
-                console.log('from broadcasting', e.text);
+            .listen('BroadcastMessage', (e) => {
+                this.setState({ tmp_msg: e });
             });
     }
 
@@ -277,8 +278,8 @@ class Messages extends Component {
             let text = document.querySelector('#chat-msg').value;
             $.ajax({
                 url: `/admin/messages/sendMessage/${slug}`,
-                method: 'post',
-                data: { to: slug, text },
+                method: 'get',
+                data: { to: slug, text: text },
                 success: function(response) {
                     console.log('from sending message', response);
                     axios.post(`/admin/messages/getMessage/${slug}`)

@@ -6,13 +6,17 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "algolia/algoliasearch-client-php": "2.2",
         "cviebrock/eloquent-sluggable": "*",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
+        "laravel/scout": "^7.1",
         "laravel/socialite": "^3.2",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "*",
-        "pusher/pusher-php-server": "^3.4"
+        "laravolt/avatar": "^2.2",
+        "pusher/pusher-php-server": "^3.4",
+        "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
