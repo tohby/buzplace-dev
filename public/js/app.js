@@ -14191,9 +14191,15 @@ window.Popper = __webpack_require__(4).default;
  */
 
 try {
+<<<<<<< HEAD
   window.$ = window.jQuery = __webpack_require__(5);
 
   __webpack_require__(19);
+=======
+    window.$ = window.jQuery = __webpack_require__(5);
+
+    __webpack_require__(19);
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 } catch (e) {}
 
 /**
@@ -14215,9 +14221,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
+<<<<<<< HEAD
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+=======
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 }
 
 /**
@@ -14231,10 +14243,17 @@ if (token) {
 window.Pusher = __webpack_require__(40);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */]({
+<<<<<<< HEAD
   broadcaster: 'pusher',
   key: '50c533768dfc523b0820',
   cluster: 'ap1',
   encrypted: true
+=======
+    broadcaster: 'pusher',
+    key: '4ac055a363f9274abf20',
+    cluster: 'ap1',
+    encrypted: true
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 });
 
 /***/ }),
@@ -71513,8 +71532,12 @@ var Messages = function (_Component) {
             recent_message: {},
             user: {},
             users: [],
+<<<<<<< HEAD
             userAuth: {},
             tmp_msg: {}
+=======
+            userAuth: {}
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
         };
         return _this;
     }
@@ -71542,16 +71565,25 @@ var Messages = function (_Component) {
     }, {
         key: "componentDidMount",
         value: function componentDidMount() {
+<<<<<<< HEAD
             var _this3 = this;
 
             Echo.private('new-message').listen('BroadcastMessage', function (e) {
                 _this3.setState({ tmp_msg: e });
+=======
+            Echo.private('new-message').listen('BroadcastMessage', function (e) {
+                console.log('from broadcasting', e.text);
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
             });
         }
     }, {
         key: "showFirstRecipient",
         value: function showFirstRecipient() {
+<<<<<<< HEAD
             var _this4 = this;
+=======
+            var _this3 = this;
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.Fragment,
@@ -71561,7 +71593,11 @@ var Messages = function (_Component) {
                     {
                         className: "recipients-list\n                        recipients-list--selected\n                        selected-" + this.state.user.slug,
                         onClick: function onClick() {
+<<<<<<< HEAD
                             return _this4.loadMessageBox(_this4.state.user.slug);
+=======
+                            return _this3.loadMessageBox(_this3.state.user.slug);
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
                         }
                     },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
@@ -71589,7 +71625,11 @@ var Messages = function (_Component) {
     }, {
         key: "showOtherRecipients",
         value: function showOtherRecipients() {
+<<<<<<< HEAD
             var _this5 = this;
+=======
+            var _this4 = this;
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.Fragment,
@@ -71601,7 +71641,11 @@ var Messages = function (_Component) {
                             key: user.slug,
                             className: "recipients-list\n                        selected-" + user.slug,
                             onClick: function onClick() {
+<<<<<<< HEAD
                                 return _this5.loadMessageBox(user.slug);
+=======
+                                return _this4.loadMessageBox(user.slug);
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
                             }
                         },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
@@ -71620,7 +71664,11 @@ var Messages = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "span",
                                 { className: "recipients-list--msg" },
+<<<<<<< HEAD
                                 _this5.getUserLastMsg(user)
+=======
+                                _this4.getUserLastMsg(user)
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
                             )
                         )
                     );
@@ -71643,7 +71691,11 @@ var Messages = function (_Component) {
     }, {
         key: "loadMessageBox",
         value: function loadMessageBox(id) {
+<<<<<<< HEAD
             var _this6 = this;
+=======
+            var _this5 = this;
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 
             document.querySelector('.recipients-list--selected').classList.remove('recipients-list--selected');
             document.querySelector(".selected-" + id).classList.add('recipients-list--selected');
@@ -71653,7 +71705,11 @@ var Messages = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post("/admin/messages/getMessage/" + id).then(function (response) {
                 var messages = response.data.messages;
                 var user = response.data.user;
+<<<<<<< HEAD
                 _this6.state.user = user;
+=======
+                _this5.state.user = user;
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
                 document.querySelector('.messages-body').innerHTML = "\n                        <span class=\"welcome-text\">This is the beginning of your conversation with " + user.name + "</span>\n                    ";
                 for (var i = 0; i < messages.length; i++) {
                     if (messages[i].to == user.slug) {
@@ -71760,7 +71816,11 @@ var Messages = function (_Component) {
                 var text = document.querySelector('#chat-msg').value;
                 $.ajax({
                     url: "/admin/messages/sendMessage/" + slug,
+<<<<<<< HEAD
                     method: 'get',
+=======
+                    method: 'post',
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
                     data: { to: slug, text: text },
                     success: function success(response) {
                         console.log('from sending message', response);
@@ -71791,7 +71851,11 @@ var Messages = function (_Component) {
     }, {
         key: "render",
         value: function render() {
+<<<<<<< HEAD
             var _this7 = this;
+=======
+            var _this6 = this;
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 
             var firstRecipient = this.showFirstRecipient();
             var otherRecipients = this.showOtherRecipients();
@@ -71858,10 +71922,17 @@ var Messages = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "form",
                                     { method: "post", className: "chat-msg", id: "chat-form", onSubmit: function onSubmit() {
+<<<<<<< HEAD
                                             return _this7.formSubmit();
                                         } },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", { placeholder: "Type a message...", id: "chat-msg", className: "chat-msg-text", onKeyDown: function onKeyDown() {
                                             return _this7.keyPressed();
+=======
+                                            return _this6.formSubmit();
+                                        } },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", { placeholder: "Type a message...", id: "chat-msg", className: "chat-msg-text", onKeyDown: function onKeyDown() {
+                                            return _this6.keyPressed();
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
                                         } }),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "button",
@@ -71922,7 +71993,11 @@ exports = module.exports = __webpack_require__(53)(false);
 
 
 // module
+<<<<<<< HEAD
 exports.push([module.i, "/*-------------------- Core Styles --------------------*/\n\n:root {\n    --border: 1px solid rgba(0, 0, 0, 0.1);\n    --light-grey: rgba(0, 0, 0, 0.05);\n    --grey-text: rgba(153, 153, 153, 1);\n}\n\n* {\n    margin: 0;\n    padding: 0;\n}\n\n.py-4 {\n    margin-top: 70px;\n    padding: 0 !important;\n}\n\n.my-column {\n    padding: 0;\n    margin: 0;\n}\n\n.no-overflow {\n    overflow: hidden;\n}\n\n/*------------- Styles for Custom Scrollbars ---------------*/\n\n.recipients-body::-webkit-scrollbar,\n.messages-body::-webkit-scrollbar {\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track,\n.messages-body::-webkit-scrollbar-track {\n    background-color: #fff;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb,\n.messages-body::-webkit-scrollbar-thumb {\n    background-color: #1da1f2;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb:hover,\n.messages-body::-webkit-scrollbar-thumb:hover {\n    background-color: #0a4aac;\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track:hover {\n    background-color: #f1f1f1;\n    width: 8px;\n}\n\n/*----------------- Styles for User List -----------------*/\n\n.recipients-container {\n    border-right: var(--border);\n    overflow: hidden;\n}\n\n.recipients-container hr {\n    margin-bottom: 0.7rem;\n}\n\n.recipients-header,\n.messages-header {\n    text-align: center;\n    padding-top: 0.5rem;\n}\n\n.recipients-body {\n    overflow-y: scroll;\n    height: 80vh;\n}\n\n.recipients-body ul {\n    list-style: none;\n}\n\n.recipients-list {\n    display: flex;\n    cursor: pointer;\n    padding: 0.5rem 0;\n}\n\n.recipients-list:not(:last-child) {\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--selected,\n.recipients-list:hover {\n    background-color: var(--light-grey);\n}\n\n.recipients-list--img {\n    height: 3.75rem;\n    border-radius: 50%;\n    margin: 0 1rem;\n}\n\n.recipients-list--name {\n    font-weight: bold;\n    display: block;\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--msg {\n    color: var(--grey-text);\n}\n\n/*---------------- Styles for Message Content -------------------- */\n\n.messages-header-text {\n    margin-top: 0.45rem;\n    font-weight: 500;\n    line-height: 1.2;\n    display: inline-block;\n    font-size: 1.125rem;\n}\n\n.green-dot,\n.red-dot {\n    border-radius: 50%;\n    height: 6px;\n    width: 6px;\n    display: inline-block;\n    cursor: pointer;\n    margin-left: 1rem;\n}\n\n.green-dot {\n    background: rgb(66, 183, 42);\n}\n\n.red-dot {\n    background: red;\n}\n\n/*---------- Styles for Aligning and Viewing Message Content / History -------*/\n\n.messages-body .welcome-text {\n    text-align: center;\n    display: block;\n}\n\n.messages-body {\n    overflow-y: scroll;\n    height: 65vh;\n}\n\n.sender:first-child {\n    margin-top: 1rem;\n}\n\n.sender {\n    padding: 0.5rem 1rem;\n    max-width: 80%;\n    border-radius: 48px;\n    margin-right: 1rem;\n    float: right;\n    color: #fff;\n}\n\n.receiver {\n    display: flex;\n    margin-left: 0.5rem;\n    width: 80%;\n    position: relative;\n    margin-top: 3rem;\n    margin-bottom: 0.5rem;\n}\n\n.receiver img {\n    width: 28px;\n    height: 28px;\n    margin-right: 0.3rem;\n    margin-top: 1.5rem;\n    position: absolute;\n    bottom: 0;\n    border-radius: 50%;\n}\n\n.sender-msg,\n.receiver-msg {\n    margin-left: 2rem;\n}\n\n.sender-msg {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-end;\n}\n\n.sender-msg div,\n.receiver-msg div {\n    margin-top: 0.1rem;\n    padding: 0.5rem 1rem;\n    border-radius: 48px;\n    width: fit-content;\n}\n\n.sender-msg div {  background: #2a79f2; }\n\n.receiver-msg div { background: #e6ecf0; }\n\n/*------------- Styles for Sending Message -------------*/\n\n.chat-msg {\n    position: relative;\n}\n\n.chat-msg-text {\n    border: 0;\n    outline: none;\n    width: 100%;\n    padding-top: 0.5rem;\n    padding-left: 0.5rem;\n    margin-bottom: -0.5rem;\n}\n\n.send-button {\n    position: absolute;\n    top: 19%;\n    right: 5%;\n    font-size: 1.5rem;\n    background: none;\n    outline: none;\n    border: none;\n}\n\n.send {\n    color: #2a79f2;\n}\n", ""]);
+=======
+exports.push([module.i, "/*-------------------- Core Styles --------------------*/\r\n\r\n:root {\r\n    --border: 1px solid rgba(0, 0, 0, 0.1);\r\n    --light-grey: rgba(0, 0, 0, 0.05);\r\n    --grey-text: rgba(153, 153, 153, 1);\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.py-4 {\r\n    margin-top: 70px;\r\n    padding: 0 !important;\r\n}\r\n\r\n.my-column {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.no-overflow {\r\n    overflow: hidden;\r\n}\r\n\r\n/*------------- Styles for Custom Scrollbars ---------------*/\r\n\r\n.recipients-body::-webkit-scrollbar,\r\n.messages-body::-webkit-scrollbar {\r\n    width: 8px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-track,\r\n.messages-body::-webkit-scrollbar-track {\r\n    background-color: #fff;\r\n    border-radius: 4px;\r\n    width: 3px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-thumb,\r\n.messages-body::-webkit-scrollbar-thumb {\r\n    background-color: #1da1f2;\r\n    border-radius: 4px;\r\n    width: 3px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-thumb:hover,\r\n.messages-body::-webkit-scrollbar-thumb:hover {\r\n    background-color: #0a4aac;\r\n    width: 8px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-track:hover {\r\n    background-color: #f1f1f1;\r\n    width: 8px;\r\n}\r\n\r\n/*----------------- Styles for User List -----------------*/\r\n\r\n.recipients-container {\r\n    border-right: var(--border);\r\n    overflow: hidden;\r\n}\r\n\r\n.recipients-container hr {\r\n    margin-bottom: 0.7rem;\r\n}\r\n\r\n.recipients-header,\r\n.messages-header {\r\n    text-align: center;\r\n    padding-top: 0.5rem;\r\n}\r\n\r\n.recipients-body {\r\n    overflow-y: scroll;\r\n    height: 80vh;\r\n}\r\n\r\n.recipients-body ul {\r\n    list-style: none;\r\n}\r\n\r\n.recipients-list {\r\n    display: flex;\r\n    cursor: pointer;\r\n    padding: 0.5rem 0;\r\n}\r\n\r\n.recipients-list:not(:last-child) {\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.recipients-list--selected,\r\n.recipients-list:hover {\r\n    background-color: var(--light-grey);\r\n}\r\n\r\n.recipients-list--img {\r\n    height: 3.75rem;\r\n    border-radius: 50%;\r\n    margin: 0 1rem;\r\n}\r\n\r\n.recipients-list--name {\r\n    font-weight: bold;\r\n    display: block;\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.recipients-list--msg {\r\n    color: var(--grey-text);\r\n}\r\n\r\n/*---------------- Styles for Message Content -------------------- */\r\n\r\n.messages-header-text {\r\n    margin-top: 0.45rem;\r\n    font-weight: 500;\r\n    line-height: 1.2;\r\n    display: inline-block;\r\n    font-size: 1.125rem;\r\n}\r\n\r\n.green-dot,\r\n.red-dot {\r\n    border-radius: 50%;\r\n    height: 6px;\r\n    width: 6px;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    margin-left: 1rem;\r\n}\r\n\r\n.green-dot {\r\n    background: rgb(66, 183, 42);\r\n}\r\n\r\n.red-dot {\r\n    background: red;\r\n}\r\n\r\n/*---------- Styles for Aligning and Viewing Message Content / History -------*/\r\n\r\n.messages-body .welcome-text {\r\n    text-align: center;\r\n    display: block;\r\n}\r\n\r\n.messages-body {\r\n    overflow-y: scroll;\r\n    height: 65vh;\r\n}\r\n\r\n.sender:first-child {\r\n    margin-top: 1rem;\r\n}\r\n\r\n.sender {\r\n    padding: 0.5rem 1rem;\r\n    max-width: 80%;\r\n    border-radius: 48px;\r\n    margin-right: 1rem;\r\n    float: right;\r\n    color: #fff;\r\n}\r\n\r\n.receiver {\r\n    display: flex;\r\n    margin-left: 0.5rem;\r\n    width: 80%;\r\n    position: relative;\r\n    margin-top: 3rem;\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.receiver img {\r\n    width: 28px;\r\n    height: 28px;\r\n    margin-right: 0.3rem;\r\n    margin-top: 1.5rem;\r\n    position: absolute;\r\n    bottom: 0;\r\n    border-radius: 50%;\r\n}\r\n\r\n.sender-msg,\r\n.receiver-msg {\r\n    margin-left: 2rem;\r\n}\r\n\r\n.sender-msg {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-end;\r\n}\r\n\r\n.sender-msg div,\r\n.receiver-msg div {\r\n    margin-top: 0.1rem;\r\n    padding: 0.5rem 1rem;\r\n    border-radius: 48px;\r\n    width: fit-content;\r\n}\r\n\r\n.sender-msg div {  background: #2a79f2; }\r\n\r\n.receiver-msg div { background: #e6ecf0; }\r\n\r\n/*------------- Styles for Sending Message -------------*/\r\n\r\n.chat-msg {\r\n    position: relative;\r\n}\r\n\r\n.chat-msg-text {\r\n    border: 0;\r\n    outline: none;\r\n    width: 100%;\r\n    padding-top: 0.5rem;\r\n    padding-left: 0.5rem;\r\n    margin-bottom: -0.5rem;\r\n}\r\n\r\n.send-button {\r\n    position: absolute;\r\n    top: 19%;\r\n    right: 5%;\r\n    font-size: 1.5rem;\r\n    background: none;\r\n    outline: none;\r\n    border: none;\r\n}\r\n\r\n.send {\r\n    color: #2a79f2;\r\n}\r\n", ""]);
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 
 // exports
 

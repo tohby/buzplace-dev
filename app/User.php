@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Rackbeat\UIAvatars\HasAvatar;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-
+    use HasAvatar;
     /**
      * The attributes that are mass assignable.
      *
@@ -43,7 +44,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function posts() {
-        return $this->hasMany('App\Posts');
+        return $this->hasMany('App\Post');
+    }
+
+    public function consultations() {
+        return $this->hasMany('App\Consultation');
+    }
+
+    public function getAvatar( $size = 64 ) {
+        return $this->getGravatar( $this->email, $size );
     }
 
     public function consultations() {

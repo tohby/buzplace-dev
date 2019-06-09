@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/admin/messages', 'MessageController@index');
     Route::get('/loadMessage', 'MessageController@message');
     Route::post('/admin/messages/getMessage/{id}', 'MessageController@getMessage');
+<<<<<<< HEAD
     Route::get('/admin/messages/sendMessage/{id}', 'MessageController@sendMessage');
     Route::get('directories/search/{searchKey}', 'DirectoriesController@search');
     Route::post('directories/search', 'DirectoriesController@search');
@@ -66,4 +67,15 @@ Route::group(['middleware' => 'auth'], function() {
 Route::get('/migrate', function () {
     $exitCode = Artisan::call('migrate', []);
     echo $exitCode;
+=======
+    Route::post('/admin/messages/sendMessage/{id}', 'MessageController@sendMessage');
+    Route::get('directories/search/{searchKey}', 'DirectoriesController@search');
+    Route::post('directories/search', 'DirectoriesController@search');
+    Route::resource('/consultation', 'ConsultationController');
+>>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
+});
+
+Route::get('/migrate', function () {
+    $exitCode = Artisan::call('migrate', []);
+    echo $exitCode; 
 });
