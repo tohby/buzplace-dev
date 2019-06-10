@@ -54,8 +54,4 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatar( $size = 64 ) {
         return $this->getGravatar( $this->email, $size );
     }
-
-    public function consultations() {
-        return $this->hasMany('App\Consultation');
-    }
 }

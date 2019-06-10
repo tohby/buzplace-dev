@@ -90,17 +90,6 @@ html {
     color: #f2f1f1;
 }
 
-<<<<<<< HEAD
-.seg-1{
-  background-color: #F7F5F3;
-  background-attachment: fixed;
-  h1 {
-    font-family: 'Noto Serif', serif;
-    font-weight: 700;
-    font-size: 50px;
-    width: 70%;
-  }
-=======
 .seg-1 {
     background-color: #f7f5f3;
     background-attachment: fixed;
@@ -110,7 +99,6 @@ html {
         font-size: 50px;
         width: 70%;
     }
->>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
 }
 
 .ion-icon {
@@ -145,80 +133,6 @@ html {
     position: relative;
 }
 
-<<<<<<< HEAD
-.segment-1 {
-  background-image: url("/images/woman.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  height: 70%;
-  width: 100%;
-  border-radius: 0px 360px 360px 0px;
-}
-
-.segment-2 {
-  background-image: url("/images/ruthson.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  width: 100%;
-=======
-.gallery__item {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    opacity: 0;
-    z-index: -1;
-}
-
-.gallery__item a {
-    color: #fff;
-    font-size: 1.7rem;
-    cursor: pointer;
-    padding: 1rem;
->>>>>>> f7832db18035a24b9df551e841c33c2f15bb627a
-}
-
-.gallery:hover .gallery__item {
-    opacity: 1;
-    z-index: 1000;
-}
-
-.row-1 {
-    background-color: #f7f5f3;
-}
-
-.text {
-    p {
-        font-family: "Noto Sans", sans-serif;
-        font-size: 16px;
-        font-weight: 900;
-        text-transform: uppercase;
-        color: #efc5b0;
-        letter-spacing: 2px;
-    }
-    .p2 {
-        color: #bec7d6;
-    }
-
-    h1 {
-        font-family: "Noto Serif", serif;
-        font-weight: 700;
-        font-size: 50px;
-    }
-}
-
-.text-white {
-    color: #f2f1f1;
-}
-
 .segment-1 {
     background-image: url("/images/woman.jpg");
     background-position: center;
@@ -237,118 +151,190 @@ html {
     background-size: cover;
     position: relative;
     width: 100%;
-}
-
-.bg-blue {
-    background-color: #293347;
-}
-
-.h4 {
-    color: #9c8375;
-}
-
-body[data-aos-duration="4000"] [data-aos],
-[data-aos][data-aos][data-aos-duration="4000"] {
-    transition-duration: 4000ms;
-}
-
-$white: #fff;
-$google-blue: #4285f4;
-$button-active-blue: #1669f2;
-
-.google-btn {
-    width: 184px;
-    height: 42px;
-    background-color: $google-blue;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-    .google-icon-wrapper {
+    .gallery__item {
         position: absolute;
-        margin-top: 1px;
-        margin-left: 1px;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        background-color: $white;
-    }
-    .google-icon {
-        position: absolute;
-        margin-top: 11px;
-        margin-left: 11px;
-        width: 18px;
-        height: 18px;
-    }
-    .btn-text {
-        float: right;
-        margin: 11px 11px 0 0;
-        color: $white;
-        font-size: 14px;
-        letter-spacing: 0.2px;
-        font-family: "Roboto";
-    }
-    &:hover {
-        box-shadow: 0 0 6px $google-blue;
-    }
-    &:active {
-        background: $button-active-blue;
-    }
-}
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
-
-// media queries start here
-@media (max-width: 768px) {
-    .hero-text {
-        top: 50%;
-        left: 50%;
-        width: 80%;
-        h1 {
-            font-size: 30px;
-        }
-
-        p {
-            font-size: 14px;
-        }
-
-        a {
-            font-size: 14px;
-        }
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        z-index: -1;
     }
 
-    .seg-1 {
-        h1 {
-            font-size: 30px;
-        }
+    .gallery__item a {
+        color: #fff;
+        font-size: 1.7rem;
+        cursor: pointer;
+        padding: 1rem;
+    }
+
+    .gallery:hover .gallery__item {
+        opacity: 1;
+        z-index: 1000;
+    }
+
+    .row-1 {
+        background-color: #f7f5f3;
     }
 
     .text {
-        width: 100%;
-        h1 {
-            font-size: 30px;
-        }
         p {
-            font-size: 14px;
+            font-family: "Noto Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #efc5b0;
+            letter-spacing: 2px;
+        }
+        .p2 {
+            color: #bec7d6;
+        }
+
+        h1 {
+            font-family: "Noto Serif", serif;
+            font-weight: 700;
+            font-size: 50px;
         }
     }
 
-    [data-aos],
-    [data-aos][data-aos] {
-        -o-transition-property: none !important;
-        -moz-transition-property: none !important;
-        -ms-transition-property: none !important;
-        -webkit-transition-property: none !important;
-        transition-property: none !important;
-        /*CSS transforms*/
-        -o-transform: none !important;
-        -moz-transform: none !important;
-        -ms-transform: none !important;
-        -webkit-transform: none !important;
-        transform: none !important;
-        /*CSS animations*/
-        -webkit-animation: none !important;
-        -moz-animation: none !important;
-        -o-animation: none !important;
-        -ms-animation: none !important;
-        animation: none !important;
+    .text-white {
+        color: #f2f1f1;
+    }
+
+    .segment-1 {
+        background-image: url("/images/woman.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        height: 70%;
+        width: 100%;
+        border-radius: 0px 360px 360px 0px;
+    }
+
+    .segment-2 {
+        background-image: url("/images/ruthson.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        width: 100%;
+    }
+
+    .bg-blue {
+        background-color: #293347;
+    }
+
+    .h4 {
+        color: #9c8375;
+    }
+
+    body[data-aos-duration="4000"] [data-aos],
+    [data-aos][data-aos][data-aos-duration="4000"] {
+        transition-duration: 4000ms;
+    }
+
+    $white: #fff;
+    $google-blue: #4285f4;
+    $button-active-blue: #1669f2;
+
+    .google-btn {
+        width: 184px;
+        height: 42px;
+        background-color: $google-blue;
+        border-radius: 2px;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+        .google-icon-wrapper {
+            position: absolute;
+            margin-top: 1px;
+            margin-left: 1px;
+            width: 40px;
+            height: 40px;
+            border-radius: 2px;
+            background-color: $white;
+        }
+        .google-icon {
+            position: absolute;
+            margin-top: 11px;
+            margin-left: 11px;
+            width: 18px;
+            height: 18px;
+        }
+        .btn-text {
+            float: right;
+            margin: 11px 11px 0 0;
+            color: $white;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+            font-family: "Roboto";
+        }
+        &:hover {
+            box-shadow: 0 0 6px $google-blue;
+        }
+        &:active {
+            background: $button-active-blue;
+        }
+    }
+
+    @import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+    // media queries start here
+    @media (max-width: 768px) {
+        .hero-text {
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            h1 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            a {
+                font-size: 14px;
+            }
+        }
+
+        .seg-1 {
+            h1 {
+                font-size: 30px;
+            }
+        }
+
+        .text {
+            width: 100%;
+            h1 {
+                font-size: 30px;
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+
+        [data-aos],
+        [data-aos][data-aos] {
+            -o-transition-property: none !important;
+            -moz-transition-property: none !important;
+            -ms-transition-property: none !important;
+            -webkit-transition-property: none !important;
+            transition-property: none !important;
+            /*CSS transforms*/
+            -o-transform: none !important;
+            -moz-transform: none !important;
+            -ms-transform: none !important;
+            -webkit-transform: none !important;
+            transform: none !important;
+            /*CSS animations*/
+            -webkit-animation: none !important;
+            -moz-animation: none !important;
+            -o-animation: none !important;
+            -ms-animation: none !important;
+            animation: none !important;
+        }
     }
 }
