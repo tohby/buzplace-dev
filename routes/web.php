@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('comment/edit', 'NewsController@updateComment');
     Route::get('comment/reply/edit', 'CommentRepliesController@update');
     Route::get('/the-hub/{slug}', ['as'=>'post.view', 'uses'=>'HubController@show']);
+<<<<<<< HEAD
     Route::get('/admin/messages', 'MessageController@index');
     Route::get('/loadMessage', 'MessageController@message');
     Route::post('/admin/messages/getMessage/{id}', 'MessageController@getMessage');
@@ -67,9 +68,11 @@ Route::get('/migrate', function () {
     $exitCode = Artisan::call('migrate', []);
     echo $exitCode;
     Route::post('/admin/messages/sendMessage/{id}', 'MessageController@sendMessage');
+=======
     Route::get('directories/search/{searchKey}', 'DirectoriesController@search');
     Route::post('directories/search', 'DirectoriesController@search');
     Route::resource('/consultation', 'ConsultationController');
+>>>>>>> 6671dd80f332d374d24891289dc4d5d5fd2997d9
 });
 
 Route::get('/migrate', function () {

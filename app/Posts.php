@@ -7,7 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Posts extends Model
 {
     //
 
@@ -38,9 +38,5 @@ class Post extends Model
 
     public function getUrlAttribute() {
         return route('post.view', $this->attributes['slug']);
-    }
-
-    public function postImages() {
-        return $this->hasMany('App\PostImages');
     }
 }
