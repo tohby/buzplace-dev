@@ -11,11 +11,6 @@
     @yield('head')
 
     <title>{{ config('app.name', 'Buzplace') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-
-    <!-- Fonts -->
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -25,60 +20,6 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link rel="icon" href="{{asset('images/logo.png')}}">
-
-    <style>
-        .ion-icon {
-            font-size: 64px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .share {
-            display: flex;
-            position: fixed;
-            flex-direction: column;
-            justify-content: center;
-            height: 60vh;
-        }
-
-        .icon {
-            font-size: 1.7rem;
-            cursor: pointer;
-            padding: 1rem;
-        }
-
-        .gallery {
-            cursor: pointer;
-            position: relative;
-        }
-
-        .gallery__item {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, .7);
-            opacity: 0;
-            z-index: -1;
-        }
-
-        .gallery__item a {
-            color: #fff;
-            font-size: 1.7rem;
-            cursor: pointer;
-            padding: 1rem;
-        }
-
-        .gallery:hover .gallery__item {
-            opacity: 1;
-            z-index: 1000;
-        }
-    </style>
 
 </head>
 
@@ -157,6 +98,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'news-content' );
