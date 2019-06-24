@@ -38,6 +38,7 @@
                         </div>
                         <div class="card-body">
                             <div class="media">
+                                <input type="hidden" class="hidden-{{$post->id}}" value={{ $post->user->slug }}>
                                 <img src="{{ $post->user->getUrlfriendlyAvatar() }}" class="mr-3">
                                 <div class="media-body">
                                     <h4 class="card-title mt-0">{{$post->title}}</h4>
@@ -45,6 +46,11 @@
                                         {{str_limit($post->content, 200)}}
                                     </p>
                                     <a href="{{ route('post.view', $post->slug) }}" class="btn btn-info">View</a>
+                                    <ion-icon
+                                        name="text"
+                                        title="Contact the Author"
+                                        class="contact {{$post->id}}">
+                                    </ion-icon>
                                 </div>
                             </div>
                         </div>
@@ -63,4 +69,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        let btn = document.querySelector('.contact');
+        btn.addEventListener('click', () => {
+            let id = btn.classList[1];
+            let slug = document.querySelector(`.hidden-${id}`).value;
+            window.location.href = `messages/${slug}`;
+        });
+    </script>
 @endsection
