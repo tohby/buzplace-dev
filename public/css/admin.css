@@ -1,0 +1,58 @@
+.sidenav {
+    height: 100%;
+    width: 180px;
+    position: fixed;
+    z-index: 1;
+    top: 68px;
+    left: 0;
+    background-color: #FFF;
+    overflow-x: hidden;
+    border-right: 1px solid #ECEEF4;
+    padding-top: 10px;
+  }
+
+  .navbar {
+    background-color: #FFF;
+    border-bottom: 1px solid #ECEEF4;
+  }
+
+  body{
+    background-color: #fbfbfd;
+  }
+
+  .sidenav a {
+    padding: 10px 8px 12px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d3b45;
+    display: block;
+  }
+
+  .transparent{
+    background-color: #fbfbfd;
+  }
+
+  .sidenav a.active{
+    color: #3ba3e2;
+    background-color: #F6F9FD;
+    border-left: 4px solid #3ba3e2;
+  }
+
+  .sidenav a:hover {
+    color: #3ba3e2;
+    background-color: #F6F9FD;
+    border-left: 4px solid #3ba3e2;
+  }
+
+  main {
+    margin-top: 75px;
+    margin-left: 180px; /* Same as the width of the sidenav */
+    /* padding: 0px 10px; */
+  }
+  @media screen and (max-width: 769.5px) {
+    main {margin-left: 0;}
+  }
+
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+
