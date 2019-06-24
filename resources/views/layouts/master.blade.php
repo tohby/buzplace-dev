@@ -11,6 +11,8 @@
     @yield('head')
 
     <title>{{ config('app.name', 'Buzplace') }}</title>
+
+    <!-- Fonts -->
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -19,11 +21,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="icon" href="{{asset('images/logo.png')}}">
-
 </head>
 
-<body class="{{ request()->is('admin/messages') || request()->is('admin/messages/*') ? 'no-overflow' : '' }}">
+<body class="{{ request()->is('messages') || request()->is('messages/*') ? 'no-overflow' : '' }}">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light fixed-top">
             <div class="container-fluid">
@@ -98,7 +100,6 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'news-content' );
@@ -108,6 +109,10 @@
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
     <script src="{{ asset('js/bs-custom-file-input.js') }}"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Please ensure that this script is the last to load,
+    some script might be overriding it which may prevent react
+    from rendering -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             bsCustomFileInput.init()
