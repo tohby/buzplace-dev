@@ -53,7 +53,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('comment/reply/edit', 'CommentRepliesController@update');
     Route::get('/the-hub/{slug}', ['as'=>'post.view', 'uses'=>'HubController@show']);
     Route::get('/messages', 'MessageController@index');
+    Route::get('/messages/{id}', 'MessageController@index');
     Route::get('/loadMessage', 'MessageController@message');
+    Route::get('/loadMessage/{id}', 'MessageController@message');
     Route::post('/messages/getMessage/{id}', 'MessageController@getMessage');
     Route::get('/messages/sendMessage/{id}', 'MessageController@sendMessage');
     Route::get('directories/search/{searchKey}', 'DirectoriesController@search');
