@@ -7,6 +7,7 @@ use App\User;
 use App\Events\BroadcastMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -16,55 +17,80 @@ class MessageController extends Controller
         return view('messages.index');
     }
 
-    public function message() {
+    public function message($slug = null) {
         $recent_message = Message::where(function ($query) {
-            $query->where('from', '=', Auth::user()->slug)->latest();
+            $query->where('from', '=', Auth::user()->slug);
         })->orWhere(function ($query) {
-            $query->where('to', '=', Auth::user()->slug)->latest();
-        })->first();
+            $query->where('to', '=', Auth::user()->slug);
+        })->latest()->first();
 
-        if (isset($recent_message)) {
-            $message_from = $recent_message->from;
-            $message_to = $recent_message->to;
-
-            $user = User::where(function ($query) use ($message_from) {
-                $query->where('slug', '=', $message_from)
-                    ->where('slug', '!=', Auth::user()->slug);
-            })->orWhere(function ($query) use ($message_to) {
-                $query->where('slug', '=', $message_to)
-                    ->where('slug', '!=', Auth::user()->slug);
-            })->first();
-        }
-
-        if(isset($user)) {
-            $user_slug = $user->slug;
-
-            $users = User::where('slug', '!=', Auth::user()->slug)
-                ->where('slug', '!=', $user->slug)->get();
-
-            $this->getUsersLastMessage($users);
-
-            $message_content = Message::where(function ($query) use ($user_slug) {
+        if ($slug) {
+            $recent_message = Message::where(function ($query) use ($slug) {
                 $query->where('from', '=', Auth::user()->slug)
-                    ->where('to', '=', $user_slug);
-            })->orWhere(function ($query) use ($user_slug) {
-                $query->where('from', '=', $user_slug)
+                    ->where('to', '=', $slug);
+            })->orWhere(function ($query) use ($slug) {
+                $query->where('from', '=', $slug)
                     ->where('to', '=', Auth::user()->slug);
-            })->get();
-        } else {
-            $users = User::where('slug', '!=', Auth::user()->slug)->get();
-            $this->getUsersLastMessage($users);
+            })->latest()->first();
         }
 
-        $userAuth = Auth::user();
+        if($slug) {
+            $messages_from = DB::table('messages')->where('from', '!=', Auth::user()->slug)
+                ->where('to', '=', Auth::user()->slug)
+                ->where('from', '!=', $slug)
+                ->distinct()->pluck('from')->toArray();
 
-        return response()->json([
-            'recent_message' => $recent_message,
-            'message_content' => $message_content,
-            'user' => $user,
-            'users' => $users,
-            'userAuth' => $userAuth
-        ]);
+            $messages_to = DB::table('messages')->where('from', '=', Auth::user()->slug)
+                ->where('to', '!=', Auth::user()->slug)
+                ->where('to', '!=', $slug)
+                ->distinct()->pluck('to')->toArray();
+
+        } else {
+            $messages_from = DB::table('messages')->where('from', '!=', Auth::user()->slug)
+                ->where('to', '=', Auth::user()->slug)->distinct()
+                ->pluck('from')->toArray();
+
+            $messages_to = DB::table('messages')->where('from', '=', Auth::user()->slug)
+                ->where('to', '!=', Auth::user()->slug)->distinct()
+                ->pluck('to')->toArray();
+        }
+
+        if ($slug) {
+            $users = DB::table('users')
+                ->whereIn('slug', $messages_to)
+                ->orWhereIn('slug', $messages_from)
+                ->get()->toArray();
+
+            $this->getUsersLastMessage($users);
+
+            $user = User::where('slug', '=', $slug)->first();
+        } else {
+            $users = DB::table('users')
+                ->whereIn('slug', $messages_to)
+                ->orWhereIn('slug', $messages_from)
+                ->get()->toArray();
+
+            $this->getUsersLastMessage($users);
+
+            $user = $users[0];
+
+            array_shift($users);
+        }
+
+        if ($users || $user) {
+            $userAuth = Auth::user();
+
+            return response()->json([
+                'recent_message' => $recent_message,
+                'user' => $user,
+                'users' => $users,
+                'userAuth' => $userAuth,
+                'messages_to' => $messages_to,
+                'messages_from' => $messages_from
+            ]);
+        }
+
+        return response()->json(['msg' => 'Empty timeline']);
     }
 
     public function getMessage($slug) {
@@ -89,15 +115,19 @@ class MessageController extends Controller
         return response()->json(['msg' => $msg]);
     }
 
-    public function getUsersLastMessage($users) {
+    protected function getUsersLastMessage($users) {
         foreach($users as $user) {
             $user_slug = $user->slug;
+
             $last_msg = Message::where(function ($query) use ($user_slug) {
-                $query->where('from', '=', $user_slug)->latest();
+                $query->where('from', '=', Auth::user()->slug)
+                    ->where('to', '=', $user_slug);
             })->orWhere(function ($query) use ($user_slug) {
-                $query->where('to', '=', $user_slug)->latest();
-            })->first();
-            $user['last_msg'] = isset($last_msg) ? $last_msg : 'No recent message';
+                $query->where('from', '=', $user_slug)
+                    ->where('to', '=', Auth::user()->slug);
+            })->latest()->first();
+
+            $user->last_msg = isset($last_msg) ? $last_msg : null;
         }
     }
 }
