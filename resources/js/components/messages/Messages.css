@@ -237,3 +237,39 @@
 .send {
     color: #2a79f2;
 }
+
+/*------------- Styles for No Conversation -------------*/
+
+.no-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 30rem;
+}
+
+.no-msg--title {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.no-msg--text {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+}
+
+.no-msg--btn {
+    background-color: #3ba3e2;
+    border-radius: 2rem;
+    border: none;
+    padding: .3rem 1rem;
+}
+
+.no-msg--btn a {
+    color: #fff;
+    font-size: 1.05rem;
+    text-decoration: none;
+}

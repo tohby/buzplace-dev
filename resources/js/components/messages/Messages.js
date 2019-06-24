@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import MessageBody from './MessageBody';
 
 class Messages extends Component {
     constructor(props) {
@@ -10,19 +11,26 @@ class Messages extends Component {
             user: {},
             users: [],
             userAuth: {},
-            tmp_msg: {}
+            tmp_msg: {},
+            recent_user: {},
+            no_msg: ''
         };
     }
 
     getPrerequisiteData() {
-        axios.get("/loadMessage").then(response => {
-            this.setState({
-                recent_message: response.data.recent_message,
-                message_content: response.data.message_content,
-                user: response.data.user,
-                users: response.data.users,
-                userAuth: response.data.userAuth
-            });
+        const urlSplit = window.location.href.split('/');
+        const lastIndex = urlSplit[urlSplit.length - 1];
+        const urlRequest = urlSplit.length > 4 ? `/loadMessage/${lastIndex}` : `/loadMessage`;
+        axios.get(urlRequest).then(response => {
+            if (!response.data.msg) {
+                this.setState({
+                    recent_message: response.data.recent_message,
+                    user: response.data.user,
+                    recent_user: response.data.user,
+                    users: response.data.users,
+                    userAuth: response.data.userAuth
+                });
+            } else { this.setState({ no_msg: 'No msg' }); }
         });
     }
 
@@ -35,70 +43,83 @@ class Messages extends Component {
             });
     }
 
-    showFirstRecipient() {
-        return (
-            <React.Fragment>
-                <li
-                    className={`recipients-list
-                        recipients-list--selected
-                        selected-${this.state.user.slug}`}
-                    onClick={ () => this.loadMessageBox(this.state.user.slug) }
-                >
-                    <img
-                        src={`/images/${this.state.user.avatar}`}
-                        alt="Profile Photo"
-                        className="recipients-list--img"
-                    />
-                    <div>
-                        <span className="recipients-list--name">
-                            {this.state.user.name
-                                ? this.state.user.name.substring(0, 30)
-                                : ""}
-                        </span>
-                        <span className="recipients-list--msg">
-                            {this.state.recent_message.from ===
-                            this.state.userAuth.slug
-                                ? `You: ${this.state.recent_message.text}`
-                                : `${this.state.recent_message.text}`}
-                        </span>
-                    </div>
-                </li>
-            </React.Fragment>
-        );
+    getRecentMsg() {
+        if(this.state.recent_message) {
+            if(this.state.recent_message.from === this.state.userAuth.slug) {
+                return `You: ${this.state.recent_message.text}`
+            } else {
+                return `${this.state.recent_message.text}`
+            }
+        } else {
+            return `No recent message`
+        }
     }
 
-    showOtherRecipients() {
-        return (
-            <React.Fragment>
-                {this.state.users.map(user => (
+    showFirstRecipient() {
+        if (this.state.recent_user) {
+            return (
+                <React.Fragment>
                     <li
-                        key={user.slug}
                         className={`recipients-list
-                        selected-${user.slug}`}
-                        onClick={ () => this.loadMessageBox(user.slug) }
+                            recipients-list--selected
+                            selected-${this.state.recent_user.slug}`}
+                        onClick={ () => this.loadMessageBox(this.state.recent_user.slug) }
                     >
                         <img
-                            src={`/images/${user.avatar}`}
+                            src={`/images/${this.state.recent_user.avatar}`}
                             alt="Profile Photo"
                             className="recipients-list--img"
                         />
                         <div>
                             <span className="recipients-list--name">
-                                {user.name ? user.name.substring(0, 30) : ""}
+                                {this.state.recent_user.name
+                                    ? this.state.recent_user.name.substring(0, 30)
+                                    : ""}
                             </span>
                             <span className="recipients-list--msg">
-                                {this.getUserLastMsg(user)}
+                                {this.getRecentMsg()}
                             </span>
                         </div>
                     </li>
-                ))}
-            </React.Fragment>
-        );
+                </React.Fragment>
+            );
+        }
+    }
+
+    showOtherRecipients() {
+        if (this.state.users) {
+            return (
+                <React.Fragment>
+                    {this.state.users.map(user => (
+                        <li
+                            key={user.slug}
+                            className={`recipients-list
+                            selected-${user.slug}`}
+                            onClick={ () => this.loadMessageBox(user.slug) }
+                        >
+                            <img
+                                src={`/images/${user.avatar}`}
+                                alt="Profile Photo"
+                                className="recipients-list--img"
+                            />
+                            <div>
+                                <span className="recipients-list--name">
+                                    {user.name ? user.name.substring(0, 30) : ""}
+                                </span>
+                                <span className="recipients-list--msg">
+                                    {this.getUserLastMsg(user)}
+                                </span>
+                            </div>
+                        </li>
+                    ))}
+                </React.Fragment>
+            );
+        }
     }
 
     getUserLastMsg(user) {
         if (user.last_msg.from) {
-            if (user.last_msg.from === this.state.userAuth) {
+            if (user.last_msg.from === this.state.userAuth.slug) {
                 return `You: ${user.last_msg.text}`;
             } else {
                 return `${user.last_msg.text}`;
@@ -114,7 +135,7 @@ class Messages extends Component {
 
         document.querySelector('.messages-body').innerHTML = '';
 
-        axios.post(`/admin/messages/getMessage/${id}`)
+        axios.post(`/messages/getMessage/${id}`)
             .then(response => {
                 let messages = response.data.messages;
                 let user = response.data.user;
@@ -122,76 +143,7 @@ class Messages extends Component {
                 document.querySelector('.messages-body').innerHTML = `
                         <span class="welcome-text">This is the beginning of your conversation with ${user.name}</span>
                     `;
-                for (let i = 0; i < messages.length; i++) {
-                    if (messages[i].to == user.slug) {
-                        if (i > 0) {
-                            if (messages[i].to == messages[i - 1].to) {
-                                let div = document.getElementsByClassName('sender-msg');
-                                let last_div = div[div.length - 1];
-                                last_div.insertAdjacentHTML('beforeend', `<div><span title='${messages[i].time}'>${messages[i].text}</span></div>`);
-                            } else {
-                                let sender_div = document.querySelector('.messages-body');
-                                sender_div.insertAdjacentHTML('beforeend',
-                                    `<div class="sender">
-                                            <div class="sender-msg">
-                                                <div><span title="${messages[i].time}">${messages[i].text}</span></div>
-                                            </div>
-                                        </div>`
-                                )
-                            }
-                        } else {
-                            let sender_div = document.querySelector('.messages-body');
-                            sender_div.insertAdjacentHTML('beforeend',
-                                `<div class="sender">
-                                            <div class="sender-msg">
-                                                <div><span title="${messages[i].time}">${messages[i].text}</span></div>
-                                            </div>
-                                        </div>`
-                            )
-                        }
-                    }
-
-                    if (messages[i].from == user.slug) {
-                        if (i > 0) {
-                            if (messages[i].from == messages[i - 1].from) {
-                                let div = document.getElementsByClassName('receiver-msg');
-                                let last_div = div[div.length - 1];
-                                last_div.insertAdjacentHTML('beforeend', `<div><span title='${messages[i].time}'>${messages[i].text}</span></div>`);
-                            } else {
-                                let msg_div = document.querySelector('.messages-body');
-                                msg_div.insertAdjacentHTML('beforeend',
-                                    `<div class="receiver">
-                                            <img src="../images/${user.avatar}" alt="User Image">
-                                            <div class="receiver-msg">
-                                                <div><span title="${messages[i].time}">${messages[i].text}</span></div>
-                                            </div>
-                                        </div>`
-                                )
-                            }
-                        } else {
-                            let msg_div = document.querySelector('.messages-body');
-                            msg_div.insertAdjacentHTML('beforeend',
-                                `<div class="receiver">
-                                            <img src="../images/${user.avatar}" alt="User Image">
-                                            <div class="receiver-msg">
-                                                <div><span title="${messages[i].time}">${messages[i].text}</span></div>
-                                            </div>
-                                        </div>`
-                            )
-                        }
-                    }
-                }
-            })
-    }
-
-    loadInitialMessageBox(id) {
-        axios.post(`/admin/messages/getMessage/${id}`)
-            .then(response => {
-                let messages = response.data.messages;
-                let user = response.data.user;
-                document.querySelector('.messages-body').innerHTML = `
-                        <span class="welcome-text">This is the beginning of your conversation with ${user.name}</span>
-                    `;
+                document.querySelector('.messages-header-text').textContent = `${user.name}`;
                 for (let i = 0; i < messages.length; i++) {
                     if (messages[i].to == user.slug) {
                         if (i > 0) {
@@ -277,12 +229,12 @@ class Messages extends Component {
             });
             let text = document.querySelector('#chat-msg').value;
             $.ajax({
-                url: `/admin/messages/sendMessage/${slug}`,
+                url: `/messages/sendMessage/${slug}`,
                 method: 'get',
                 data: { to: slug, text: text },
                 success: function(response) {
                     console.log('from sending message', response);
-                    axios.post(`/admin/messages/getMessage/${slug}`)
+                    axios.post(`/messages/getMessage/${slug}`)
                         .then(response => {
                             let user = response.data.user;
                             let messages = response.data.messages;
@@ -320,12 +272,12 @@ class Messages extends Component {
         }
     }
 
-    render() {
+    message() {
         const firstRecipient = this.showFirstRecipient();
         const otherRecipients = this.showOtherRecipients();
 
-        return (
-            <div className="container-fluid conversation-container" id="app">
+        return <React.Fragment>
+            {
                 <div className="row">
                     <div className="col-md-3 my-column">
                         <div className="recipients-container">
@@ -346,13 +298,11 @@ class Messages extends Component {
                         <div className="messages-container">
                             <div className="messages-header">
                                 <span className="messages-header-text">
-                                    {this.state.user.name}
+                                    {this.state.user ? this.state.user.name : ''}
                                 </span>
                             </div>
                             <hr />
-                            <div className="messages-body">
-                                { this.loadInitialMessageBox(this.state.user.slug) }
-                            </div>
+                            { this.state.user ? <MessageBody slug={this.state.user.slug} /> : '' }
                             <div className="messages-footer">
                                 <form method="post" className="chat-msg" id="chat-form" onSubmit={() => this.formSubmit()}>
                                     <textarea placeholder="Type a message..." id="chat-msg" className="chat-msg-text" onKeyDown={() => this.keyPressed()}></textarea>
@@ -364,6 +314,37 @@ class Messages extends Component {
                         </div>
                     </div>
                 </div>
+            }
+        </React.Fragment>
+    }
+
+    noMessage() {
+        return <React.Fragment>
+            {
+                <div className="no-msg">
+                    <span className="no-msg--title">
+                        <strong>Welcome to your conversations page</strong>
+                    </span>
+                    <span className="no-msg--text">
+                        It's empty now, but it won't be for long.
+                        Start chatting with people and you'll see Conversations
+                        show up here.
+                    </span>
+                    <button className="no-msg--btn">
+                        <a href="/the-hub">Get started</a>
+                    </button>
+                </div>
+            }
+        </React.Fragment>
+    }
+
+    render() {
+        const message = this.message();
+        const noMessage = this.noMessage();
+
+        return (
+            <div className="container-fluid conversation-container" id="app">
+                { this.state.no_msg ? noMessage : message }
             </div>
         );
     }
