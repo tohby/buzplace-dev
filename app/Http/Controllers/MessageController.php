@@ -71,13 +71,15 @@ class MessageController extends Controller
                 ->get()->toArray();
 
             $this->getUsersLastMessage($users);
+
+            if ($users) {
+            	$user = $users[0];
+
+            	array_shift($users);
+            }
         }
 
-        if ($users || isset($user)) {
-        	$user = $users[0];
-
-            array_shift($users);
-            
+        if ($users || isset($user)) {          
             $userAuth = Auth::user();
 
             return response()->json([
