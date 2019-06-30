@@ -71539,6 +71539,11 @@ var Messages = function (_Component) {
                         recent_user: response.data.user,
                         users: response.data.users,
                         userAuth: response.data.userAuth
+                    }, function () {
+                        if (_this2.state.userAuth.slug === _this2.state.user.slug) {
+                            alert("Sorry, but you're not allowed to message yourself");
+                            window.location.href = "/messages";
+                        }
                     });
                 } else {
                     _this2.setState({ no_msg: 'No msg' });
