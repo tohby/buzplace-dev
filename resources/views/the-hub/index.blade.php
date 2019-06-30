@@ -73,11 +73,15 @@
 
 @section('scripts')
     <script>
-        let btn = document.querySelector('.contact');
-        btn.addEventListener('click', () => {
-            let id = btn.classList[1];
-            let slug = document.querySelector(`.hidden-${id}`).value;
-            window.location.href = `messages/${slug}`;
-        });
+        setTimeout(() => {
+            let btns = document.getElementsByClassName('contact');
+            Array.from(btns).forEach(el => {
+                el.addEventListener('click', () => {
+                    let id = el.classList[1];
+                    let slug = document.querySelector(`.hidden-${id}`).value;
+                    window.location.href = `messages/${slug}`;
+                });
+            });
+        }, 1000);
     </script>
 @endsection
