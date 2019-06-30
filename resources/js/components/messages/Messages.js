@@ -29,6 +29,11 @@ class Messages extends Component {
                     recent_user: response.data.user,
                     users: response.data.users,
                     userAuth: response.data.userAuth
+                }, () => {
+                    if (this.state.userAuth.slug === this.state.user.slug) {
+                        alert("Sorry, but you're not allowed to message yourself");
+                        window.location.href = `/messages`;
+                    }
                 });
             } else { this.setState({ no_msg: 'No msg' }); }
         });
