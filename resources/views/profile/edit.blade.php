@@ -1,7 +1,7 @@
 @extends('layouts/master')
 @section('content')
 <div class="container-fluid">
-    Edit User
+    <h2>Edit User</h2>
     <div class="row">
         <div class="col-sm-3">
             <img style="width: 100%; border-radius: 8px;" src="/images/{{$user->avatar}}" alt="Profile Image">
@@ -10,7 +10,7 @@
             {!! Form::model($user, ['method'=>'PATCH', 'action'=>['ProfileController@update', $user->id], 'files'=>true]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Name:') !!}
-                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                    {!! Form::text('name', null, ['class'=>'form-control', 'minlength'=>4]) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('email', 'Email:') !!}
@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('businessName', 'Business Name:') !!}
-                    {!! Form::text('businessName', null, ['class'=>'form-control']) !!}
+                    {!! Form::text('businessName', null, ['class'=>'form-control', 'minlength'=>4]) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Update Profile', ['class'=>'btn btn-primary']) !!}
