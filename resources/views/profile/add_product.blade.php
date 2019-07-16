@@ -7,15 +7,15 @@
             {!! Form::open(['method'=>'POST', 'action'=>'ProfileController@store_product', 'files'=>true]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Name:') !!}
-                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                    {!! Form::text('name', null, ['class'=>'form-control', 'required'=>'required']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('description', 'Description:') !!}
-                    {!! Form::textarea('description', null, ['class'=>'form-control']) !!}
+                    {!! Form::textarea('description', null, ['class'=>'form-control', 'required'=>'required']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('image', 'Image:') !!}
-                    {!! Form::file('image', null, ['class'=>'form-control']) !!}
+                    {!! Form::file('image', ['required'=>'required']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Add Product', ['class'=>'btn btn-primary']) !!}
