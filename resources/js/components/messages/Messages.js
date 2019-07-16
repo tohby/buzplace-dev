@@ -13,11 +13,13 @@ class Messages extends Component {
             userAuth: {},
             tmp_msg: {},
             recent_user: {},
-            no_msg: ''
+            no_msg: '',
+            loading: false
         };
     }
 
     getPrerequisiteData() {
+        this.setState({ loading: true });
         const urlSplit = window.location.href.split('/');
         const lastIndex = urlSplit[urlSplit.length - 1];
         const urlRequest = urlSplit.length > 4 ? `/loadMessage/${lastIndex}` : `/loadMessage`;
@@ -28,14 +30,15 @@ class Messages extends Component {
                     user: response.data.user,
                     recent_user: response.data.user,
                     users: response.data.users,
-                    userAuth: response.data.userAuth
+                    userAuth: response.data.userAuth,
+                    loading: false
                 }, () => {
                     if (this.state.userAuth.slug === this.state.user.slug) {
                         alert("Sorry, but you're not allowed to message yourself");
                         window.location.href = `/messages`;
                     }
                 });
-            } else { this.setState({ no_msg: 'No msg' }); }
+            } else { this.setState({ no_msg: 'No msg', loading: false }); }
         });
     }
 
@@ -46,6 +49,18 @@ class Messages extends Component {
             .listen('BroadcastMessage', (e) => {
                 this.setState({ tmp_msg: e });
             });
+    }
+
+    loadingTag() {
+        if (this.state.loading === true) {
+            return <React.Fragment>
+                {
+                    <div id="main">
+                        <span className="spinner"></span>
+                    </div>
+                }
+            </React.Fragment>
+        }
     }
 
     getRecentMsg() {
@@ -346,10 +361,12 @@ class Messages extends Component {
     render() {
         const message = this.message();
         const noMessage = this.noMessage();
+        const loading = this.loadingTag();
 
         return (
             <div className="container-fluid conversation-container" id="app">
-                { this.state.no_msg ? noMessage : message }
+                { this.state.loading ? loading : this.state.no_msg ? noMessage : message}
+                {/* { this.state.no_msg ? noMessage : message } */}
             </div>
         );
     }
