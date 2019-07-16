@@ -6,6 +6,7 @@ use App\Products;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -24,14 +25,31 @@ class ProfileController extends Controller
     public function update(Request $request, $id){
         $user = User::findOrFail($id);
         $input = $request->all();
-        if($file = $request->file('avatar')) {
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['avatar'] = $name;
+        $valid_indicator = true;
+        if (isset($input['name'])) {
+            if (!preg_match("/^[a-zA-Z'-]+$/", $input['name'])) {
+                $valid_indicator = false;
+                Session::flash('error', 'Name must only contain alphabets');
+            }
         }
-        isset($request->password) ? $input['password'] = bcrypt($request->password) : $user->password;
-        $user->update($input);
-        return redirect('profile/'.$user->slug);
+        if (isset($input['phone'])) {
+            if (!preg_match('/[0-9]/', $input['phone'])) {
+                $valid_indicator = false;
+                Session::flash('error', 'Phone number must only contain numerics');
+            }
+        }
+        if ($valid_indicator) {
+            if($file = $request->file('avatar')) {
+                $name = time() . $file->getClientOriginalName();
+                $file->move('images', $name);
+                $input['avatar'] = $name;
+            }
+            isset($request->password) ? $input['password'] = bcrypt($request->password) : $user->password;
+            $user->update($input);
+            return redirect('profile/'.$user->slug);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function create_product(){
