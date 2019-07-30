@@ -19,9 +19,6 @@ class CreateMessagesTable extends Migration
             $table->string('to')->index();
             $table->text('text');
             $table->timestamps();
-
-            $table->foreign('from')->references('slug')->on('users')->onDelete('cascade');
-            $table->foreign('to')->references('slug')->on('users')->onDelete('cascade');
         });
     }
 

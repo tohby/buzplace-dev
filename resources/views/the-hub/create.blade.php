@@ -30,7 +30,7 @@
                     <div class="form-group">
 
                         {!! Form::label('image', 'Image:') !!}
-                        {!! Form::file('image', ['required'=>'required']) !!}
+                        {!! Form::file('image') !!}
 
                     </div>
 
