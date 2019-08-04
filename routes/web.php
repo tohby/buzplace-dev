@@ -25,7 +25,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('login/google', 'Auth\LoginController@redirectToProvider');
     Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
     Route::get('/', function () {
-        return view('index');
+        return view('welcome');
     });
 });
 Route::group(['middleware' => 'auth'], function() {
