@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Posts;
+use Auth;
+use App\Post;
+use App\PostImages;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class HubController extends Controller
@@ -17,7 +18,7 @@ class HubController extends Controller
     public function index()
     {
         //
-        $posts = Posts::paginate(15);
+        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(12);
         foreach ($posts as $post) {
             $facebook = $post->getShareUrl();
             $twitter = $post->getShareUrl('twitter');
@@ -33,8 +34,8 @@ class HubController extends Controller
      */
     public function create()
     {
-        //
-        return view('the-hub.create');
+        //now uses modal for this function
+        // return view('the-hub.create');
     }
 
     /**
@@ -46,16 +47,35 @@ class HubController extends Controller
     public function store(Request $request)
     {
         //
-        $input = $request->all();
-        $user = Auth::user();
-        if ($file = $request->file('image')) {
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['image'] = 'images/'.$name;
+         $this->validate($request, [
+            'title' => 'required',
+            'image.*' => 'image|nullable|mimes:jpeg,png',
+            'description'  => 'required',
+        ]);
+        $post = Post::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request->input('title'),
+            'content' => $request->input('description'),
+        ]);
+        //get file name with the extension
+        if($request->hasFile('image')){
+                foreach ($request->file('image') as $image) {
+                $fileNameWithExt = $image->getClientOriginalName();
+                //get just file name
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                //get extension
+                $extension = $image->getClientOriginalExtension();
+                //filename to store
+                $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+                //image upload
+                $path = $image->storeAs('public/post_images', $fileNameToStore);
+                $post_image = PostImages::create([
+                    'post_id' => $post->id,
+                    'image' => $fileNameToStore,
+                ]);
+            }
         }
-        $user->posts()->create($input);
-        Session::flash('post_message', 'Your post has been created successfully');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Your Post has been created');
     }
 
     /**

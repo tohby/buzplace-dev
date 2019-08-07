@@ -7,7 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
-class Posts extends Model
+class Post extends Model
 {
     //
 
@@ -27,6 +27,10 @@ class Posts extends Model
 
     public function user() {
         return $this->belongsTo('App\User');
+    }
+
+    public function postImages() {
+        return $this->hasMany('App\PostImages');
     }
 
     protected $shareOptions = [
