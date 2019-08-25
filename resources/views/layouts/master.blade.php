@@ -88,10 +88,21 @@
         <div class="sidenav d-none d-md-block">
             <a href="/the-hub" class="{{ request()->is('the-hub') || request()->is('the-hub/*') ? 'active' : '' }}"> The Hub</a>
             <a href="/profile/{{Auth::user()->slug}}" class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"></i>Profile</a>
-            <a href="/news" class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
-            <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a>
-            <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
-            <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
+            <a href="/news" class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}">News</a>
+            <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}">
+                Conversations
+                @if (isset($unreadNotifications))
+                    @if (count($unreadNotifications) > 0)
+                        <span class="notify-alert">
+                            {{ count($unreadNotifications) }}
+                        </span>
+                    @elseif (count($unreadNotifications) > 99)
+                        <span class="notify-alert">99+</span>
+                    @endif
+                @endif
+            </a>
+            <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}">Directories</a>
+            <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}">Consultations</a>
         </div>
         <main class="py-4">
             <div class="container my-3">

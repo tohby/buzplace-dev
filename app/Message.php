@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
@@ -11,13 +12,21 @@ class Message extends Model
 
     protected $fillable = ['from', 'to', 'text'];
 
-    protected $appends = ['time'];
+    protected $appends = ['time', 'date'];
 
-    public function getTime() {
+    protected function getTime() {
         return $this->created_at->diffForHumans();
     }
 
     public function getTimeAttribute() {
         return $this->getTime();
+    }
+
+    protected function getDate() {
+        return $this->created_at->format('M d Y, h:m');
+    }
+
+    public function getDateAttribute() {
+        return $this->getDate();
     }
 }

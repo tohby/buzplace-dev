@@ -56,3 +56,11 @@
     float: right;
     cursor: pointer;
 }
+
+.notify-alert {
+    background-color: red;
+    border-radius: 50%;
+    padding: .2rem .5rem;
+    color: white;
+    margin-left: .5rem
+}

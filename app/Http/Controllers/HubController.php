@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use App\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,16 +15,22 @@ class HubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Notification $notification)
     {
         //
+        $unreadNotifications = $this->notifications($request, $notification);
         $posts = Posts::paginate(15);
         foreach ($posts as $post) {
             $facebook = $post->getShareUrl();
             $twitter = $post->getShareUrl('twitter');
             $linkedin = $post->getShareUrl('linkedin');
         }
-        return view('the-hub/index', compact('posts', 'facebook', 'twitter', 'linkedin'));
+        return view('the-hub/index',
+            compact('posts', 'facebook',
+                'twitter', 'linkedin',
+                'unreadNotifications'
+            )
+        );
     }
 
     /**

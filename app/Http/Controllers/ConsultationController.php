@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Consultation;
+use App\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,12 @@ class ConsultationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Notification $notifications)
     {
         //
-        return view('consultations/index');
+        $unreadNotifications = $this->notifications($request, $notifications);
+        return view('consultations/index',
+            compact('unreadNotifications'));
     }
 
     /**

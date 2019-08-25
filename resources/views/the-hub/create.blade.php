@@ -23,21 +23,21 @@
                     <div class="form-group">
 
                         {!! Form::label('title', 'Title:') !!}
-                        {!! Form::text('title', null, ['class'=>'form-control']) !!}
+                        {!! Form::text('title', null, ['class'=>'form-control', 'required'=>'required']) !!}
 
                     </div>
 
                     <div class="form-group">
 
                         {!! Form::label('image', 'Image:') !!}
-                        {!! Form::file('image') !!}
+                        {!! Form::file('image', ['required'=>'required']) !!}
 
                     </div>
 
                     <div class="form-group">
 
                         {!! Form::label('content', 'Description:') !!}
-                        {!! Form::textarea('content', null, ['class'=>'form-control']) !!}
+                        {!! Form::textarea('content', null, ['class'=>'form-control', 'required'=>'required']) !!}
 
                     </div>
 

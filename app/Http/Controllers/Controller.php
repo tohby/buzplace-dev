@@ -10,4 +10,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected function notifications($request, $notifications) {
+        $unreadNotifications = $notifications
+            ->where('notifiable_id', $request->user()->id)
+            ->where('read_at', null)->get();
+        return $unreadNotifications;
+    }
 }

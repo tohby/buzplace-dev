@@ -71517,8 +71517,10 @@ var Messages = function (_Component) {
             users: [],
             userAuth: {},
             tmp_msg: {},
+            tmp_res: {},
             recent_user: {},
-            no_msg: ''
+            no_msg: '',
+            loading: false
         };
         return _this;
     }
@@ -71528,6 +71530,7 @@ var Messages = function (_Component) {
         value: function getPrerequisiteData() {
             var _this2 = this;
 
+            this.setState({ loading: true });
             var urlSplit = window.location.href.split('/');
             var lastIndex = urlSplit[urlSplit.length - 1];
             var urlRequest = urlSplit.length > 4 ? "/loadMessage/" + lastIndex : "/loadMessage";
@@ -71538,10 +71541,16 @@ var Messages = function (_Component) {
                         user: response.data.user,
                         recent_user: response.data.user,
                         users: response.data.users,
-                        userAuth: response.data.userAuth
+                        userAuth: response.data.userAuth,
+                        loading: false
+                    }, function () {
+                        if (_this2.state.userAuth.slug === _this2.state.user.slug) {
+                            alert("Sorry, but you're not allowed to message yourself");
+                            window.location.href = "/messages";
+                        }
                     });
                 } else {
-                    _this2.setState({ no_msg: 'No msg' });
+                    _this2.setState({ no_msg: 'No msg', loading: false });
                 }
             });
         }
@@ -71560,13 +71569,31 @@ var Messages = function (_Component) {
             });
         }
     }, {
+        key: "loadingTag",
+        value: function loadingTag() {
+            if (this.state.loading === true) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.Fragment,
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { id: "main" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "spinner" })
+                    )
+                );
+            }
+        }
+    }, {
         key: "getRecentMsg",
         value: function getRecentMsg() {
+            var msg = void 0;
             if (this.state.recent_message) {
                 if (this.state.recent_message.from === this.state.userAuth.slug) {
-                    return "You: " + this.state.recent_message.text;
+                    msg = this.state.recent_message.text ? this.state.recent_message.text.length > 20 ? "You: " + this.state.recent_message.text.substring(0, 20) + " ..." : "You: " + this.state.recent_message.text : '';
+                    return msg;
                 } else {
-                    return "" + this.state.recent_message.text;
+                    msg = this.state.recent_message.text ? this.state.recent_message.text.length > 24 ? this.state.recent_message.text.substring(0, 24) + " ..." : "" + this.state.recent_message.text : '';
+                    return msg;
                 }
             } else {
                 return "No recent message";
@@ -71658,11 +71685,14 @@ var Messages = function (_Component) {
     }, {
         key: "getUserLastMsg",
         value: function getUserLastMsg(user) {
+            var msg = void 0;
             if (user.last_msg.from) {
                 if (user.last_msg.from === this.state.userAuth.slug) {
-                    return "You: " + user.last_msg.text;
+                    msg = user.last_msg.text.length > 20 ? "You: " + user.last_msg.text.substring(0, 20) + "..." : user.last_msg.text;
+                    return msg;
                 } else {
-                    return "" + user.last_msg.text;
+                    msg = user.last_msg.text.length > 24 ? user.last_msg.text.substring(0, 24) + "..." : user.last_msg.text;
+                    return msg;
                 }
             } else {
                 return "" + user.last_msg;
@@ -71749,8 +71779,7 @@ var Messages = function (_Component) {
                     url: "/messages/sendMessage/" + slug,
                     method: 'get',
                     data: { to: slug, text: text },
-                    success: function success(response) {
-                        console.log('from sending message', response);
+                    success: function success() {
                         __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post("/messages/getMessage/" + slug).then(function (response) {
                             var user = response.data.user;
                             var messages = response.data.messages;
@@ -71898,11 +71927,12 @@ var Messages = function (_Component) {
         value: function render() {
             var message = this.message();
             var noMessage = this.noMessage();
+            var loading = this.loadingTag();
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
                 { className: "container-fluid conversation-container", id: "app" },
-                this.state.no_msg ? noMessage : message
+                this.state.loading ? loading : this.state.no_msg ? noMessage : message
             );
         }
     }]);
@@ -72062,7 +72092,7 @@ exports = module.exports = __webpack_require__(54)(false);
 
 
 // module
-exports.push([module.i, "/*-------------------- Core Styles --------------------*/\n\n:root {\n    --border: 1px solid rgba(0, 0, 0, 0.1);\n    --light-grey: rgba(0, 0, 0, 0.05);\n    --grey-text: rgba(153, 153, 153, 1);\n}\n\n* {\n    margin: 0;\n    padding: 0;\n}\n\n.py-4 {\n    margin-top: 70px;\n    padding: 0 !important;\n}\n\n.my-column {\n    padding: 0;\n    margin: 0;\n}\n\n.no-overflow {\n    overflow: hidden;\n}\n\n/*------------- Styles for Custom Scrollbars ---------------*/\n\n.recipients-body::-webkit-scrollbar,\n.messages-body::-webkit-scrollbar {\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track,\n.messages-body::-webkit-scrollbar-track {\n    background-color: #fff;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb,\n.messages-body::-webkit-scrollbar-thumb {\n    background-color: #1da1f2;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb:hover,\n.messages-body::-webkit-scrollbar-thumb:hover {\n    background-color: #0a4aac;\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track:hover {\n    background-color: #f1f1f1;\n    width: 8px;\n}\n\n/*----------------- Styles for User List -----------------*/\n\n.recipients-container {\n    border-right: var(--border);\n    overflow: hidden;\n}\n\n.recipients-container hr {\n    margin-bottom: 0.7rem;\n}\n\n.recipients-header,\n.messages-header {\n    text-align: center;\n    padding-top: 0.5rem;\n}\n\n.recipients-body {\n    overflow-y: scroll;\n    height: 80vh;\n}\n\n.recipients-body ul {\n    list-style: none;\n}\n\n.recipients-list {\n    display: flex;\n    cursor: pointer;\n    padding: 0.5rem 0;\n}\n\n.recipients-list:not(:last-child) {\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--selected,\n.recipients-list:hover {\n    background-color: var(--light-grey);\n}\n\n.recipients-list--img {\n    height: 3.75rem;\n    border-radius: 50%;\n    margin: 0 1rem;\n}\n\n.recipients-list--name {\n    font-weight: bold;\n    display: block;\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--msg {\n    color: var(--grey-text);\n}\n\n/*---------------- Styles for Message Content -------------------- */\n\n.messages-header-text {\n    margin-top: 0.45rem;\n    font-weight: 500;\n    line-height: 1.2;\n    display: inline-block;\n    font-size: 1.125rem;\n}\n\n.green-dot,\n.red-dot {\n    border-radius: 50%;\n    height: 6px;\n    width: 6px;\n    display: inline-block;\n    cursor: pointer;\n    margin-left: 1rem;\n}\n\n.green-dot {\n    background: rgb(66, 183, 42);\n}\n\n.red-dot {\n    background: red;\n}\n\n/*---------- Styles for Aligning and Viewing Message Content / History -------*/\n\n.messages-body .welcome-text {\n    text-align: center;\n    display: block;\n}\n\n.messages-body {\n    overflow-y: scroll;\n    height: 65vh;\n}\n\n.sender:first-child {\n    margin-top: 1rem;\n}\n\n.sender {\n    padding: 0.5rem 1rem;\n    max-width: 80%;\n    border-radius: 48px;\n    margin-right: 1rem;\n    float: right;\n    color: #fff;\n}\n\n.receiver {\n    display: flex;\n    margin-left: 0.5rem;\n    width: 80%;\n    position: relative;\n    margin-top: 3rem;\n    margin-bottom: 0.5rem;\n}\n\n.receiver img {\n    width: 28px;\n    height: 28px;\n    margin-right: 0.3rem;\n    margin-top: 1.5rem;\n    position: absolute;\n    bottom: 0;\n    border-radius: 50%;\n}\n\n.sender-msg,\n.receiver-msg {\n    margin-left: 2rem;\n}\n\n.sender-msg {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-end;\n}\n\n.sender-msg div,\n.receiver-msg div {\n    margin-top: 0.1rem;\n    padding: 0.5rem 1rem;\n    border-radius: 48px;\n    width: fit-content;\n}\n\n.sender-msg div {  background: #2a79f2; }\n\n.receiver-msg div { background: #e6ecf0; }\n\n/*------------- Styles for Sending Message -------------*/\n\n.chat-msg {\n    position: relative;\n}\n\n.chat-msg-text {\n    border: 0;\n    outline: none;\n    width: 100%;\n    padding-top: 0.5rem;\n    padding-left: 0.5rem;\n    margin-bottom: -0.5rem;\n}\n\n.send-button {\n    position: absolute;\n    top: 19%;\n    right: 5%;\n    font-size: 1.5rem;\n    background: none;\n    outline: none;\n    border: none;\n}\n\n.send {\n    color: #2a79f2;\n}\n\n/*------------- Styles for No Conversation -------------*/\n\n.no-msg {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    text-align: center;\n    width: 30rem;\n}\n\n.no-msg--title {\n    font-size: 1.5rem;\n    display: block;\n    margin-bottom: 1rem;\n}\n\n.no-msg--text {\n    display: block;\n    font-size: 1.05rem;\n    margin-bottom: 1rem;\n}\n\n.no-msg--btn {\n    background-color: #3ba3e2;\n    border-radius: 2rem;\n    border: none;\n    padding: .3rem 1rem;\n}\n\n.no-msg--btn a {\n    color: #fff;\n    font-size: 1.05rem;\n    text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "/*-------------------- Core Styles --------------------*/\n\n:root {\n    --border: 1px solid rgba(0, 0, 0, 0.1);\n    --light-grey: rgba(0, 0, 0, 0.05);\n    --grey-text: rgba(153, 153, 153, 1);\n}\n\n* {\n    margin: 0;\n    padding: 0;\n}\n\n.py-4 {\n    margin-top: 70px;\n    padding: 0 !important;\n}\n\n.my-column {\n    padding: 0;\n    margin: 0;\n}\n\n.no-overflow {\n    overflow: hidden;\n}\n\n/*------------- Styles for Custom Scrollbars ---------------*/\n\n.recipients-body::-webkit-scrollbar,\n.messages-body::-webkit-scrollbar {\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track,\n.messages-body::-webkit-scrollbar-track {\n    background-color: #fff;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb,\n.messages-body::-webkit-scrollbar-thumb {\n    background-color: #1da1f2;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb:hover,\n.messages-body::-webkit-scrollbar-thumb:hover {\n    background-color: #0a4aac;\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track:hover {\n    background-color: #f1f1f1;\n    width: 8px;\n}\n\n/*----------------- Styles for User List -----------------*/\n\n.recipients-container {\n    border-right: var(--border);\n    overflow: hidden;\n}\n\n.recipients-container hr {\n    margin-bottom: 0.7rem;\n}\n\n.recipients-header,\n.messages-header {\n    text-align: center;\n    padding-top: 0.5rem;\n}\n\n.recipients-body {\n    overflow-y: scroll;\n    height: 80vh;\n}\n\n.recipients-body ul {\n    list-style: none;\n}\n\n.recipients-list {\n    display: flex;\n    cursor: pointer;\n    padding: 0.5rem 0;\n}\n\n.recipients-list:not(:last-child) {\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--selected,\n.recipients-list:hover {\n    background-color: var(--light-grey);\n}\n\n.recipients-list--img {\n    height: 3.75rem;\n    border-radius: 50%;\n    margin: 0 1rem;\n}\n\n.recipients-list--name {\n    font-weight: bold;\n    display: block;\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--msg {\n    color: var(--grey-text);\n}\n\n/*---------------- Styles for Message Content -------------------- */\n\n.messages-header-text {\n    margin-top: 0.45rem;\n    font-weight: 500;\n    line-height: 1.2;\n    display: inline-block;\n    font-size: 1.125rem;\n}\n\n.green-dot,\n.red-dot {\n    border-radius: 50%;\n    height: 6px;\n    width: 6px;\n    display: inline-block;\n    cursor: pointer;\n    margin-left: 1rem;\n}\n\n.green-dot {\n    background: rgb(66, 183, 42);\n}\n\n.red-dot {\n    background: red;\n}\n\n/*---------- Styles for Aligning and Viewing Message Content / History -------*/\n\n.messages-body .welcome-text {\n    text-align: center;\n    display: block;\n}\n\n.messages-body {\n    overflow-y: scroll;\n    height: 65vh;\n}\n\n.sender:first-child {\n    margin-top: 1rem;\n}\n\n.sender {\n    padding: 0.5rem 1rem;\n    max-width: 80%;\n    border-radius: 48px;\n    margin-right: 1rem;\n    float: right;\n    color: #fff;\n}\n\n.receiver {\n    display: flex;\n    margin-left: 0.5rem;\n    width: 80%;\n    position: relative;\n    margin-top: 3rem;\n    margin-bottom: 0.5rem;\n}\n\n.receiver img {\n    width: 28px;\n    height: 28px;\n    margin-right: 0.3rem;\n    margin-top: 1.5rem;\n    position: absolute;\n    bottom: 0;\n    border-radius: 50%;\n}\n\n.sender-msg,\n.receiver-msg {\n    margin-left: 2rem;\n}\n\n.sender-msg {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-end;\n}\n\n.sender-msg div,\n.receiver-msg div {\n    margin-top: 0.1rem;\n    padding: 0.5rem 1rem;\n    border-radius: 48px;\n    width: fit-content;\n}\n\n.sender-msg div {  background: #2a79f2; }\n\n.receiver-msg div { background: #e6ecf0; }\n\n/*------------- Styles for Sending Message -------------*/\n\n.chat-msg {\n    position: relative;\n}\n\n.chat-msg-text {\n    border: 0;\n    outline: none;\n    width: 100%;\n    padding-top: 0.5rem;\n    padding-left: 0.5rem;\n    margin-bottom: -0.5rem;\n}\n\n.send-button {\n    position: absolute;\n    top: 19%;\n    right: 5%;\n    font-size: 1.5rem;\n    background: none;\n    outline: none;\n    border: none;\n}\n\n.send {\n    color: #2a79f2;\n}\n\n/*------------- Styles for No Conversation -------------*/\n\n.no-msg {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    text-align: center;\n    width: 30rem;\n}\n\n.no-msg--title {\n    font-size: 1.5rem;\n    display: block;\n    margin-bottom: 1rem;\n}\n\n.no-msg--text {\n    display: block;\n    font-size: 1.05rem;\n    margin-bottom: 1rem;\n}\n\n.no-msg--btn {\n    background-color: #3ba3e2;\n    border-radius: 2rem;\n    border: none;\n    padding: .3rem 1rem;\n}\n\n.no-msg--btn a {\n    color: #fff;\n    font-size: 1.05rem;\n    text-decoration: none;\n}\n\n/*------------- Spinner -------------*/\n\n#main {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    font-size: 6.4rem;\n}\n\n.spinner { position: relative; }\n\n.spinner:before, .spinner:after {\n    content: \"\";\n    position: relative;\n    display: block;\n}\n\n.spinner:before {\n    animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;\n    width: 1em;\n    height: 1em;\n    background-color: #2a79f2;\n}\n\n.spinner:after {\n    animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;\n    bottom: -.5em;\n    height: .25em;\n    border-radius: 50%;\n    background-color: rgba(0, 0, 0, 0.2);\n}\n\n@keyframes spinner {\n    50% {\n        border-radius: 50%;\n        transform: scale(0.5) rotate(360deg);\n    }\n    100% {\n        transform: scale(1) rotate(720deg);\n    }\n}\n\n@keyframes shadow {\n    50% {\n        transform: scale(0.5);\n        background-color: rgba(0, 0, 0, 0.1);\n    }\n}\n", ""]);
 
 // exports
 

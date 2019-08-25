@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Notification;
 use Illuminate\Http\Request;
 use App\News;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +15,13 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Notification $notification)
     {
         //
+        $unreadNotifications = $this->notifications($request, $notification);
         $news = News::simplePaginate(15);
-        return view('news/index')->with('news', $news);
+        return view('news/index',
+            compact('unreadNotifications'))->with('news', $news);
     }
 
     /**

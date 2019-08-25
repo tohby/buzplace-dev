@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\CommentReply;
 use App\News;
+use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,13 +68,16 @@ class CommentRepliesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $id, Notification $notification)
     {
         //
+        $unreadNotifications = $this->notifications($request, $notification);
         $news = News::findOrFail($request->news_id);
         $reply = CommentReply::findOrFail($id);
         $comments = $news->comment()->get();
-        return view('news/news-item', compact('reply', 'news', 'comments'));
+        return view('news/news-item',
+            compact('reply', 'news',
+                'comments', 'unreadNotifications'));
     }
 
     /**

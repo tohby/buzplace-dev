@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use Illuminate\Http\Request;
 use App\Directory;
 
@@ -12,11 +13,14 @@ class DirectoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Notification $notification)
     {
         //
+        $unreadNotifications = $this->notifications($request, $notification);
         $directories = Directory::simplePaginate(4);
-        return view('directories/index')->with('directories', $directories);
+        return view('directories/index',
+            compact('unreadNotifications'))
+            ->with('directories', $directories);
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use App\Notification;
+use App\Notifications\NotifyUsersForMessage;
 use App\User;
 use App\Events\BroadcastMessage;
 use Illuminate\Http\Request;
@@ -13,11 +15,11 @@ class MessageController extends Controller
 {
     //
 
-    public function index() {
+    public function index(Request $request) {
         return view('messages.index');
     }
 
-    public function message($slug = null) {
+    public function message($slug = null, Notification $notification) {
         $recent_message = Message::where(function ($query) {
             $query->where('from', '=', Auth::user()->slug);
         })->orWhere(function ($query) {
@@ -72,12 +74,25 @@ class MessageController extends Controller
 
             $this->getUsersLastMessage($users);
 
-            $user = $users[0];
-
-            array_shift($users);
+            if ($users) {
+            	$user = $users[0];
+            	$recent_message = $user->last_msg;
+            	array_shift($users);
+            }
         }
 
-        if ($users || $user) {
+        if ($users || isset($user)) {
+            $unreadNotification = $notification
+                ->where('notifiable_id', Auth::user()->id)
+                ->where('read_at', null)->get();
+            foreach($unreadNotification as $notification) {
+                $data = json_decode($notification->data);
+                if ($data->user->slug == $user->slug) {
+                    $notification->read_at = now();
+                    $notification->save();
+                }
+            }
+
             $userAuth = Auth::user();
 
             return response()->json([
@@ -93,7 +108,7 @@ class MessageController extends Controller
         return response()->json(['msg' => 'Empty timeline']);
     }
 
-    public function getMessage($slug) {
+    public function getMessage($slug, Notification $notification) {
         $user = User::where('slug', '=', $slug)->first();
 
         $messages = Message::where(function ($query) use ($slug) {
@@ -104,6 +119,17 @@ class MessageController extends Controller
                 ->where('to', '=', Auth::user()->slug);
         })->get();
 
+        $unreadNotification = $notification
+            ->where('notifiable_id', Auth::user()->id)
+            ->where('read_at', null)->get();
+        foreach($unreadNotification as $notification) {
+            $data = json_decode($notification->data);
+            if ($data->user->slug == $user->slug) {
+                $notification->read_at = now();
+                $notification->save();
+            }
+        }
+
         return response()->json(['user' => $user, 'messages' => $messages]);
     }
 
@@ -111,6 +137,11 @@ class MessageController extends Controller
         $input = $request->all();
         if (Auth::check()) { $input['from'] = Auth::user()->slug; }
         $msg = Message::create($input);
+        $user = Auth::user();
+        if ($msg->to !== $user->id) {
+            User::where('slug', '=', $msg->to)->first()
+                ->notify(new NotifyUsersForMessage($msg, $user));
+        }
         broadcast(new BroadcastMessage($msg))->toOthers();
         return response()->json(['msg' => $msg]);
     }

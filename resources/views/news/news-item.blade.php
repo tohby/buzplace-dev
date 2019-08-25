@@ -49,10 +49,10 @@
                             {{csrf_field()}}
                         {!! Form::close() !!}
                     @else
-                        {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment']) !!}
-                        <input type="hidden" name="news_id" value="{{$news->id}}">
+                        {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment', 'class' => 'createCommentForm']) !!}
+                        <input type="hidden" name="news_id" value="{{$news->id}}" class="news-id">
                         <div class="form-group">
-                            {!! Form::textarea('body', null , ['class'=>'form-control', 'rows'=>3]) !!}
+                            {!! Form::textarea('body', null , array('class'=>'form-control comment-body', 'rows'=>3, 'required'=>'required')) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}
@@ -70,17 +70,17 @@
                             <div class="media-body">
                                 <h5 class="mt-0">{{$comment->author}}</h5>
                                 {{$comment->body}}
-                                <div class="toggle" style="display: flex;">
+                                <div class="toggle" style="display: flex; justify-content: space-between">
                                     @if ($comment->author === Auth::user()->name)
-                                        {!! Form::open(['method'=>'GET', 'action'=>['NewsController@editComment', $comment->id], 'style'=>'margin-top:3px']) !!}
+                                        {!! Form::open(['method'=>'GET', 'action'=>['NewsController@editComment', $comment->id], 'style'=>'margin-top:3px;']) !!}
                                             <input type="hidden" name="news_id" value="{{$news->id}}">
                                             <div class="form-group">
-                                                {!! Form::submit('Edit', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+                                                {!! Form::submit('Edit', ['class' => 'btn btn-info btn-edit-comment']) !!}
                                             </div>
                                         {!! Form::close() !!}
                                         {!! Form::open(['method'=>'GET', 'action'=>['NewsController@deleteComment', $comment->id], 'style'=>'margin-top:3px']) !!}
                                             <div class="form-group">
-                                                {!! Form::submit('Delete', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+                                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                             </div>
                                         {!! Form::close() !!}
                                     @endif
@@ -93,17 +93,17 @@
                                                 <div class="media-body">
                                                     <h5 class="mt-0">{{ $replies->author }}</h5>
                                                     {{ $replies->body }}
-                                                    <div style="display: flex;">
+                                                    <div style="display: flex; justify-content: space-between">
                                                         @if ($replies->author === Auth::user()->name)
-                                                            {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@edit', $replies->id], 'style'=>'margin-top:3px']) !!}
+                                                            {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@edit', $replies->id], 'style'=>'margin-top:3px;']) !!}
                                                                 <input type="hidden" name="news_id" value="{{$news->id}}">
                                                                 <div class="form-group">
-                                                                    {!! Form::submit('Edit', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+                                                                    {!! Form::submit('Edit', ['class'=>'btn btn-info']) !!}
                                                                 </div>
                                                             {!! Form::close() !!}
                                                             {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@destroy', $replies->id], 'style'=>'margin-top:3px']) !!}
                                                                 <div class="form-group">
-                                                                    {!! Form::submit('Delete', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+                                                                    {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
                                                                 </div>
                                                             {!! Form::close() !!}
                                                         @endif
@@ -130,7 +130,7 @@
                                         {!! Form::open(['method'=>'POST', 'action'=>'CommentRepliesController@store', 'style'=>'margin-top:15px', 'id'=>'reply']) !!}
                                             <input type="hidden" name="comment_id" value="{{$comment->id}}">
                                             <div class="form-group">
-                                                {!! Form::text('body', null, ['class'=>'form-control', 'id'=>'autofocus']) !!}
+                                                {!! Form::text('body', null, array('class'=>'form-control', 'id'=>'autofocus', 'autocomplete'=>'off', 'required'=>'required')) !!}
                                             </div>
                                             <div class="form-group">
                                                 {!! Form::submit('Reply', ['class'=>'btn btn-primary']) !!}
@@ -166,4 +166,8 @@
     {{--</div>--}}
 
 {{--</div>--}}
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/script.js') }}"></script>
 @endsection

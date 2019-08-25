@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use App\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,11 +57,13 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request, Notification $notification)
     {
         //
+        $unreadNotifications = $this->notifications($request, $notification);
         $product = Products::findOrFail($id);
-        return view('profile/edit_product', compact('product'));
+        return view('profile/edit_product',
+            compact('product', 'unreadNotifications'));
     }
 
     /**

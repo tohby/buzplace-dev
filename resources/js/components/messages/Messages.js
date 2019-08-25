@@ -12,12 +12,15 @@ class Messages extends Component {
             users: [],
             userAuth: {},
             tmp_msg: {},
+            tmp_res: {},
             recent_user: {},
-            no_msg: ''
+            no_msg: '',
+            loading: false
         };
     }
 
     getPrerequisiteData() {
+        this.setState({ loading: true });
         const urlSplit = window.location.href.split('/');
         const lastIndex = urlSplit[urlSplit.length - 1];
         const urlRequest = urlSplit.length > 4 ? `/loadMessage/${lastIndex}` : `/loadMessage`;
@@ -28,9 +31,15 @@ class Messages extends Component {
                     user: response.data.user,
                     recent_user: response.data.user,
                     users: response.data.users,
-                    userAuth: response.data.userAuth
+                    userAuth: response.data.userAuth,
+                    loading: false
+                }, () => {
+                    if (this.state.userAuth.slug === this.state.user.slug) {
+                        alert("Sorry, but you're not allowed to message yourself");
+                        window.location.href = `/messages`;
+                    }
                 });
-            } else { this.setState({ no_msg: 'No msg' }); }
+            } else { this.setState({ no_msg: 'No msg', loading: false }); }
         });
     }
 
@@ -43,12 +52,33 @@ class Messages extends Component {
             });
     }
 
+    loadingTag() {
+        if (this.state.loading === true) {
+            return <React.Fragment>
+                {
+                    <div id="main">
+                        <span className="spinner"></span>
+                    </div>
+                }
+            </React.Fragment>
+        }
+    }
+
     getRecentMsg() {
-        if(this.state.recent_message) {
-            if(this.state.recent_message.from === this.state.userAuth.slug) {
-                return `You: ${this.state.recent_message.text}`
+        let msg;
+        if (this.state.recent_message) {
+            if (this.state.recent_message.from === this.state.userAuth.slug) {
+                msg = this.state.recent_message.text ?
+                    this.state.recent_message.text.length > 20 ?
+                    `You: ${this.state.recent_message.text.substring(0, 20)} ...` :
+                    `You: ${this.state.recent_message.text}` : '';
+                return msg;
             } else {
-                return `${this.state.recent_message.text}`
+                msg = this.state.recent_message.text ?
+                    this.state.recent_message.text.length > 24 ?
+                    `${this.state.recent_message.text.substring(0, 24)} ...` :
+                    `${this.state.recent_message.text}` : '';
+                return msg;
             }
         } else {
             return `No recent message`
@@ -118,11 +148,18 @@ class Messages extends Component {
     }
 
     getUserLastMsg(user) {
+        let msg;
         if (user.last_msg.from) {
             if (user.last_msg.from === this.state.userAuth.slug) {
-                return `You: ${user.last_msg.text}`;
+                msg = user.last_msg.text.length > 20 ?
+                    `You: ${user.last_msg.text.substring(0, 20)}...` :
+                    user.last_msg.text;
+                return msg;
             } else {
-                return `${user.last_msg.text}`;
+                msg = user.last_msg.text.length > 24 ?
+                    `${user.last_msg.text.substring(0, 24)}...` :
+                    user.last_msg.text;
+                return msg;
             }
         } else {
             return `${user.last_msg}`;
@@ -232,8 +269,7 @@ class Messages extends Component {
                 url: `/messages/sendMessage/${slug}`,
                 method: 'get',
                 data: { to: slug, text: text },
-                success: function(response) {
-                    console.log('from sending message', response);
+                success: () => {
                     axios.post(`/messages/getMessage/${slug}`)
                         .then(response => {
                             let user = response.data.user;
@@ -341,10 +377,12 @@ class Messages extends Component {
     render() {
         const message = this.message();
         const noMessage = this.noMessage();
+        const loading = this.loadingTag();
 
         return (
             <div className="container-fluid conversation-container" id="app">
-                { this.state.no_msg ? noMessage : message }
+                { this.state.loading ? loading : this.state.no_msg ? noMessage : message}
+                {/* { this.state.no_msg ? noMessage : message } */}
             </div>
         );
     }
