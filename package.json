@@ -23,6 +23,7 @@
         "react-dom": "^16.2.0"
     },
     "dependencies": {
+        "animate.css": "^3.7.2",
         "aos": "^2.3.4",
         "laravel-echo": "^1.5.3",
         "pusher-js": "^4.4.0"

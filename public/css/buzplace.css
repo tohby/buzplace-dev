@@ -32,7 +32,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Noto Sans", sans-serif;
+  --font-family-sans-serif: "Roboto", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -65,7 +65,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -6946,7 +6946,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -7071,7 +7071,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -11786,25 +11786,31 @@ a.text-dark:focus {
 
 .text-get {
   color: #212529;
+  font-weight: 400;
 }
 
 .header {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0)), to(rgba(21, 27, 38, 0.5))), url("/images/img4.jpg");
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(21, 27, 38, 0.5) 100%), url("/images/img4.jpg");
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0)), to(rgba(21, 27, 38, 0.5))), url("/images/adult-business-min.jpg");
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(21, 27, 38, 0.5) 100%), url("/images/adult-business-min.jpg");
   min-height: 85%;
   min-width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
+  position: relative;
 }
 
 .header .header-text {
   top: 25%;
-  position: absolute;
+  position: relative;
   text-align: left;
-  color: #FFFFFF;
-  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+}
+
+@media (max-width: 992px) {
+  .header .header-text {
+    top: 0px;
+  }
 }
 
 .header .header-text span {
@@ -11850,5 +11856,34 @@ a.text-dark:focus {
   transition: all 0.2s ease-in-out;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+}
+
+.navbar-brand img {
+  width: 140px;
+}
+
+.navbar-nav .btn-sm,
+.navbar-nav .btn-group-sm > .btn {
+  padding: 0.625rem 1.125rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
+.navbar-nav .btn {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.nav-link {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff !important;
+  margin-right: 15px !important;
+}
+
+section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
