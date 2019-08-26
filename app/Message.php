@@ -11,10 +11,10 @@ class Message extends Model
     protected $guarded = [];
 
     protected $fillable = ['from', 'to', 'text'];
-
+    
     protected $appends = ['time', 'date'];
 
-    protected function getTime() {
+    public function getTime() {
         return $this->created_at->diffForHumans();
     }
 

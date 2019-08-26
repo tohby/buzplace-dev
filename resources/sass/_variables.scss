@@ -1,14 +1,27 @@
+<<<<<<< HEAD
 
+=======
+// font
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap");
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 // Body
 $body-bg: #FFFFFF;
 
 // Typography
+<<<<<<< HEAD
 $font-family-sans-serif: 'Noto Sans', sans-serif;
+=======
+$font-family-sans-serif: "Roboto", sans-serif;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
+<<<<<<< HEAD
 $blue: #3d3b45;
+=======
+// $blue: #3d3b45;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66D9b;
@@ -18,3 +31,11 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+<<<<<<< HEAD
+=======
+
+$breakpoint-xs: 576px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff

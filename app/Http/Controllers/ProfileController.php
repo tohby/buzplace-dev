@@ -57,7 +57,7 @@ class ProfileController extends Controller
             return redirect()->back();
         }
     }
-
+    
     public function create_product(Request $request, Notification $notification){
         $unreadNotifications = $this->notifications($request, $notification);
         return view('profile/add_product',

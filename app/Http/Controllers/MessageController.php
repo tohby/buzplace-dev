@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
-    //
-
     public function index(Request $request) {
         return view('messages.index');
     }
@@ -80,7 +78,7 @@ class MessageController extends Controller
             	array_shift($users);
             }
         }
-
+        
         if ($users || isset($user)) {
             $unreadNotification = $notification
                 ->where('notifiable_id', Auth::user()->id)
@@ -92,7 +90,6 @@ class MessageController extends Controller
                     $notification->save();
                 }
             }
-
             $userAuth = Auth::user();
 
             return response()->json([
@@ -107,7 +104,7 @@ class MessageController extends Controller
 
         return response()->json(['msg' => 'Empty timeline']);
     }
-
+    
     public function getMessage($slug, Notification $notification) {
         $user = User::where('slug', '=', $slug)->first();
 
@@ -118,7 +115,7 @@ class MessageController extends Controller
             $query->where('from', '=', $slug)
                 ->where('to', '=', Auth::user()->slug);
         })->get();
-
+        
         $unreadNotification = $notification
             ->where('notifiable_id', Auth::user()->id)
             ->where('read_at', null)->get();
@@ -129,7 +126,7 @@ class MessageController extends Controller
                 $notification->save();
             }
         }
-
+        
         return response()->json(['user' => $user, 'messages' => $messages]);
     }
 

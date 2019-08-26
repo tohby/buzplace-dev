@@ -30,7 +30,11 @@
                     <div class="form-group">
 
                         {!! Form::label('image', 'Image:') !!}
+<<<<<<< HEAD
                         {!! Form::file('image', ['required'=>'required']) !!}
+=======
+                        {!! Form::file('image') !!}
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
                     </div>
 

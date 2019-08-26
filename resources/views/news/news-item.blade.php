@@ -49,10 +49,17 @@
                             {{csrf_field()}}
                         {!! Form::close() !!}
                     @else
+<<<<<<< HEAD
                         {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment', 'class' => 'createCommentForm']) !!}
                         <input type="hidden" name="news_id" value="{{$news->id}}" class="news-id">
                         <div class="form-group">
                             {!! Form::textarea('body', null , array('class'=>'form-control comment-body', 'rows'=>3, 'required'=>'required')) !!}
+=======
+                        {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment']) !!}
+                        <input type="hidden" name="news_id" value="{{$news->id}}">
+                        <div class="form-group">
+                            {!! Form::textarea('body', null , ['class'=>'form-control', 'rows'=>3]) !!}
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                         </div>
                         <div class="form-group">
                             {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}
@@ -70,17 +77,30 @@
                             <div class="media-body">
                                 <h5 class="mt-0">{{$comment->author}}</h5>
                                 {{$comment->body}}
+<<<<<<< HEAD
                                 <div class="toggle" style="display: flex; justify-content: space-between">
                                     @if ($comment->author === Auth::user()->name)
                                         {!! Form::open(['method'=>'GET', 'action'=>['NewsController@editComment', $comment->id], 'style'=>'margin-top:3px;']) !!}
                                             <input type="hidden" name="news_id" value="{{$news->id}}">
                                             <div class="form-group">
                                                 {!! Form::submit('Edit', ['class' => 'btn btn-info btn-edit-comment']) !!}
+=======
+                                <div class="toggle" style="display: flex;">
+                                    @if ($comment->author === Auth::user()->name)
+                                        {!! Form::open(['method'=>'GET', 'action'=>['NewsController@editComment', $comment->id], 'style'=>'margin-top:3px']) !!}
+                                            <input type="hidden" name="news_id" value="{{$news->id}}">
+                                            <div class="form-group">
+                                                {!! Form::submit('Edit', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                             </div>
                                         {!! Form::close() !!}
                                         {!! Form::open(['method'=>'GET', 'action'=>['NewsController@deleteComment', $comment->id], 'style'=>'margin-top:3px']) !!}
                                             <div class="form-group">
+<<<<<<< HEAD
                                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+=======
+                                                {!! Form::submit('Delete', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                             </div>
                                         {!! Form::close() !!}
                                     @endif
@@ -93,17 +113,30 @@
                                                 <div class="media-body">
                                                     <h5 class="mt-0">{{ $replies->author }}</h5>
                                                     {{ $replies->body }}
+<<<<<<< HEAD
                                                     <div style="display: flex; justify-content: space-between">
                                                         @if ($replies->author === Auth::user()->name)
                                                             {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@edit', $replies->id], 'style'=>'margin-top:3px;']) !!}
                                                                 <input type="hidden" name="news_id" value="{{$news->id}}">
                                                                 <div class="form-group">
                                                                     {!! Form::submit('Edit', ['class'=>'btn btn-info']) !!}
+=======
+                                                    <div style="display: flex;">
+                                                        @if ($replies->author === Auth::user()->name)
+                                                            {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@edit', $replies->id], 'style'=>'margin-top:3px']) !!}
+                                                                <input type="hidden" name="news_id" value="{{$news->id}}">
+                                                                <div class="form-group">
+                                                                    {!! Form::submit('Edit', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                                                 </div>
                                                             {!! Form::close() !!}
                                                             {!! Form::open(['method'=>'GET', 'action'=>['CommentRepliesController@destroy', $replies->id], 'style'=>'margin-top:3px']) !!}
                                                                 <div class="form-group">
+<<<<<<< HEAD
                                                                     {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
+=======
+                                                                    {!! Form::submit('Delete', ['style'=>'background:none;outline:none;border:none;text-decoration:underline;color:blue;cursor:pointer;margin-left:-5px']) !!}
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                                                 </div>
                                                             {!! Form::close() !!}
                                                         @endif
@@ -130,7 +163,11 @@
                                         {!! Form::open(['method'=>'POST', 'action'=>'CommentRepliesController@store', 'style'=>'margin-top:15px', 'id'=>'reply']) !!}
                                             <input type="hidden" name="comment_id" value="{{$comment->id}}">
                                             <div class="form-group">
+<<<<<<< HEAD
                                                 {!! Form::text('body', null, array('class'=>'form-control', 'id'=>'autofocus', 'autocomplete'=>'off', 'required'=>'required')) !!}
+=======
+                                                {!! Form::text('body', null, ['class'=>'form-control', 'id'=>'autofocus']) !!}
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                             </div>
                                             <div class="form-group">
                                                 {!! Form::submit('Reply', ['class'=>'btn btn-primary']) !!}
@@ -167,7 +204,10 @@
 
 {{--</div>--}}
 @endsection
+<<<<<<< HEAD
 
 @section('scripts')
     <script src="{{ asset('js/script.js') }}"></script>
 @endsection
+=======
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff

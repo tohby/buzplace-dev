@@ -16,6 +16,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
+<<<<<<< HEAD
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -23,6 +24,14 @@
                         </div>
                     </div>
                     <div class="card-body">
+=======
+                <div class="card rounded-xl">
+                    <div class="card-body py-5">
+                        <div class="text-center mb-5">
+                            <h6 class="h3 mb-1">Login</h6>
+                            <p class="text-muted">Sign in to your account to continue.</p>
+                        </div>
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group row">
@@ -32,6 +41,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+<<<<<<< HEAD
                                         name="email" 
                                         value="{{ old('email') }}" 
                                         required 
@@ -45,6 +55,16 @@
                                                 </strong>
                                             </span> 
                                         @endif
+=======
+                                        name="email" value="{{ old('email') }}" required autofocus>
+                                    @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>
+                                            {{ $errors->first('email') }}
+                                        </strong>
+                                    </span>
+                                    @endif
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                 </div>
                             </div>
 
@@ -107,7 +127,11 @@
                         <div class="form-group row mb-0 mt-2">
                             <div class="col-md-6 offset-md-4">
                                 <a class="btn btn-link text-center" href="{{ url('/') }}">
+<<<<<<< HEAD
                                     Back home
+=======
+                                    Go back home
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                 </a>
                             </div>
                         </div>

@@ -60,7 +60,11 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 14);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +74,13 @@
 "use strict";
 
 
+<<<<<<< HEAD
 var bind = __webpack_require__(7);
 var isBuffer = __webpack_require__(21);
+=======
+var bind = __webpack_require__(6);
+var isBuffer = __webpack_require__(23);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 /*global toString:true*/
 
@@ -247,9 +256,19 @@ function trim(str) {
  *
  * react-native:
  *  navigator.product -> 'ReactNative'
+<<<<<<< HEAD
  */
 function isStandardBrowserEnv() {
   if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
+=======
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
+                                           navigator.product === 'NativeScript' ||
+                                           navigator.product === 'NS')) {
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
     return false;
   }
   return (
@@ -331,6 +350,35 @@ function merge(/* obj1, obj2, obj3, ... */) {
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * Function equal to merge with the difference being that no reference
+ * to original objects is kept.
+ *
+ * @see merge
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function deepMerge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
+      result[key] = deepMerge(result[key], val);
+    } else if (typeof val === 'object') {
+      result[key] = deepMerge({}, val);
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
  * Extends object a by mutably adding to it the properties of object b.
  *
  * @param {Object} a The object to be extended
@@ -368,6 +416,10 @@ module.exports = {
   isStandardBrowserEnv: isStandardBrowserEnv,
   forEach: forEach,
   merge: merge,
+<<<<<<< HEAD
+=======
+  deepMerge: deepMerge,
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
   extend: extend,
   trim: trim
 };
@@ -391,6 +443,7 @@ if (false) {
 /* 2 */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 var g;
 
 // This works in non-strict mode
@@ -412,12 +465,36 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
+=======
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(20);
 
 /***/ }),
@@ -526,6 +603,12 @@ module.exports = defaults;
 
 /***/ }),
 /* 5 */
+=======
+module.exports = __webpack_require__(22);
+
+/***/ }),
+/* 4 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3066,7 +3149,11 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
+<<<<<<< HEAD
 /* 6 */
+=======
+/* 5 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13671,7 +13758,11 @@ return jQuery;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 7 */
+=======
+/* 6 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13689,12 +13780,94 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
+<<<<<<< HEAD
+=======
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%40/gi, '@').
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+
+/***/ }),
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(0);
 var settle = __webpack_require__(25);
 var buildURL = __webpack_require__(27);
@@ -13702,6 +13875,132 @@ var parseHeaders = __webpack_require__(28);
 var isURLSameOrigin = __webpack_require__(29);
 var createError = __webpack_require__(9);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(30);
+=======
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(29);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  // Only Node.JS has a process variable that is of [[Class]] process
+  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(10);
+  } else if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(10);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var settle = __webpack_require__(30);
+var buildURL = __webpack_require__(7);
+var parseHeaders = __webpack_require__(32);
+var isURLSameOrigin = __webpack_require__(33);
+var createError = __webpack_require__(11);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13713,6 +14012,7 @@ module.exports = function xhrAdapter(config) {
     }
 
     var request = new XMLHttpRequest();
+<<<<<<< HEAD
     var loadEvent = 'onreadystatechange';
     var xDomain = false;
 
@@ -13729,6 +14029,8 @@ module.exports = function xhrAdapter(config) {
       request.onprogress = function handleProgress() {};
       request.ontimeout = function handleTimeout() {};
     }
+=======
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
     // HTTP basic authentication
     if (config.auth) {
@@ -13743,8 +14045,13 @@ module.exports = function xhrAdapter(config) {
     request.timeout = config.timeout;
 
     // Listen for ready state
+<<<<<<< HEAD
     request[loadEvent] = function handleLoad() {
       if (!request || (request.readyState !== 4 && !xDomain)) {
+=======
+    request.onreadystatechange = function handleLoad() {
+      if (!request || request.readyState !== 4) {
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
         return;
       }
 
@@ -13761,9 +14068,14 @@ module.exports = function xhrAdapter(config) {
       var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
       var response = {
         data: responseData,
+<<<<<<< HEAD
         // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
         status: request.status === 1223 ? 204 : request.status,
         statusText: request.status === 1223 ? 'No Content' : request.statusText,
+=======
+        status: request.status,
+        statusText: request.statusText,
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
         headers: responseHeaders,
         config: config,
         request: request
@@ -13775,6 +14087,21 @@ module.exports = function xhrAdapter(config) {
       request = null;
     };
 
+<<<<<<< HEAD
+=======
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
+
+      // Clean up request
+      request = null;
+    };
+
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
     // Handle low level network errors
     request.onerror = function handleError() {
       // Real errors are hidden from us by the browser
@@ -13798,12 +14125,21 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
+<<<<<<< HEAD
       var cookies = __webpack_require__(31);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
           cookies.read(config.xsrfCookieName) :
           undefined;
+=======
+      var cookies = __webpack_require__(34);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+        cookies.read(config.xsrfCookieName) :
+        undefined;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
       if (xsrfValue) {
         requestHeaders[config.xsrfHeaderName] = xsrfValue;
@@ -13876,13 +14212,21 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 9 */
+=======
+/* 11 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var enhanceError = __webpack_require__(26);
+=======
+var enhanceError = __webpack_require__(31);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13901,19 +14245,78 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 10 */
+=======
+/* 12 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
+=======
+var utils = __webpack_require__(0);
+
+/**
+ * Config-specific merge-function which creates a new config-object
+ * by merging two configuration objects together.
+ *
+ * @param {Object} config1
+ * @param {Object} config2
+ * @returns {Object} New object resulting from merging config2 to config1
+ */
+module.exports = function mergeConfig(config1, config2) {
+  // eslint-disable-next-line no-param-reassign
+  config2 = config2 || {};
+  var config = {};
+
+  utils.forEach(['url', 'method', 'params', 'data'], function valueFromConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    }
+  });
+
+  utils.forEach(['headers', 'auth', 'proxy'], function mergeDeepProperties(prop) {
+    if (utils.isObject(config2[prop])) {
+      config[prop] = utils.deepMerge(config1[prop], config2[prop]);
+    } else if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (utils.isObject(config1[prop])) {
+      config[prop] = utils.deepMerge(config1[prop]);
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  utils.forEach([
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'maxContentLength',
+    'validateStatus', 'maxRedirects', 'httpAgent', 'httpsAgent', 'cancelToken',
+    'socketPath'
+  ], function defaultToConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  return config;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 };
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 11 */
+=======
+/* 13 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13939,7 +14342,11 @@ module.exports = Cancel;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 12 */
+=======
+/* 14 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14036,7 +14443,11 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 13 */
+=======
+/* 15 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14145,6 +14556,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14169,18 +14581,50 @@ __webpack_require__(16);
  * Next, we will create a fresh React component instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
+=======
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(17);
+__webpack_require__(57);
+module.exports = __webpack_require__(58);
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes React and other helpers. It's a great starting point while
+ * building robust, powerful web applications using React + Laravel.
+ */
+
+__webpack_require__(18);
+
+/**
+ * Next, we will create a fresh React component instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
  */
 
 __webpack_require__(41);
 
 /***/ }),
+<<<<<<< HEAD
 /* 16 */
+=======
+/* 18 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo__ = __webpack_require__(39);
 
+<<<<<<< HEAD
 window._ = __webpack_require__(17);
 window.Popper = __webpack_require__(5).default;
 
@@ -14200,21 +14644,50 @@ try {
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
+=======
+window._ = __webpack_require__(19);
+window.Popper = __webpack_require__(4).default;
+
+/**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
+try {
+    window.$ = window.jQuery = __webpack_require__(5);
+
+    __webpack_require__(21);
+} catch (e) {}
+
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
  */
 
 window.axios = __webpack_require__(3);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+<<<<<<< HEAD
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.
+=======
+/**
+ * Next we will register the CSRF Token as a common header with Axios so that
+ * all outgoing HTTP requests automatically have it attached. This is just
+ * a simple convenience so we don't have to attach every token manually.
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
  */
 
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
+<<<<<<< HEAD
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
@@ -14224,6 +14697,17 @@ if (token) {
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
+=======
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
  */
 
 
@@ -14231,6 +14715,7 @@ if (token) {
 window.Pusher = __webpack_require__(40);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */]({
+<<<<<<< HEAD
   broadcaster: 'pusher',
   key: '50c533768dfc523b0820',
   cluster: 'ap1',
@@ -14239,6 +14724,16 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */](
 
 /***/ }),
 /* 17 */
+=======
+    broadcaster: 'pusher',
+    key: '50c533768dfc523b0820',
+    cluster: 'ap1',
+    encrypted: true
+});
+
+/***/ }),
+/* 19 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31350,6 +31845,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */](
   }
 }.call(this));
 
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(18)(module)))
 
 /***/ }),
@@ -31382,6 +31878,40 @@ module.exports = function(module) {
 
 /***/ }),
 /* 19 */
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(20)(module)))
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 21 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -31390,7 +31920,11 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
+<<<<<<< HEAD
    true ? factory(exports, __webpack_require__(6), __webpack_require__(5)) :
+=======
+   true ? factory(exports, __webpack_require__(5), __webpack_require__(4)) :
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (global = global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
 }(this, function (exports, $, Popper) { 'use strict';
@@ -35822,16 +36356,27 @@ module.exports = function(module) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 20 */
+=======
+/* 22 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
+<<<<<<< HEAD
 var bind = __webpack_require__(7);
 var Axios = __webpack_require__(22);
 var defaults = __webpack_require__(4);
+=======
+var bind = __webpack_require__(6);
+var Axios = __webpack_require__(24);
+var mergeConfig = __webpack_require__(12);
+var defaults = __webpack_require__(9);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 /**
  * Create an instance of Axios
@@ -35860,6 +36405,7 @@ axios.Axios = Axios;
 
 // Factory for creating new instances
 axios.create = function create(instanceConfig) {
+<<<<<<< HEAD
   return createInstance(utils.merge(defaults, instanceConfig));
 };
 
@@ -35867,6 +36413,15 @@ axios.create = function create(instanceConfig) {
 axios.Cancel = __webpack_require__(11);
 axios.CancelToken = __webpack_require__(37);
 axios.isCancel = __webpack_require__(10);
+=======
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(13);
+axios.CancelToken = __webpack_require__(37);
+axios.isCancel = __webpack_require__(8);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -35881,7 +36436,11 @@ module.exports.default = axios;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 21 */
+=======
+/* 23 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports) {
 
 /*!
@@ -35891,6 +36450,7 @@ module.exports.default = axios;
  * @license  MIT
  */
 
+<<<<<<< HEAD
 // The _isBuffer check is for Safari 5-7 support, because it's missing
 // Object.prototype.constructor. Remove this eventually
 module.exports = function (obj) {
@@ -35904,20 +36464,37 @@ function isBuffer (obj) {
 // For Node v0.10 support. Remove this eventually.
 function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+=======
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 }
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 22 */
+=======
+/* 24 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var defaults = __webpack_require__(4);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(32);
 var dispatchRequest = __webpack_require__(33);
+=======
+var utils = __webpack_require__(0);
+var buildURL = __webpack_require__(7);
+var InterceptorManager = __webpack_require__(25);
+var dispatchRequest = __webpack_require__(26);
+var mergeConfig = __webpack_require__(12);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 /**
  * Create a new instance of Axios
@@ -35941,6 +36518,7 @@ Axios.prototype.request = function request(config) {
   /*eslint no-param-reassign:0*/
   // Allow for axios('example/url'[, config]) a la fetch API
   if (typeof config === 'string') {
+<<<<<<< HEAD
     config = utils.merge({
       url: arguments[0]
     }, arguments[1]);
@@ -35948,6 +36526,16 @@ Axios.prototype.request = function request(config) {
 
   config = utils.merge(defaults, {method: 'get'}, this.defaults, config);
   config.method = config.method.toLowerCase();
+=======
+    config = arguments[1] || {};
+    config.url = arguments[0];
+  } else {
+    config = config || {};
+  }
+
+  config = mergeConfig(this.defaults, config);
+  config.method = config.method ? config.method.toLowerCase() : 'get';
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
   // Hook up interceptors middleware
   var chain = [dispatchRequest, undefined];
@@ -35968,6 +36556,14 @@ Axios.prototype.request = function request(config) {
   return promise;
 };
 
+<<<<<<< HEAD
+=======
+Axios.prototype.getUri = function getUri(config) {
+  config = mergeConfig(this.defaults, config);
+  return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+};
+
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 // Provide aliases for supported request methods
 utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
   /*eslint func-names:0*/
@@ -35994,7 +36590,190 @@ module.exports = Axios;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 23 */
+=======
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var transformData = __webpack_require__(27);
+var isCancel = __webpack_require__(8);
+var defaults = __webpack_require__(9);
+var isAbsoluteURL = __webpack_require__(35);
+var combineURLs = __webpack_require__(36);
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Support baseURL config
+  if (config.baseURL && !isAbsoluteURL(config.url)) {
+    config.url = combineURLs(config.baseURL, config.url);
+  }
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData(
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers || {}
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData(
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData(
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+/* 28 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -36184,7 +36963,11 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 24 */
+=======
+/* 29 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36203,13 +36986,21 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 25 */
+=======
+/* 30 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var createError = __webpack_require__(9);
+=======
+var createError = __webpack_require__(11);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -36220,8 +37011,12 @@ var createError = __webpack_require__(9);
  */
 module.exports = function settle(resolve, reject, response) {
   var validateStatus = response.config.validateStatus;
+<<<<<<< HEAD
   // Note: status is not exposed by XDomainRequest
   if (!response.status || !validateStatus || validateStatus(response.status)) {
+=======
+  if (!validateStatus || validateStatus(response.status)) {
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
     resolve(response);
   } else {
     reject(createError(
@@ -36236,7 +37031,11 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 26 */
+=======
+/* 31 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36257,6 +37056,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   if (code) {
     error.code = code;
   }
+<<<<<<< HEAD
   error.request = request;
   error.response = response;
   return error;
@@ -36333,11 +37133,41 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   }
 
   return url;
+=======
+
+  error.request = request;
+  error.response = response;
+  error.isAxiosError = true;
+
+  error.toJSON = function() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: this.config,
+      code: this.code
+    };
+  };
+  return error;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 };
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 28 */
+=======
+/* 32 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36397,7 +37227,11 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 29 */
+=======
+/* 33 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36410,17 +37244,27 @@ module.exports = (
 
   // Standard browser envs have full support of the APIs needed to test
   // whether the request URL is of the same origin as current location.
+<<<<<<< HEAD
   (function standardBrowserEnv() {
     var msie = /(msie|trident)/i.test(navigator.userAgent);
     var urlParsingNode = document.createElement('a');
     var originURL;
 
     /**
+=======
+    (function standardBrowserEnv() {
+      var msie = /(msie|trident)/i.test(navigator.userAgent);
+      var urlParsingNode = document.createElement('a');
+      var originURL;
+
+      /**
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
     * Parse a URL to discover it's components
     *
     * @param {String} url The URL to be parsed
     * @returns {Object}
     */
+<<<<<<< HEAD
     function resolveURL(url) {
       var href = url;
 
@@ -36450,11 +37294,43 @@ module.exports = (
     originURL = resolveURL(window.location.href);
 
     /**
+=======
+      function resolveURL(url) {
+        var href = url;
+
+        if (msie) {
+        // IE needs attribute set twice to normalize properties
+          urlParsingNode.setAttribute('href', href);
+          href = urlParsingNode.href;
+        }
+
+        urlParsingNode.setAttribute('href', href);
+
+        // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+        return {
+          href: urlParsingNode.href,
+          protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+          host: urlParsingNode.host,
+          search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+          hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+          hostname: urlParsingNode.hostname,
+          port: urlParsingNode.port,
+          pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+            urlParsingNode.pathname :
+            '/' + urlParsingNode.pathname
+        };
+      }
+
+      originURL = resolveURL(window.location.href);
+
+      /**
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
     * Determine if a URL shares the same origin as the current location
     *
     * @param {String} requestURL The URL to test
     * @returns {boolean} True if URL shares the same origin, otherwise false
     */
+<<<<<<< HEAD
     return function isURLSameOrigin(requestURL) {
       var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
       return (parsed.protocol === originURL.protocol &&
@@ -36468,10 +37344,26 @@ module.exports = (
       return true;
     };
   })()
+=======
+      return function isURLSameOrigin(requestURL) {
+        var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+      };
+    })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return function isURLSameOrigin() {
+        return true;
+      };
+    })()
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 );
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36516,6 +37408,9 @@ module.exports = btoa;
 
 /***/ }),
 /* 31 */
+=======
+/* 34 */
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36527,6 +37422,7 @@ module.exports = (
   utils.isStandardBrowserEnv() ?
 
   // Standard browser envs support document.cookie
+<<<<<<< HEAD
   (function standardBrowserEnv() {
     return {
       write: function write(name, value, expires, path, domain, secure) {
@@ -36571,10 +37467,57 @@ module.exports = (
       remove: function remove() {}
     };
   })()
+=======
+    (function standardBrowserEnv() {
+      return {
+        write: function write(name, value, expires, path, domain, secure) {
+          var cookie = [];
+          cookie.push(name + '=' + encodeURIComponent(value));
+
+          if (utils.isNumber(expires)) {
+            cookie.push('expires=' + new Date(expires).toGMTString());
+          }
+
+          if (utils.isString(path)) {
+            cookie.push('path=' + path);
+          }
+
+          if (utils.isString(domain)) {
+            cookie.push('domain=' + domain);
+          }
+
+          if (secure === true) {
+            cookie.push('secure');
+          }
+
+          document.cookie = cookie.join('; ');
+        },
+
+        read: function read(name) {
+          var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+          return (match ? decodeURIComponent(match[3]) : null);
+        },
+
+        remove: function remove(name) {
+          this.write(name, '', Date.now() - 86400000);
+        }
+      };
+    })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return {
+        write: function write() {},
+        read: function read() { return null; },
+        remove: function remove() {}
+      };
+    })()
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 );
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36754,6 +37697,8 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
+=======
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36802,7 +37747,11 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
+<<<<<<< HEAD
 var Cancel = __webpack_require__(11);
+=======
+var Cancel = __webpack_require__(13);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -47080,8 +48029,13 @@ if (true) {
   (function() {
 'use strict';
 
+<<<<<<< HEAD
 var _assign = __webpack_require__(12);
 var checkPropTypes = __webpack_require__(13);
+=======
+var _assign = __webpack_require__(14);
+var checkPropTypes = __webpack_require__(15);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 // TODO: this is special because it gets imported during build.
 
@@ -49053,8 +50007,13 @@ if (true) {
 'use strict';
 
 var React = __webpack_require__(1);
+<<<<<<< HEAD
 var _assign = __webpack_require__(12);
 var checkPropTypes = __webpack_require__(13);
+=======
+var _assign = __webpack_require__(14);
+var checkPropTypes = __webpack_require__(15);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 var scheduler = __webpack_require__(46);
 var tracing = __webpack_require__(48);
 
@@ -71517,7 +72476,10 @@ var Messages = function (_Component) {
             users: [],
             userAuth: {},
             tmp_msg: {},
+<<<<<<< HEAD
             tmp_res: {},
+=======
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
             recent_user: {},
             no_msg: '',
             loading: false
@@ -71586,6 +72548,7 @@ var Messages = function (_Component) {
     }, {
         key: "getRecentMsg",
         value: function getRecentMsg() {
+<<<<<<< HEAD
             var msg = void 0;
             if (this.state.recent_message) {
                 if (this.state.recent_message.from === this.state.userAuth.slug) {
@@ -71594,6 +72557,13 @@ var Messages = function (_Component) {
                 } else {
                     msg = this.state.recent_message.text ? this.state.recent_message.text.length > 24 ? this.state.recent_message.text.substring(0, 24) + " ..." : "" + this.state.recent_message.text : '';
                     return msg;
+=======
+            if (this.state.recent_message) {
+                if (this.state.recent_message.from === this.state.userAuth.slug) {
+                    return "You: " + this.state.recent_message.text;
+                } else {
+                    return "" + this.state.recent_message.text;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                 }
             } else {
                 return "No recent message";
@@ -71685,6 +72655,7 @@ var Messages = function (_Component) {
     }, {
         key: "getUserLastMsg",
         value: function getUserLastMsg(user) {
+<<<<<<< HEAD
             var msg = void 0;
             if (user.last_msg.from) {
                 if (user.last_msg.from === this.state.userAuth.slug) {
@@ -71693,6 +72664,13 @@ var Messages = function (_Component) {
                 } else {
                     msg = user.last_msg.text.length > 24 ? user.last_msg.text.substring(0, 24) + "..." : user.last_msg.text;
                     return msg;
+=======
+            if (user.last_msg.from) {
+                if (user.last_msg.from === this.state.userAuth.slug) {
+                    return "You: " + user.last_msg.text;
+                } else {
+                    return "" + user.last_msg.text;
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                 }
             } else {
                 return "" + user.last_msg;
@@ -71779,7 +72757,12 @@ var Messages = function (_Component) {
                     url: "/messages/sendMessage/" + slug,
                     method: 'get',
                     data: { to: slug, text: text },
+<<<<<<< HEAD
                     success: function success() {
+=======
+                    success: function success(response) {
+                        console.log('from sending message', response);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                         __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post("/messages/getMessage/" + slug).then(function (response) {
                             var user = response.data.user;
                             var messages = response.data.messages;
@@ -72092,7 +73075,11 @@ exports = module.exports = __webpack_require__(54)(false);
 
 
 // module
+<<<<<<< HEAD
 exports.push([module.i, "/*-------------------- Core Styles --------------------*/\n\n:root {\n    --border: 1px solid rgba(0, 0, 0, 0.1);\n    --light-grey: rgba(0, 0, 0, 0.05);\n    --grey-text: rgba(153, 153, 153, 1);\n}\n\n* {\n    margin: 0;\n    padding: 0;\n}\n\n.py-4 {\n    margin-top: 70px;\n    padding: 0 !important;\n}\n\n.my-column {\n    padding: 0;\n    margin: 0;\n}\n\n.no-overflow {\n    overflow: hidden;\n}\n\n/*------------- Styles for Custom Scrollbars ---------------*/\n\n.recipients-body::-webkit-scrollbar,\n.messages-body::-webkit-scrollbar {\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track,\n.messages-body::-webkit-scrollbar-track {\n    background-color: #fff;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb,\n.messages-body::-webkit-scrollbar-thumb {\n    background-color: #1da1f2;\n    border-radius: 4px;\n    width: 3px;\n}\n\n.recipients-body::-webkit-scrollbar-thumb:hover,\n.messages-body::-webkit-scrollbar-thumb:hover {\n    background-color: #0a4aac;\n    width: 8px;\n}\n\n.recipients-body::-webkit-scrollbar-track:hover {\n    background-color: #f1f1f1;\n    width: 8px;\n}\n\n/*----------------- Styles for User List -----------------*/\n\n.recipients-container {\n    border-right: var(--border);\n    overflow: hidden;\n}\n\n.recipients-container hr {\n    margin-bottom: 0.7rem;\n}\n\n.recipients-header,\n.messages-header {\n    text-align: center;\n    padding-top: 0.5rem;\n}\n\n.recipients-body {\n    overflow-y: scroll;\n    height: 80vh;\n}\n\n.recipients-body ul {\n    list-style: none;\n}\n\n.recipients-list {\n    display: flex;\n    cursor: pointer;\n    padding: 0.5rem 0;\n}\n\n.recipients-list:not(:last-child) {\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--selected,\n.recipients-list:hover {\n    background-color: var(--light-grey);\n}\n\n.recipients-list--img {\n    height: 3.75rem;\n    border-radius: 50%;\n    margin: 0 1rem;\n}\n\n.recipients-list--name {\n    font-weight: bold;\n    display: block;\n    margin-bottom: 0.5rem;\n}\n\n.recipients-list--msg {\n    color: var(--grey-text);\n}\n\n/*---------------- Styles for Message Content -------------------- */\n\n.messages-header-text {\n    margin-top: 0.45rem;\n    font-weight: 500;\n    line-height: 1.2;\n    display: inline-block;\n    font-size: 1.125rem;\n}\n\n.green-dot,\n.red-dot {\n    border-radius: 50%;\n    height: 6px;\n    width: 6px;\n    display: inline-block;\n    cursor: pointer;\n    margin-left: 1rem;\n}\n\n.green-dot {\n    background: rgb(66, 183, 42);\n}\n\n.red-dot {\n    background: red;\n}\n\n/*---------- Styles for Aligning and Viewing Message Content / History -------*/\n\n.messages-body .welcome-text {\n    text-align: center;\n    display: block;\n}\n\n.messages-body {\n    overflow-y: scroll;\n    height: 65vh;\n}\n\n.sender:first-child {\n    margin-top: 1rem;\n}\n\n.sender {\n    padding: 0.5rem 1rem;\n    max-width: 80%;\n    border-radius: 48px;\n    margin-right: 1rem;\n    float: right;\n    color: #fff;\n}\n\n.receiver {\n    display: flex;\n    margin-left: 0.5rem;\n    width: 80%;\n    position: relative;\n    margin-top: 3rem;\n    margin-bottom: 0.5rem;\n}\n\n.receiver img {\n    width: 28px;\n    height: 28px;\n    margin-right: 0.3rem;\n    margin-top: 1.5rem;\n    position: absolute;\n    bottom: 0;\n    border-radius: 50%;\n}\n\n.sender-msg,\n.receiver-msg {\n    margin-left: 2rem;\n}\n\n.sender-msg {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-end;\n}\n\n.sender-msg div,\n.receiver-msg div {\n    margin-top: 0.1rem;\n    padding: 0.5rem 1rem;\n    border-radius: 48px;\n    width: fit-content;\n}\n\n.sender-msg div {  background: #2a79f2; }\n\n.receiver-msg div { background: #e6ecf0; }\n\n/*------------- Styles for Sending Message -------------*/\n\n.chat-msg {\n    position: relative;\n}\n\n.chat-msg-text {\n    border: 0;\n    outline: none;\n    width: 100%;\n    padding-top: 0.5rem;\n    padding-left: 0.5rem;\n    margin-bottom: -0.5rem;\n}\n\n.send-button {\n    position: absolute;\n    top: 19%;\n    right: 5%;\n    font-size: 1.5rem;\n    background: none;\n    outline: none;\n    border: none;\n}\n\n.send {\n    color: #2a79f2;\n}\n\n/*------------- Styles for No Conversation -------------*/\n\n.no-msg {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    text-align: center;\n    width: 30rem;\n}\n\n.no-msg--title {\n    font-size: 1.5rem;\n    display: block;\n    margin-bottom: 1rem;\n}\n\n.no-msg--text {\n    display: block;\n    font-size: 1.05rem;\n    margin-bottom: 1rem;\n}\n\n.no-msg--btn {\n    background-color: #3ba3e2;\n    border-radius: 2rem;\n    border: none;\n    padding: .3rem 1rem;\n}\n\n.no-msg--btn a {\n    color: #fff;\n    font-size: 1.05rem;\n    text-decoration: none;\n}\n\n/*------------- Spinner -------------*/\n\n#main {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    font-size: 6.4rem;\n}\n\n.spinner { position: relative; }\n\n.spinner:before, .spinner:after {\n    content: \"\";\n    position: relative;\n    display: block;\n}\n\n.spinner:before {\n    animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;\n    width: 1em;\n    height: 1em;\n    background-color: #2a79f2;\n}\n\n.spinner:after {\n    animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;\n    bottom: -.5em;\n    height: .25em;\n    border-radius: 50%;\n    background-color: rgba(0, 0, 0, 0.2);\n}\n\n@keyframes spinner {\n    50% {\n        border-radius: 50%;\n        transform: scale(0.5) rotate(360deg);\n    }\n    100% {\n        transform: scale(1) rotate(720deg);\n    }\n}\n\n@keyframes shadow {\n    50% {\n        transform: scale(0.5);\n        background-color: rgba(0, 0, 0, 0.1);\n    }\n}\n", ""]);
+=======
+exports.push([module.i, "/*-------------------- Core Styles --------------------*/\r\n\r\n:root {\r\n    --border: 1px solid rgba(0, 0, 0, 0.1);\r\n    --light-grey: rgba(0, 0, 0, 0.05);\r\n    --grey-text: rgba(153, 153, 153, 1);\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.py-4 {\r\n    margin-top: 70px;\r\n    padding: 0 !important;\r\n}\r\n\r\n.my-column {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.no-overflow {\r\n    overflow: hidden;\r\n}\r\n\r\n/*------------- Styles for Custom Scrollbars ---------------*/\r\n\r\n.recipients-body::-webkit-scrollbar,\r\n.messages-body::-webkit-scrollbar {\r\n    width: 8px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-track,\r\n.messages-body::-webkit-scrollbar-track {\r\n    background-color: #fff;\r\n    border-radius: 4px;\r\n    width: 3px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-thumb,\r\n.messages-body::-webkit-scrollbar-thumb {\r\n    background-color: #1da1f2;\r\n    border-radius: 4px;\r\n    width: 3px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-thumb:hover,\r\n.messages-body::-webkit-scrollbar-thumb:hover {\r\n    background-color: #0a4aac;\r\n    width: 8px;\r\n}\r\n\r\n.recipients-body::-webkit-scrollbar-track:hover {\r\n    background-color: #f1f1f1;\r\n    width: 8px;\r\n}\r\n\r\n/*----------------- Styles for User List -----------------*/\r\n\r\n.recipients-container {\r\n    border-right: var(--border);\r\n    overflow: hidden;\r\n}\r\n\r\n.recipients-container hr {\r\n    margin-bottom: 0.7rem;\r\n}\r\n\r\n.recipients-header,\r\n.messages-header {\r\n    text-align: center;\r\n    padding-top: 0.5rem;\r\n}\r\n\r\n.recipients-body {\r\n    overflow-y: scroll;\r\n    height: 80vh;\r\n}\r\n\r\n.recipients-body ul {\r\n    list-style: none;\r\n}\r\n\r\n.recipients-list {\r\n    display: flex;\r\n    cursor: pointer;\r\n    padding: 0.5rem 0;\r\n}\r\n\r\n.recipients-list:not(:last-child) {\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.recipients-list--selected,\r\n.recipients-list:hover {\r\n    background-color: var(--light-grey);\r\n}\r\n\r\n.recipients-list--img {\r\n    height: 3.75rem;\r\n    border-radius: 50%;\r\n    margin: 0 1rem;\r\n}\r\n\r\n.recipients-list--name {\r\n    font-weight: bold;\r\n    display: block;\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.recipients-list--msg {\r\n    color: var(--grey-text);\r\n}\r\n\r\n/*---------------- Styles for Message Content -------------------- */\r\n\r\n.messages-header-text {\r\n    margin-top: 0.45rem;\r\n    font-weight: 500;\r\n    line-height: 1.2;\r\n    display: inline-block;\r\n    font-size: 1.125rem;\r\n}\r\n\r\n.green-dot,\r\n.red-dot {\r\n    border-radius: 50%;\r\n    height: 6px;\r\n    width: 6px;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    margin-left: 1rem;\r\n}\r\n\r\n.green-dot {\r\n    background: rgb(66, 183, 42);\r\n}\r\n\r\n.red-dot {\r\n    background: red;\r\n}\r\n\r\n/*---------- Styles for Aligning and Viewing Message Content / History -------*/\r\n\r\n.messages-body .welcome-text {\r\n    text-align: center;\r\n    display: block;\r\n}\r\n\r\n.messages-body {\r\n    overflow-y: scroll;\r\n    height: 65vh;\r\n}\r\n\r\n.sender:first-child {\r\n    margin-top: 1rem;\r\n}\r\n\r\n.sender {\r\n    padding: 0.5rem 1rem;\r\n    max-width: 80%;\r\n    border-radius: 48px;\r\n    margin-right: 1rem;\r\n    float: right;\r\n    color: #fff;\r\n}\r\n\r\n.receiver {\r\n    display: flex;\r\n    margin-left: 0.5rem;\r\n    width: 80%;\r\n    position: relative;\r\n    margin-top: 3rem;\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.receiver img {\r\n    width: 28px;\r\n    height: 28px;\r\n    margin-right: 0.3rem;\r\n    margin-top: 1.5rem;\r\n    position: absolute;\r\n    bottom: 0;\r\n    border-radius: 50%;\r\n}\r\n\r\n.sender-msg,\r\n.receiver-msg {\r\n    margin-left: 2rem;\r\n}\r\n\r\n.sender-msg {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-end;\r\n}\r\n\r\n.sender-msg div,\r\n.receiver-msg div {\r\n    margin-top: 0.1rem;\r\n    padding: 0.5rem 1rem;\r\n    border-radius: 48px;\r\n    width: fit-content;\r\n}\r\n\r\n.sender-msg div {  background: #2a79f2; }\r\n\r\n.receiver-msg div { background: #e6ecf0; }\r\n\r\n/*------------- Styles for Sending Message -------------*/\r\n\r\n.chat-msg {\r\n    position: relative;\r\n}\r\n\r\n.chat-msg-text {\r\n    border: 0;\r\n    outline: none;\r\n    width: 100%;\r\n    padding-top: 0.5rem;\r\n    padding-left: 0.5rem;\r\n    margin-bottom: -0.5rem;\r\n}\r\n\r\n.send-button {\r\n    position: absolute;\r\n    top: 19%;\r\n    right: 5%;\r\n    font-size: 1.5rem;\r\n    background: none;\r\n    outline: none;\r\n    border: none;\r\n}\r\n\r\n.send {\r\n    color: #2a79f2;\r\n}\r\n\r\n/*------------- Styles for No Conversation -------------*/\r\n\r\n.no-msg {\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    text-align: center;\r\n    width: 30rem;\r\n}\r\n\r\n.no-msg--title {\r\n    font-size: 1.5rem;\r\n    display: block;\r\n    margin-bottom: 1rem;\r\n}\r\n\r\n.no-msg--text {\r\n    display: block;\r\n    font-size: 1.05rem;\r\n    margin-bottom: 1rem;\r\n}\r\n\r\n.no-msg--btn {\r\n    background-color: #3ba3e2;\r\n    border-radius: 2rem;\r\n    border: none;\r\n    padding: .3rem 1rem;\r\n}\r\n\r\n.no-msg--btn a {\r\n    color: #fff;\r\n    font-size: 1.05rem;\r\n    text-decoration: none;\r\n}\r\n\r\n/*------------- Spinner -------------*/\r\n\r\n#main {\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    font-size: 6.4rem;\r\n}\r\n\r\n.spinner { position: relative; }\r\n\r\n.spinner:before, .spinner:after {\r\n    content: \"\";\r\n    position: relative;\r\n    display: block;\r\n}\r\n\r\n.spinner:before {\r\n    animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;\r\n    width: 1em;\r\n    height: 1em;\r\n    background-color: #2a79f2;\r\n}\r\n\r\n.spinner:after {\r\n    animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;\r\n    bottom: -.5em;\r\n    height: .25em;\r\n    border-radius: 50%;\r\n    background-color: rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n@keyframes spinner {\r\n    50% {\r\n        border-radius: 50%;\r\n        transform: scale(0.5) rotate(360deg);\r\n    }\r\n    100% {\r\n        transform: scale(1) rotate(720deg);\r\n    }\r\n}\r\n\r\n@keyframes shadow {\r\n    50% {\r\n        transform: scale(0.5);\r\n        background-color: rgba(0, 0, 0, 0.1);\r\n    }\r\n}\r\n", ""]);
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 
 // exports
 
@@ -72639,5 +73626,14 @@ module.exports = function (css) {
 
 // removed by extract-text-webpack-plugin
 
+<<<<<<< HEAD
+=======
+/***/ }),
+/* 58 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 /***/ })
 /******/ ]);

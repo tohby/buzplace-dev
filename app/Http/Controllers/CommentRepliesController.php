@@ -78,7 +78,7 @@ class CommentRepliesController extends Controller
         return view('news/news-item',
             compact('reply', 'news',
                 'comments', 'unreadNotifications'));
-    }
+    }    
 
     /**
      * Update the specified resource in storage.

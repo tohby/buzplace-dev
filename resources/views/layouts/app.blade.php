@@ -75,7 +75,11 @@
             </div>
         </nav>
 
+<<<<<<< HEAD
         <main class="py-4">
+=======
+        <main class="py-2">
+>>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
             @yield('content')
         </main>
     </div>
