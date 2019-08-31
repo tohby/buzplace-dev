@@ -11,11 +11,7 @@
     },
     "devDependencies": {
         "@babel/preset-react": "^7.0.0",
-<<<<<<< HEAD
-        "axios": "^0.18",
-=======
         "axios": "^0.19.0",
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
         "babel-preset-react": "^6.24.1",
         "bootstrap": "^4.3",
         "cross-env": "^5.1",
@@ -27,10 +23,7 @@
         "react-dom": "^16.2.0"
     },
     "dependencies": {
-<<<<<<< HEAD
-=======
         "animate.css": "^3.7.2",
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
         "aos": "^2.3.4",
         "laravel-echo": "^1.5.3",
         "pusher-js": "^4.4.0"

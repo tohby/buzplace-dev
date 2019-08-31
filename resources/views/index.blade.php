@@ -90,12 +90,12 @@
           <div class="col-md-6">
             <div class="row mx-2">
               <div class="col-6 mt-5 px-2 animated fadeInLeft">
-                <img src="/images/row/isabel.jpg" class="mb-3 img-fluid rounded" alt="">
-                <img src="/images/row/Simeon Roberson.jpg" class="img-fluid rounded" alt="">
+                <img src="/images/row/albert.jpg" class="mb-3 img-fluid rounded shadow-lg" alt="">
+                <img src="/images/row/micheal.jpg" class="img-fluid rounded shadow-lg" alt="">
               </div>
               <div class="col-6 px-2 animated fadeInRight">
-                <img src="/images/row/Louisa Huff.jpg" class="mb-3 img-fluid rounded" alt="">
-                <img src="/images/row/Simon Potts.jpg" class="img-fluid rounded" alt="">
+                <img src="/images/row/sage.jpg" class="mb-3 img-fluid rounded shadow-lg" alt="">
+                <img src="/images/row/jurica.jpg" class="img-fluid rounded shadow-lg" alt="">
               </div>
             </div>
           </div>

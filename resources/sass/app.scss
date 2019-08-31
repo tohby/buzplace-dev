@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
@@ -90,95 +89,6 @@ html {
   text-decoration: none;
   background-color: #3d3b45;
   color: #f2f1f1;
-=======
-// Variables
-@import "variables";
-
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px; /* Set the fixed height of the footer here */
-    line-height: 60px; /* Vertically center the text there */
-    background-color: #293347;
-}
-
-.navbar-laravel {
-    background-color: #f2f1f1;
-    min-height: 30px;
-    z-index: 1;
-}
-
-.hero-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url("/images/hero.jpg");
-    height: 92%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    margin-top: -25px;
-}
-
-.hero-text {
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 30%;
-    width: 40%;
-    transform: translate(-50%, -50%);
-    color: #f2f1f1;
-    h1 {
-        font-family: "Noto Serif", serif;
-        font-weight: 700;
-        font-size: 50px;
-    }
-
-    p {
-        font-family: "Noto Sans", sans-serif;
-        font-size: 20px;
-        font-weight: 400;
-    }
-
-    a {
-        color: inherit;
-        text-decoration: none;
-        font-size: 20px;
-        font-weight: 900;
-    }
-
-    a:hover {
-        text-decoration: none;
-    }
-}
-
-.hero-text .button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 10px 25px;
-    color: #f2f1f1;
-    background-color: #3d3b45;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 3px;
-    letter-spacing: 2px;
-    font-weight: 700;
-}
-
-.hero-text .button:hover {
-    text-decoration: none;
-    background-color: #3d3b45;
-    color: #f2f1f1;
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 }
 
 .ion-icon {
@@ -210,7 +120,6 @@ html {
 }
 .gallery {
     cursor: pointer;
-<<<<<<< HEAD
     position: relative; }
 .seg-1{
   background-color: #F7F5F3;
@@ -261,58 +170,6 @@ html {
   height: 70%;
   width: 100%;
   border-radius: 0px 360px 360px 0px;
-=======
-    position: relative;
-    .seg-1 {
-        background-color: #f7f5f3;
-        background-attachment: fixed;
-        h1 {
-            font-family: "Noto Serif", serif;
-            font-weight: 700;
-            font-size: 50px;
-            width: 70%;
-        }
-    }
-}
-
-.row-1 {
-    background-color: #f7f5f3;
-}
-
-.text {
-    p {
-        font-family: "Noto Sans", sans-serif;
-        font-size: 16px;
-        font-weight: 900;
-        text-transform: uppercase;
-        color: #efc5b0;
-        letter-spacing: 2px;
-    }
-    .p2 {
-        color: #bec7d6;
-    }
-
-    h1 {
-        font-family: "Noto Serif", serif;
-        font-weight: 700;
-        font-size: 50px;
-    }
-}
-
-.text-white {
-    color: #f2f1f1;
-}
-
-.segment-1 {
-    background-image: url("/images/woman.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    height: 70%;
-    width: 100%;
-    border-radius: 0px 360px 360px 0px;
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 }
 
 .segment-2 {
@@ -398,7 +255,6 @@ html {
     .bg-blue {
         background-color: #293347;
     }
-<<<<<<< HEAD
   background-image: url("/images/ruthson.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -417,32 +273,10 @@ html {
 
 body[data-aos-duration='4000'] [data-aos], [data-aos][data-aos][data-aos-duration='4000']{
   transition-duration: 4000ms;
-=======
-    background-image: url("/images/ruthson.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    width: 100%;
-}
-
-.bg-blue {
-    background-color: #293347;
-}
-
-.h4 {
-    color: #9c8375;
-}
-
-body[data-aos-duration="4000"] [data-aos],
-[data-aos][data-aos][data-aos-duration="4000"] {
-    transition-duration: 4000ms;
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
 }
 
 $white: #fff;
 $google-blue: #4285f4;
-<<<<<<< HEAD
 $button-active-blue: #1669F2;
 
 .google-btn {
@@ -536,208 +370,6 @@ $button-active-blue: #1669F2;
 
     @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
-=======
-$button-active-blue: #1669f2;
-
-.google-btn {
-    width: 184px;
-    height: 42px;
-    background-color: $google-blue;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-    .google-icon-wrapper {
-        position: absolute;
-        margin-top: 1px;
-        margin-left: 1px;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        background-color: $white;
-    }
-    .google-icon {
-        position: absolute;
-        margin-top: 11px;
-        margin-left: 11px;
-        width: 18px;
-        height: 18px;
-    }
-    .btn-text {
-        float: right;
-        margin: 11px 11px 0 0;
-        color: $white;
-        font-size: 14px;
-        letter-spacing: 0.2px;
-        font-family: "Roboto";
-    }
-    &:hover {
-        box-shadow: 0 0 6px $google-blue;
-    }
-    &:active {
-        background: $button-active-blue;
-    }
-}
-
-.h4 {
-    color: #9c8375;
-}
-
-body[data-aos-duration="4000"] [data-aos],
-[data-aos][data-aos][data-aos-duration="4000"] {
-    transition-duration: 4000ms;
-}
-
-.ion-icon {
-            font-size: 64px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .share {
-            display: flex;
-            position: fixed;
-            flex-direction: column;
-            justify-content: center;
-            height: 60vh;
-        }
-
-        .icon {
-            font-size: 1.7rem;
-            cursor: pointer;
-            padding: 1rem;
-        }
-
-        .gallery {
-            cursor: pointer;
-            position: relative;
-        }
-
-        .gallery__item {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, .7);
-            opacity: 0;
-            z-index: -1;
-        }
-
-        .gallery__item a {
-            color: #fff;
-            font-size: 1.7rem;
-            cursor: pointer;
-            padding: 1rem;
-        }
-
-        .gallery:hover .gallery__item {
-            opacity: 1;
-            z-index: 1000;
-        }
-        
-$white: #fff;
-$google-blue: #4285f4;
-$button-active-blue: #1669f2;
-
-.google-btn {
-    width: 184px;
-    height: 42px;
-    background-color: $google-blue;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-    .google-icon-wrapper {
-        position: absolute;
-        margin-top: 1px;
-        margin-left: 1px;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        background-color: $white;
-    }
-    .google-icon {
-        position: absolute;
-        margin-top: 11px;
-        margin-left: 11px;
-        width: 18px;
-        height: 18px;
-    }
-    .btn-text {
-        float: right;
-        margin: 11px 11px 0 0;
-        color: $white;
-        font-size: 14px;
-        letter-spacing: 0.2px;
-        font-family: "Roboto";
-    }
-    &:hover {
-        box-shadow: 0 0 6px $google-blue;
-    }
-    &:active {
-        background: $button-active-blue;
-    }
-}
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
-
-// media queries start here
-@media (max-width: 768px) {
-    .hero-text {
-        top: 50%;
-        left: 50%;
-        width: 80%;
-        h1 {
-            font-size: 30px;
-        }
-
-        p {
-            font-size: 14px;
-        }
-
-        a {
-            font-size: 14px;
-        }
-    }
-
-    .seg-1 {
-        h1 {
-            font-size: 30px;
-        }
-    }
-
-    .text {
-        width: 100%;
-        h1 {
-            font-size: 30px;
-        }
-        p {
-            font-size: 14px;
-        }
-    }
-
-    [data-aos],
-    [data-aos][data-aos] {
-        -o-transition-property: none !important;
-        -moz-transition-property: none !important;
-        -ms-transition-property: none !important;
-        -webkit-transition-property: none !important;
-        transition-property: none !important;
-        /*CSS transforms*/
-        -o-transform: none !important;
-        -moz-transform: none !important;
-        -ms-transform: none !important;
-        -webkit-transform: none !important;
-        transform: none !important;
-        /*CSS animations*/
-        -webkit-animation: none !important;
-        -moz-animation: none !important;
-        -o-animation: none !important;
-        -ms-animation: none !important;
-        animation: none !important;
-    }
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
     // media queries start here
     @media (max-width: 768px) {
         .hero-text {
@@ -793,7 +425,6 @@ $button-active-blue: #1669f2;
             -ms-animation: none !important;
             animation: none !important;
         }
-<<<<<<< HEAD
 // media queries start here
 @media (max-width: 768px) {
   .hero-text{
@@ -850,11 +481,3 @@ $button-active-blue: #1669f2;
   }
  }
     }
-=======
-    }
-}
-
-.rounded-xl{
-    border-radius: 1rem;
-}
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff

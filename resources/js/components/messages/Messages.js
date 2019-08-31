@@ -12,10 +12,7 @@ class Messages extends Component {
             users: [],
             userAuth: {},
             tmp_msg: {},
-<<<<<<< HEAD
             tmp_res: {},
-=======
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
             recent_user: {},
             no_msg: '',
             loading: false
@@ -68,7 +65,6 @@ class Messages extends Component {
     }
 
     getRecentMsg() {
-<<<<<<< HEAD
         let msg;
         if (this.state.recent_message) {
             if (this.state.recent_message.from === this.state.userAuth.slug) {
@@ -83,13 +79,6 @@ class Messages extends Component {
                     `${this.state.recent_message.text.substring(0, 24)} ...` :
                     `${this.state.recent_message.text}` : '';
                 return msg;
-=======
-        if(this.state.recent_message) {
-            if(this.state.recent_message.from === this.state.userAuth.slug) {
-                return `You: ${this.state.recent_message.text}`
-            } else {
-                return `${this.state.recent_message.text}`
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
             }
         } else {
             return `No recent message`
@@ -159,7 +148,6 @@ class Messages extends Component {
     }
 
     getUserLastMsg(user) {
-<<<<<<< HEAD
         let msg;
         if (user.last_msg.from) {
             if (user.last_msg.from === this.state.userAuth.slug) {
@@ -172,13 +160,6 @@ class Messages extends Component {
                     `${user.last_msg.text.substring(0, 24)}...` :
                     user.last_msg.text;
                 return msg;
-=======
-        if (user.last_msg.from) {
-            if (user.last_msg.from === this.state.userAuth.slug) {
-                return `You: ${user.last_msg.text}`;
-            } else {
-                return `${user.last_msg.text}`;
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
             }
         } else {
             return `${user.last_msg}`;
@@ -288,12 +269,8 @@ class Messages extends Component {
                 url: `/messages/sendMessage/${slug}`,
                 method: 'get',
                 data: { to: slug, text: text },
-<<<<<<< HEAD
-                success: () => {
-=======
                 success: function(response) {
                     console.log('from sending message', response);
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                     axios.post(`/messages/getMessage/${slug}`)
                         .then(response => {
                             let user = response.data.user;
