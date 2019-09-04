@@ -49,17 +49,10 @@
                             {{csrf_field()}}
                         {!! Form::close() !!}
                     @else
-<<<<<<< HEAD
                         {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment', 'class' => 'createCommentForm']) !!}
                         <input type="hidden" name="news_id" value="{{$news->id}}" class="news-id">
                         <div class="form-group">
                             {!! Form::textarea('body', null , array('class'=>'form-control comment-body', 'rows'=>3, 'required'=>'required')) !!}
-=======
-                        {!! Form::open(['method'=>'POST', 'action'=>'NewsController@storeComment']) !!}
-                        <input type="hidden" name="news_id" value="{{$news->id}}">
-                        <div class="form-group">
-                            {!! Form::textarea('body', null , ['class'=>'form-control', 'rows'=>3]) !!}
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                         </div>
                         <div class="form-group">
                             {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}

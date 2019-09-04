@@ -9,13 +9,9 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Buzplace</title>
   <link href="{{ asset('css/buzplace.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   <link rel="shortcut icon" href="{{asset('images/logo.png')}}" type="image/x-icon">
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="https://kit.fontawesome.com/4cc6387cd5.js"></script>
-  <link rel="preload" as="font" href="{{ asset('fonts/Inter-UI-upright.var.woff2')}}" type="font/woff2"
-    crossorigin="anonymous">
-  <link rel="preload" as="font" href="{{ asset('fonts/Inter-UI.var.woff2')}}" type="font/woff2" crossorigin="anonymous">
 </head>
 
 <body>
@@ -102,7 +98,8 @@
           <div class="col-md-6 col-lg-5 ml-auto">
             <div class="py-5 text-left">
               <h3 class="h2">Join a network of Manufacturers, Suppliers and Customers</h3>
-              <p class="lead text-muted">Connect quickly and easily with other businesses and services across the globe. Build
+              <p class="lead text-muted">Connect quickly and easily with other businesses and services across the globe.
+                Build
                 relationships, advertise your products and services and reach more audience.</p>
             </div>
           </div>
@@ -110,6 +107,61 @@
       </div>
     </section>
   </div>
+  <div>
+    <section>
+      <div class="container position-relative">
+        <div class="card br-1 shadow-lg border-0 zindex-100">
+          <div class="card-body px-5 py-5 text-center text-md-left">
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <h4 class="h5 mb-2">Expand your business reach.</h4>
+                <p class="mb-0">Our team can connect you to the people you need to meet your business goals.</p>
+              </div>
+              <div class="col-12 col-md-4 mt-4 mt-md-0 text-md-right">
+                <a href="#" class="btn btn-primary btn-lg rounded-pill"><span class="btn-inner--text">Join us today</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-10 position-absolute bottom-n3 left-n5">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 361.1 384.8"
+            style="enable-background:new 0 0 361.1 384.8;" xml:space="preserve" class="injected-svg svg-inject fill-primary">
+            <path
+              d="M53.1,266.7C19.3,178-41,79.1,41.6,50.1S287.7-59.6,293.8,77.5c6.1,137.1,137.8,238,15.6,288.9 S86.8,355.4,53.1,266.7z">
+            </path>
+          </svg>
+        </div>
+        <div class="w-10 position-absolute top-n5 right-n5">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 361.1 384.8"
+            style="enable-background:new 0 0 361.1 384.8;" xml:space="preserve" class="injected-svg svg-inject fill-dark">
+            <path
+              d="M53.1,266.7C19.3,178-41,79.1,41.6,50.1S287.7-59.6,293.8,77.5c6.1,137.1,137.8,238,15.6,288.9 S86.8,355.4,53.1,266.7z">
+            </path>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div>
+    <section>
+      <div class="container">
+        <div class="row align-items-center justify-content-around">
+          <div class="col-lg-5 col-md-6 aos-init aos-animate" data-aos="fade-up">
+            <h2 class="h1">A layout suitable for a coworking space</h2>
+            <p class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+              totam rem aperiam, eaque ipsa.</p>
+          </div>
+          <div class="col-xl-4 col-lg-5 col-md-6 mb-4 mb-md-0 aos-init aos-animate" data-aos="fade-up">
+            <img src="/images/hunters-race.jpg" alt="Image" class="rounded shadow-3d img">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
 </body>
 
 </html>

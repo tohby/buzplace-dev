@@ -1,19 +1,10 @@
 @extends('layouts/master')
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-lg-3 overflow-auto">
+        <div class="col-lg-8">
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h4>News</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 overflow-auto">
-            <div class="card">
-                <div class="card-header">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="card-title">
@@ -21,13 +12,8 @@
                             </div>
                         </div>
                         <div class="col-lg-8">
-<<<<<<< HEAD
-                            <a href="{{route('the-hub.create')}}" class="float-right">Create
-=======
                             <a href="#" role="button" data-toggle="modal" data-target=".bd-example-modal-xl"
-                                class="float-right"><i class="fas fa-plus-circle"></i> Create
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
-                                new post</a>
+                                class="float-right"><i class="fas fa-plus-circle"></i> Create new post</a>
                         </div>
                     </div>
                 </div>
@@ -36,18 +22,8 @@
             @if ($posts)
             @foreach ($posts as $post)
             <div class="row justify-content-center">
-<<<<<<< HEAD
-                <div style="padding-top: 1rem;">
-                    <div class="card">
-                        <div class="gallery">
-                            <img src="{{$post->image}}" alt="Post image" class="card-img-top gallery__img">
-                        </div>
-                        <div class="card-body">
-                            <div class="media">
-                                <input type="hidden" class="hidden-{{$post->id}}" value={{ $post->user->slug }}>
-=======
                 <div class="pt-3">
-                    <div class="card" style="width: 38rem;">
+                    <div class="card">
                         @if (count($post->postImages) > 0)
                         @if (count($post->postImages) > 1)
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
@@ -84,7 +60,6 @@
                         @endif
                         <div class="card-body">
                             <div class="media">
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                                 <img src="{{ $post->user->getUrlfriendlyAvatar() }}" class="mr-3">
                                 <div class="media-body">
                                     <h4 class="card-title mt-0">{{$post->title}}</h4>
@@ -92,34 +67,18 @@
                                         {{str_limit($post->content, 200)}}
                                     </p>
                                     <a href="{{ route('post.view', $post->slug) }}" class="btn btn-info">View</a>
-<<<<<<< HEAD
-                                    Contact
-                                    <ion-icon
-                                        name="mail"
-                                        title="Contact the Author"
-                                        class="contact {{$post->id}}">
+                                    
+                                    <ion-icon name="mail" title="Contact the Author" class="contact {{$post->id}}">
+                                        Contact
                                     </ion-icon>
-                                </div>
-                            </div>
-=======
                                 </div>
                             </div>
                             @endforeach
                             @endif
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                         </div>
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            @endforeach
-            @endif
-        </div>
-        <div class="col-lg-3 overflow-auto">
-            <div class="card">
-                <div class="card-header">
-                    Something
-=======
         </div>
     </div>
 
@@ -195,7 +154,6 @@
                             </div>
                         </div>
                     </div>
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
                 </div>
             </div>
         </div>
@@ -204,21 +162,19 @@
 @endsection
 
 @section('scripts')
-<<<<<<< HEAD
-    <script>
-        setTimeout(() => {
-            let btns = document.getElementsByClassName('contact');
-            Array.from(btns).forEach(el => {
-                el.addEventListener('click', () => {
-                    let id = el.classList[1];
-                    let slug = document.querySelector(`.hidden-${id}`).value;
-                    window.location.href = `messages/${slug}`;
-                });
-            });
-        }, 1000);
-    </script>
+<script>
+    setTimeout(() => {
+    let btns = document.getElementsByClassName('contact');
+    Array.from(btns).forEach(el => {
+    el.addEventListener('click', () => {
+    let id = el.classList[1];
+    let slug = document.querySelector(`.hidden-${id}`).value;
+    window.location.href = `messages/${slug}`;
+    });
+    });
+    }, 1000);
+</script>
 @endsection
-=======
 <script>
     setTimeout(() => {
         let btns = document.getElementsByClassName('contact');
@@ -231,5 +187,3 @@
         });
     }, 1000);
 </script>
-@endsection
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
