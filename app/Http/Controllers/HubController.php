@@ -28,8 +28,7 @@ class HubController extends Controller
             $linkedin = $post->getShareUrl('linkedin');
         }
         return view('the-hub/index',
-            compact('posts', 'facebook',
-                'twitter', 'linkedin',
+            compact('posts',
                 'unreadNotifications'
             )
         );

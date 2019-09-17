@@ -1,0 +1,86 @@
+.sidenav {
+  height: 100%;
+  width: 270px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #252529;
+  overflow-x: hidden;
+  border: none;
+  padding-top: 10px;
+}
+
+.sidenav a {
+  padding: 10px 8px 12px 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  display: block;
+  border: none;
+  border-radius: 5px;
+}
+
+.sidenav a:hover {
+  color: #fff;
+  background-color: #495357;
+  border: none;
+}
+
+.sidenav a.active {
+  color: #fff;
+  background-color: #007bff;
+  font-weight: 500;
+}
+
+.sidenav .navbar-brand {
+  padding: 10px 8px 12px 20px;
+}
+
+.navbar {
+  background-color: #FFF;
+  border-bottom: 1px solid #ECEEF4;
+}
+
+body {
+  background-color: #fbfbfd;
+}
+
+.transparent {
+  background-color: #fbfbfd;
+}
+
+main {
+  margin-top: 75px;
+  margin-left: 180px;
+  /* Same as the width of the sidenav */
+  /* padding: 0px 10px; */
+}
+
+a:hover.navbar-brand {
+  border-left: none;
+  color: none !important;
+  background-color: transparent !important;
+}
+
+main {
+  margin-top: 75px;
+  margin-left: 270px;
+  /* Same as the width of the sidenav */
+  /* padding: 0px 10px; */
+}
+
+nav {
+  margin-left: 270px;
+  /* Same as the width of the sidenav */
+}
+
+@media screen and (max-width: 769.5px) {
+  main {
+    margin-left: 0;
+  }
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+

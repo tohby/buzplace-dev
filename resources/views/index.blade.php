@@ -36,7 +36,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/news">News</a>
             </li>
-            <a href="/login" class="btn btn-primary btn-sm"><i class="far fa-user-circle"></i> Signin</a>
+            <a href="/login" class="btn btn-primary btn-sm"><i class="far fa-user-circle"></i> Sign in</a>
           </ul>
         </div>
       </div>
@@ -54,23 +54,38 @@
         <div class="col-lg-5">
           <div class="card shadow p-3">
             <div class="card-body">
-              <h3 class="card-title text-get mb-4">Get started for free</h3>
-              <form action="" method="post">
+              <h3 class="card-title text-get mb-4">Get started</h3>
+              <form action="{{ route('register') }}" method="post">
                 @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter your company name">
+                  <input type="text" name="name" class="form-control form-control-lg{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" placeholder="Enter your name" required autofocus>
+                  @if($errors->has('name'))
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('name') }}</strong>
+                  </span> 
+                  @endif
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" placeholder="Enter your email address">
+                  <input type="email" name="email" class="form-control form-control-lg{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="Enter your email address" required autofocus>
+                  @if ($errors->has('email'))
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('email') }}</strong>
+                  </span> 
+                  @endif
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" placeholder="Enter your password">
+                  <input type="password" name="password" class="form-control form-control-lg{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Enter your password" required autofocus>
+                  @if ($errors->has('password'))
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('password') }}</strong>
+                  </span> 
+                  @endif
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" placeholder="Confirm your password">
+                  <input type="password" name="password_confirmation" class="form-control form-control-lg" placeholder="Confirm your password" required autofocus>
                 </div>
                 <div class="form-group">
-                  <button type="button" class="btn btn-primary btn-lg btn-block">Get Started</button>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block">Get Started</button>
                 </div>
               </form>
             </div>
@@ -123,19 +138,19 @@
             </div>
           </div>
         </div>
-        <div class="w-10 position-absolute bottom-n3 left-n5">
+        <div class="w-10 position-absolute bottom-n3 left-n5 d-none d-md-block d-lg-block d-xl-block">
           <svg xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 361.1 384.8"
-            style="enable-background:new 0 0 361.1 384.8;" xml:space="preserve" class="injected-svg svg-inject fill-primary">
+            style="enable-background:new 0 0 361.1 384.8;" xml:space="preserve" class="fill-primary">
             <path
               d="M53.1,266.7C19.3,178-41,79.1,41.6,50.1S287.7-59.6,293.8,77.5c6.1,137.1,137.8,238,15.6,288.9 S86.8,355.4,53.1,266.7z">
             </path>
           </svg>
         </div>
-        <div class="w-10 position-absolute top-n5 right-n5">
+        <div class="w-10 position-absolute top-n5 right-n5 d-none d-md-block d-lg-block d-xl-block">
           <svg xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 361.1 384.8"
-            style="enable-background:new 0 0 361.1 384.8;" xml:space="preserve" class="injected-svg svg-inject fill-dark">
+            style="enable-background:new 0 0 361.1 384.8;" xml:space="preserve" class="fill-dark">
             <path
               d="M53.1,266.7C19.3,178-41,79.1,41.6,50.1S287.7-59.6,293.8,77.5c6.1,137.1,137.8,238,15.6,288.9 S86.8,355.4,53.1,266.7z">
             </path>
@@ -150,9 +165,11 @@
       <div class="container">
         <div class="row align-items-center justify-content-around">
           <div class="col-lg-5 col-md-6 aos-init aos-animate" data-aos="fade-up">
-            <h2 class="h1">A layout suitable for a coworking space</h2>
-            <p class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-              totam rem aperiam, eaque ipsa.</p>
+            <h2 class="h1">Get consultations from our professionals</h2>
+            <p class="lead">Let our team of
+            experts and consultancy team locate your needs and products for you. Our goal is to contact busineses, get you the best
+            offers, research products and solve any such challenges.
+            Let's do the worry and research, just tell us your needs.</p>
           </div>
           <div class="col-xl-4 col-lg-5 col-md-6 mb-4 mb-md-0 aos-init aos-animate" data-aos="fade-up">
             <img src="/images/hunters-race.jpg" alt="Image" class="rounded shadow-3d img">

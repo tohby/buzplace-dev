@@ -17,20 +17,17 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card rounded-xl">
-                    <div class="card-body py-5">
+                    <div class="card-body p-5">
                         <div class="text-center mb-5">
                             <h6 class="h3 mb-1">Login</h6>
                             <p class="text-muted">Sign in to your account to continue.</p>
                         </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-                            <div class="form-group row">
-                                <label for="email"
-                                    class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                                <div class="col-md-6">
+                            <div class="form-group">
                                     <input id="email" type="email"
-                                        class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                        class="form-control form-control-lg{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                        placeholder="Email"
                                         name="email" value="{{ old('email') }}" required autofocus>
                                     @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -39,21 +36,16 @@
                                         </strong>
                                     </span>
                                     @endif
-                                </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
+                            <div class="form-group">
                                     <input id="password" type="password"
-                                        class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        name="password" required> @if ($errors->has('password'))
+                                        class="form-control form-control-lg{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                        name="password"
+                                        placeholder="Password" required> @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span> @endif
-                                </div>
                             </div>
 
                             <div class="form-group row">
@@ -69,25 +61,21 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-2">
-                                    <button type="submit" class="btn btn-primary btn-block">
+                            <div class="form-group mb-0">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block">
                                         {{ __('Login') }}
                                     </button>
-                                </div>
                             </div>
-                            <div class="form-group row mb-0">
-                                <div class="col-md-12 offset-md-1">
+                            <div class="form-group">
                                     <a class="btn btn-link text-center" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
-                                    </a> | <a href="{{ route('register') }}">Don't have an account? Sign up</a>
-                                </div>
+                                    </a> | <a href="{{ route('register') }}"> Don't have an account? Sign up</a>
                             </div>
                         </form>
                         <p class="text-center">OR</p>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <a href="{{ url ('login/google')}}">
+                        <div class="form-group">
+                            <a href="{{ url ('login/google')}}" class="btn btn-lg btn-danger btn-block"> Sign in with google</a>
+                                {{-- <a href="{{ url ('login/google')}}">
                                     <div class="google-btn">
                                         <div class="google-icon-wrapper">
                                             <img class="google-icon"
@@ -95,8 +83,7 @@
                                         </div>
                                         <p class="btn-text"><b>Sign in with google</b></p>
                                     </div>
-                                </a>
-                            </div>
+                                </a> --}}
                         </div>
                         <div class="form-group row mb-0 mt-2">
                             <div class="col-md-6 offset-md-4">

@@ -17,7 +17,7 @@
             rgba(0, 0, 0, 0) 0%,
             rgba(21, 27, 38, 0.5) 100%
         ),
-        url("/images/adult-business-min.jpg");
+        url("/images/img4.jpg");
     min-height: 85%;
     min-width: 100%;
     background-position: center;
@@ -107,6 +107,10 @@
 section{
     padding-top: 6rem;
     padding-bottom: 6rem;
+    @media (max-width: 768px) {
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+    }
 }
 
 .br-1{
