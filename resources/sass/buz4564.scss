@@ -60,12 +60,6 @@ $grey:    #495357 !default;
     background-color: #fbfbfd;
   }
 
-  main {
-    margin-top: 75px;
-    margin-left: 180px; /* Same as the width of the sidenav */
-    /* padding: 0px 10px; */
-  }
-
    a:hover.navbar-brand {
     border-left: none;
     color: none !important;
@@ -84,7 +78,13 @@ $grey:    #495357 !default;
 
   @media screen and (max-width: 769.5px) {
     main {margin-left: 0;}
+    nav {margin-left: 0;}
   }
 
   /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 
+.card-img-top {
+    width: 100%;
+    height: 30vw;
+    object-fit: cover;
+}

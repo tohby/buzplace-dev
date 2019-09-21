@@ -96,7 +96,7 @@
             <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
             </div>
         </div>
-        <main class="py-4">
+        <main class="py-4 px-2">
             <div class="container my-3">
                 @include('layouts/messages')
             </div>

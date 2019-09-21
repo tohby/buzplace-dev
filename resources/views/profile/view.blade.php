@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-            <div class="card border-0">
+            <div class="card border-0 shadow">
                 <img class="card-img-top img-fluid" src="/images/{{$user->avatar}}" alt="Profile image">
                 <div class="card-body">
                     <h3 class="card-title font-weight-bold">{{$user->name}}</h3>
@@ -19,13 +19,13 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="card border-0">
+            <div class="card border-0 shadow">
                 <div class="card-body">
                     <H1>Description</H1>
                     <p>{{ $user->description == null ? "No description" : $user->description }}</p>
                 </div>
             </div>
-            <div class="card border-0 my-3">
+            <div class="card border-0 my-3 shadow">
                 <div class="card-body">
                     <H1>Products</H1>
                     @if($products)

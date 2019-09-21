@@ -1,7 +1,7 @@
 @extends('layouts/master') 
 @section('content')
 <div class="container-fluid">
-    <div class="card border-0">
+    <div class="card border-0 shadow">
         <div class="card-body">
             <div class="card-title">
                 <div class="row">

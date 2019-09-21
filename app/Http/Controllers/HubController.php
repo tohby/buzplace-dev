@@ -95,14 +95,8 @@ class HubController extends Controller
     public function show($slug)
     {
         //
-        $posts = Posts::findBySlugOrFail($slug);
-        $facebook = $posts->getShareUrl();
-        $twitter = $posts->getShareUrl('twitter');
-        $whatsapp = $posts->getShareUrl('whatsapp');
-        $linkedin = $posts->getShareUrl('linkedin');
-        $pinterest = $posts->getShareUrl('pinterest');
-        return view('the-hub.show',
-            compact('posts', 'facebook', 'twitter', 'whatsapp', 'linkedin', 'pinterest'));
+        $post = Post::findBySlugOrFail($slug);
+        return view('the-hub.show', compact('post'));
     }
 
     /**
