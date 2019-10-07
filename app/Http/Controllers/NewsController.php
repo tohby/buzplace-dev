@@ -46,7 +46,7 @@ class NewsController extends Controller
         //
         $this->validate($request, [
             'headline' => 'required',
-            'image' => 'required|image|max:5000',
+            'image' => 'required|image|max:10000',
             'content'  => 'required',
         ]);
         if($request->hasFile('image')){
@@ -64,13 +64,13 @@ class NewsController extends Controller
             $fileNameToStore = "noSubmission";
         }
         $news = News::create([
-            'headline' => $request->input('name'),
+            'headline' => $request->input('headline'),
             'content' => $request->input('content'),
             'image' => $fileNameToStore,
         ]);
 
-        // return redirect('/news');
-        return $news;
+        return redirect('/news')->with('success', 'The post has been created');
+        // return $news;
     }
 
     /**

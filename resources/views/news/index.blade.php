@@ -19,12 +19,12 @@
     <div class="card-columns">
         @foreach ($news as $news_item)
         <div class="card border-0 transparent">
-            <img src="{{$news_item->image}}" class="card-img-top" alt="...">
+            <img src="/storage/news-images/{{$news_item->image}}" class="card-img-top news-img rounded-lg" alt="...">
             <div class="card-body">
                 <a href="/news/{{$news_item->id}}">
                     <h3 class="card-title font-weight-bold">{{$news_item->headline}}</h3>
                 </a>
-                <p class="card-text">{{str_limit($news_item->content, 200, '...')}}</p>
+                <p class="card-text">{!!str_limit($news_item->content, 200, '...')!!}</p>
                 <div class="float-right">
                     <small>{{$news_item->created_at->diffForHumans()}}</small>
                 </div>

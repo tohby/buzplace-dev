@@ -1,61 +1,75 @@
-@extends('layouts/master')
-
-@section('content')
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <h1>Create Posts</h1>
+{{-- modal --}}
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h4 class="modal-title">Create new Post</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-
-        <hr>
-
-        <div class="row">
-            <div class="col-lg-6">
-                @if (session('post_message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('post_message') }}
-                    </div>
-                @endif
-                {!! Form::open(['method'=>'POST', 'action'=>'HubController@store', 'files'=>true]) !!}
-
+            <div class="modal-body px-5">
+                <form action="{{action("HubController@store")}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
-
-                        {!! Form::label('title', 'Title:') !!}
-                        {!! Form::text('title', null, ['class'=>'form-control', 'required'=>'required']) !!}
-
+                        {{-- <label for="title">Title:</label> --}}
+                        <input type="text" class="form-control" name="title" aria-describedby="emailHelp"
+                            placeholder="Enter Post Title">
                     </div>
-
                     <div class="form-group">
-
-                        {!! Form::label('image', 'Image:') !!}
-<<<<<<< HEAD
-                        {!! Form::file('image', ['required'=>'required']) !!}
-=======
-                        {!! Form::file('image') !!}
->>>>>>> 025ba61e8ad480a6520216d2c5fc1a928e0619ff
-
+                        {{-- <label for="description">Description:</label> --}}
+                        <textarea class="form-control" name="description" rows="3"
+                            placeholder="Enter Post description"></textarea>
                     </div>
-
-                    <div class="form-group">
-
-                        {!! Form::label('content', 'Description:') !!}
-                        {!! Form::textarea('content', null, ['class'=>'form-control', 'required'=>'required']) !!}
-
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="image[]" id="customFile" multiple>
+                        <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
-
-                    <div class="form-group">
-
-                        {!! Form::submit('Create post', ['class'=>'btn btn-primary']) !!}
-
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-right">Submit</button>
                     </div>
-
-                    {{--}}{{csrf_field()}} {{-- For avoiding an exception --}}
-
-                {!! Form::close() !!}
+                </form>
+            </div>
+            <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <h4 class="modal-title">Create new Post</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body px-5">
+                            <form action="{{action("HubController@store")}}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="title">Title:</label>
+                                    <input type="text" class="form-control" name="title" aria-describedby="emailHelp"
+                                        placeholder="Enter Post Title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <textarea class="form-control" name="description" rows="3"
+                                        placeholder="Enter Post description"></textarea>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="image[]" id="customFile"
+                                        multiple>
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-@endsection
+</div>

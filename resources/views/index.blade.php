@@ -133,7 +133,7 @@
                 <p class="mb-0">Our team can connect you to the people you need to meet your business goals.</p>
               </div>
               <div class="col-12 col-md-4 mt-4 mt-md-0 text-md-right">
-                <a href="#" class="btn btn-primary btn-lg rounded-pill"><span class="btn-inner--text">Join us today</span></a>
+                <a href="{{ route('register') }}" class="btn btn-primary btn-lg rounded-pill"><span class="btn-inner--text">Join us today</span></a>
               </div>
             </div>
           </div>

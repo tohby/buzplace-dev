@@ -15,7 +15,7 @@
         <div class="container">
         <div class="card border-0 mt-3">
             <div class="card-body">
-                <form action="{{action("NewsController@store")}}" method="post">
+                <form action="{{action("NewsController@store")}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Headline</label>
