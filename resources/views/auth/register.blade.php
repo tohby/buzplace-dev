@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card p-5">
+                <div class="card rounded-lg p-5">
                     <div class="text-center mb-5">
                         <h6 class="h3 mb-1">Sign Up</h6>
                         <p class="text-muted">Create an account, it's the first step you take to connect to the world.

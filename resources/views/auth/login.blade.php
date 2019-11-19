@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card rounded-xl">
+                <div class="card rounded-lg">
                     <div class="card-body p-5">
                         <div class="text-center mb-5">
                             <h6 class="h3 mb-1">Login</h6>

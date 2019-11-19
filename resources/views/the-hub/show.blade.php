@@ -24,7 +24,7 @@
                             <div class="carousel-inner">
                                 @foreach ($post->postImages as $image)
                                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                    <img src="/storage/post_images/{{$image->image}}" class="d-block w-100 img-fluid card-img-top" alt="...">
+                                    <img src="/storage/post_images/{{$image->image}}" class="d-block w-100 img-fluid" alt="...">
                                 </div>
                                 @endforeach
                             </div>

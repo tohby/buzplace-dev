@@ -20,13 +20,11 @@
 // });
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login/google', 'Auth\LoginController@redirectToProvider');
     Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
-    Route::get('/', function () {
-        return view('index');
-    });
+    Route::get('/', 'homeController@landingPage');
 });
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('/the-hub', 'HubController');
