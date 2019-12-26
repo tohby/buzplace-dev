@@ -47,7 +47,7 @@
           <div class="header-text animated fadeInLeft">
             <span class="d-block text-uppercase mb-2">Connect with companies globally</span>
             <h1 class="display-4">
-              Buzplace extends your market reach accross the globe
+              Buzplace extends your market reach across the globe
             </h1>
           </div>
         </div>

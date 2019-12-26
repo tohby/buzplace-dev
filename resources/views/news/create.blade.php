@@ -30,7 +30,7 @@
                         <input type="file" class="custom-file-input" name="image" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                    <button type="submit" class="btn btn-primary float-right mt-3">Submit</button>
                 </form>
             </div>
         </div>

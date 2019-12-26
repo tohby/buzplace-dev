@@ -11,7 +11,7 @@
 <br>
     <div class="card border-0">
         <div class="card-body">
-            <form action="{{action("DirectoriesController@store")}}" method="post">
+            <form action="{{action("DirectoriesController@store")}}" method="post" enctype="multipart/form-data"> 
                 @csrf
                 <div class="form-group">
                     <label for="name">Company Name:</label>
@@ -29,8 +29,7 @@
                     <textarea 
                         class="form-control" 
                         name="description" 
-                        rows="3">
-                    </textarea>
+                        rows="10"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -42,6 +41,11 @@
                         aria-describedby="emailHelp"
                         placeholder="Enter company location"
                     >
+                </div>
+
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" name="image">
+                    <label class="custom-file-label" for="customFile" accept="image/*">Choose image file</label>
                 </div>
                 <button type="submit" class="btn btn-primary float-right">Submit</button>
             </form>

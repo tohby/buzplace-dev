@@ -47,12 +47,25 @@ class DirectoriesController extends Controller
             'name' => 'required',
             'location' => 'required',
             'description'  => 'required',
+            'image' => 'image',
         ]);
-
+        if($request->hasFile('image')){
+            //get file name with the extension
+            $fileNameWithExt = $request->file('image')->getClientOriginalName();
+            //get just file name
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get extension
+            $extension = $request->file('image')->getClientOriginalExtension();
+            //filename to store
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //image upload
+            $path = $request->file('image')->storeAs('public/directories', $fileNameToStore);
+        }
         $directory = Directory::create([
             'name' => $request->input('name'),
             'location' => $request->input('location'),
             'description' => $request->input('description'),
+            'image' => $fileNameToStore,
         ]);
 
         return redirect('/directories');

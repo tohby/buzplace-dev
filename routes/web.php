@@ -25,6 +25,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('login/google', 'Auth\LoginController@redirectToProvider');
     Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
     Route::get('/', 'homeController@landingPage');
+    Route::get('/posts', 'GuestNewsController@posts');
 });
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('/the-hub', 'HubController');
@@ -60,7 +61,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('directories/search', 'DirectoriesController@search');
     Route::resource('/consultation', 'ConsultationController');
 });
-
 Route::get('/migrate', function () {
     $exitCode = Artisan::call('migrate', []);
     echo $exitCode;

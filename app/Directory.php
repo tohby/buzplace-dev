@@ -10,7 +10,7 @@ class Directory extends Model
     //
     use Searchable;
     protected $fillable = [
-        'name', 'description', 'location',
+        'name', 'description', 'location', 'image', 'logo', 'phone', 'email'
     ];
     public function searchableAs()
     {

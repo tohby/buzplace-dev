@@ -82,6 +82,7 @@
                 </div>
             </div>
         </nav>
+        @auth
         <div class="sidenav d-none d-md-block">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="/images/logo2.png"  alt="Buzplace">
@@ -96,6 +97,7 @@
             <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
             </div>
         </div>
+        @endauth
         <main class="py-4 px-2">
             <div class="container my-3">
                 @include('layouts/messages')
