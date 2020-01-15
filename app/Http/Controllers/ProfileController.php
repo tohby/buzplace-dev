@@ -29,33 +29,31 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request, $id){
-        $user = User::findOrFail($id);
-        $input = $request->all();
-        $valid_indicator = true;
-        if (isset($input['name'])) {
-            if (!preg_match("/^[a-zA-Z'-]+$/", $input['name'])) {
-                $valid_indicator = false;
-                Session::flash('error', 'Name must only contain alphabets');
-            }
+        $this->validate($request, [
+            'name' => 'required',
+            'avatar' => 'image'
+        ]);
+        if($request->hasFile('avatar')){
+            //get file name with the extension
+            $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
+            //get just file name
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get extension
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+            //filename to store
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //image upload
+            $path = $request->file('avatar')->storeAs('public/user-images', $fileNameToStore);
         }
-        if (isset($input['phone'])) {
-            if (!preg_match('/[0-9]/', $input['phone'])) {
-                $valid_indicator = false;
-                Session::flash('error', 'Phone number must only contain numerics');
-            }
-        }
-        if ($valid_indicator) {
-            if($file = $request->file('avatar')) {
-                $name = time() . $file->getClientOriginalName();
-                $file->move('images', $name);
-                $input['avatar'] = $name;
-            }
-            isset($request->password) ? $input['password'] = bcrypt($request->password) : $user->password;
-            $user->update($input);
-            return redirect('profile/'.$user->slug);
-        } else {
-            return redirect()->back();
-        }
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->description = $request->description;
+        $user->location = $request->location;
+        $user->website = $request->website;
+        $user->phone = $request->phone;
+        $user->businessName = $request->businessName;
+        $user->avatar = $fileNameToStore;
+        $user->save();
     }
     
     public function create_product(Request $request, Notification $notification){

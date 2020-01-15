@@ -12,8 +12,8 @@
                    </small>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="inputPhone4">Password</label>
-                  <input type="number" class="form-control" name="phone" id="inputPhone4" placeholder="Phone">
+                  <label for="phone">Phone</label>
+                  <input type="number" class="form-control" name="phone" placeholder="Phone">
                 </div>
             </div>
             <div class="form-group">

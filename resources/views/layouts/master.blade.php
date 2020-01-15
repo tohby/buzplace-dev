@@ -59,7 +59,7 @@
                                 <a class="nav-link" href="/news">News</a>
                                 <a class="nav-link" href="/messages">Conversations</a>
                                 <a class="nav-link" href="/directories">Directories</a>
-                                <a class="nav-link" href="/the-hub">Consultation</a>
+                                {{--  <a class="nav-link" href="/the-hub">Consultation</a>  --}}
                             </div>
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" v-pre>
@@ -94,7 +94,7 @@
             <a href="/news" class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
             <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a>
             <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
-            <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
+            {{--  <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>  --}}
             </div>
         </div>
         @endauth

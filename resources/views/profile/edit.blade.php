@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('phone', 'Phone:') !!}
-                    {!! Form::text('phone', null, ['class'=>'form-control']) !!}
+                    {!! Form::number('phone', null, ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('businessName', 'Business Name:') !!}
