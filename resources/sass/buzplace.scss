@@ -76,6 +76,13 @@
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
+
+    &.form-control-flush {
+        padding-left: 0;
+        border-color: transparent !important;
+        background-color: transparent !important;
+        resize: none;
+    }
 }
 
 .navbar-brand {

@@ -12008,6 +12008,13 @@ a.text-dark:focus {
   box-shadow: none !important;
 }
 
+.form-control.form-control-flush {
+  padding-left: 0;
+  border-color: transparent !important;
+  background-color: transparent !important;
+  resize: none;
+}
+
 .navbar-brand img {
   width: 140px;
 }

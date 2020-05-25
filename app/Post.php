@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Traits\Shareable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +10,6 @@ class Post extends Model
 {
     //
 
-    use Shareable;
     use Sluggable;
     use SluggableScopeHelpers;
 
@@ -32,13 +30,6 @@ class Post extends Model
     public function postImages() {
         return $this->hasMany('App\PostImages');
     }
-
-    protected $shareOptions = [
-        'columns' => [
-            'title' => 'title'
-        ],
-        'url' => 'url'
-    ];
 
     public function getUrlAttribute() {
         return route('post.view', $this->attributes['slug']);

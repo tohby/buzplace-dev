@@ -3,7 +3,7 @@
 <div class="container justify-content-center mb-5">
     <div class="row">
         <div class="col-lg-8">
-            <div class="card border-0 shadow">
+            {{-- <div class="card border-0 shadow">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-4">
@@ -16,6 +16,50 @@
                                 class="float-right"><i class="fas fa-plus-circle"></i> Create new post</a>
                         </div>
                     </div>
+                </div>
+            </div> --}}
+            <div class="card">
+                <div class="card-body">
+            
+                    <!-- Form -->
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control form-control-flush form-control-auto" data-toggle="autosize" rows="3"
+                                placeholder="Start a post..."
+                                style="overflow: hidden; overflow-wrap: break-word; height: 69px;"></textarea>
+                        </div>
+                    </form>
+            
+                    <!-- Footer -->
+                    <div class="row align-items-center">
+                        <div class="col">
+            
+                            <!-- Symbols -->
+                            <small class="text-muted">
+                                0/500
+                            </small>
+            
+                        </div>
+                        <div class="col-auto">
+            
+                            <!-- Icons -->
+                            <div class="text-muted">
+                                <a class="text-reset mr-3" href="#!" data-toggle="tooltip" title="" data-original-title="Add photo">
+                                    <i class="fas fa-camera"></i>
+                                    <input name="Select File" type="file" />
+                                </a>
+                                <a class="text-reset mr-3" href="#!" data-toggle="tooltip" title=""
+                                    data-original-title="Attach file">
+                                    <i class="fe fe-paperclip"></i>
+                                </a>
+                                <a class="text-reset" href="#!" data-toggle="tooltip" title="" data-original-title="Record audio">
+                                    <i class="fe fe-mic"></i>
+                                </a>
+                            </div>
+            
+                        </div>
+                    </div>
+            
                 </div>
             </div>
 
