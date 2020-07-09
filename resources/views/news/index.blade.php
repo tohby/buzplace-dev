@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-lg-6"><h2 class="font-weight-bold">News</h2></div>
                     <div class="col-lg-6">
-                        @if (Auth::user()->is_admin == true)
+                        @if (Auth::user() != NULL && Auth::user()->is_admin == true)
                         <a href="/news/create" class="btn btn-primary btn-lg float-right" role="button" aria-pressed="true"><i class="fas fa-plus"></i>&nbsp; Create</a>
                         @endif
                     </div>

@@ -188,13 +188,13 @@
     </section>
   </div>
 
-  <div>
+  {{-- <div>
     @if (count($news) > 0)
     <section>
       @include('news_section')
     </section>
     @endif
-  </div>
+  </div> --}}
 
 </body>
 

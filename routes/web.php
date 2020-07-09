@@ -24,13 +24,16 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login/google', 'Auth\LoginController@redirectToProvider');
     Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
-    Route::get('/', 'homeController@landingPage');
+    Route::get('/', 'HomeController@landingPage');
     Route::get('/posts', 'GuestNewsController@posts');
 });
+Route::get('/news', 'NewsController@index');
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('/the-hub', 'HubController');
     Route::resource('/directories', 'DirectoriesController');
-    Route::resource('/news', 'NewsController');
+    Route::resource('/news', 'NewsController')->except([
+        'index',
+    ]);
     Route::get('/profile/{user}', 'ProfileController@show');
     Route::get('/profile/{user}/edit', 'ProfileController@edit');
     Route::resource('/profile', 'ProfileController', ['names'=>[
