@@ -159,7 +159,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -172,8 +171,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\CanvasServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Unisharp\Ckeditor\ServiceProvider::class,
 
     ],
 

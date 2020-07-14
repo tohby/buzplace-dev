@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Notification;
-use Illuminate\Http\Request;
 use App\News;
+use App\Comment;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
@@ -15,13 +15,14 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Notification $notification)
+    public function index()
     {
-        //
-        $unreadNotifications = $this->notifications($request, $notification);
         $news = News::simplePaginate(15);
-        return view('news/index',
-            compact('unreadNotifications'))->with('news', $news);
+        if (Auth::check()) {
+            return view('news/index', compact('news', $news));
+        }else{
+            return view('news/guestNews', compact('news', $news));
+        }
     }
 
     /**
@@ -31,7 +32,6 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
         return view('news/create');
     }
 
@@ -43,7 +43,6 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $this->validate($request, [
             'headline' => 'required',
             'image' => 'required|image|max:10000',
@@ -63,14 +62,15 @@ class NewsController extends Controller
         }else {
             $fileNameToStore = "noSubmission";
         }
+        $slug = str_slug($request->input('headline')." ".str_random(6), "-");
         $news = News::create([
             'headline' => $request->input('headline'),
             'content' => $request->input('content'),
             'image' => $fileNameToStore,
+            'slug' => $slug
         ]);
 
         return redirect('/news')->with('success', 'The post has been created');
-        // return $news;
     }
 
     /**
@@ -81,16 +81,8 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
         $news = News::findOrFail($id);
-        $facebook = $news->getShareUrl();
-        $twitter = $news->getShareUrl('twitter');
-        $whatsapp = $news->getShareUrl('whatsapp');
-        $linkedin = $news->getShareUrl('linkedin');
-        $pinterest = $news->getShareUrl('pinterest');
-        $comments = $news->comment()->get();
-        return view('news/news-item',
-            compact('news', 'comments', 'twitter', 'whatsapp', 'facebook', 'linkedin', 'pinterest'));
+        return view('news/news-item', compact('news', 'comments'));
     }
 
     /**
