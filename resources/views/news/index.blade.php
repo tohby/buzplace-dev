@@ -24,7 +24,7 @@
                 <a href="/news/{{$news_item->id}}">
                     <h3 class="card-title font-weight-bold">{{$news_item->headline}}</h3>
                 </a>
-                <p class="card-text">{!!str_limit($news_item->content, 200, '...')!!}</p>
+                <p class="card-text">{!!Str::limit($news_item->content, 200, '...')!!}</p>
                 <div class="float-right">
                     <small>{{$news_item->created_at->diffForHumans()}}</small>
                 </div>
