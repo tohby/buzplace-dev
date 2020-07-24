@@ -12,4 +12,12 @@ class Canvas extends Model
      * @var string
      */
     protected $table = 'canvas_posts';
+
+    protected $dates = [
+        'published_at',
+    ];
+
+    public function getRouteKeyName(){
+        return 'slug';
+    }
 }

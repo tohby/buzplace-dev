@@ -33,6 +33,10 @@ class User extends Authenticatable implements MustVerifyEmail
     return 'slug';
 }
 
+    protected $casts = [
+        'is_admin' => 'boolean',
+    ];
+
     public function products(){
         return $this->hasMany('App\Products');
     }

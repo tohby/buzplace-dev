@@ -69,6 +69,10 @@ nav {
   /* Same as the width of the sidenav */
 }
 
+nav.breadcrumbs {
+  margin-left: 0;
+}
+
 @media screen and (max-width: 769.5px) {
   main {
     margin-left: 0;
@@ -81,17 +85,14 @@ nav {
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 
-.card-img-top {
-  width: 100%;
-  height: 30vw;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 .news-img {
   width: 100%;
   height: 15vw;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.card-body a:hover {
+  text-decoration: none !important;
 }
 

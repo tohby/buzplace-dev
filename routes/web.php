@@ -28,12 +28,13 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/posts', 'GuestNewsController@posts');
 });
 Route::get('/news', 'NewsController@index');
+Route::get('/news/{canvas}', 'NewsController@show');
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('/the-hub', 'HubController');
     Route::resource('/directories', 'DirectoriesController');
-    Route::resource('/news', 'NewsController')->except([
-        'index',
-    ]);
+    // Route::resource('/news', 'NewsController')->except([
+    //     'index',
+    // ]);
     Route::get('/profile/{user}', 'ProfileController@show');
     Route::get('/profile/{user}/edit', 'ProfileController@edit');
     Route::resource('/profile', 'ProfileController', ['names'=>[
@@ -45,14 +46,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/product', 'ProductsController', ['names'=>[
         'edit'=>'profile.edit_product'
     ]]);
-    Route::post('comment', 'NewsController@storeComment');
-    Route::post('comment/reply', 'CommentRepliesController@store');
-    Route::get('comment/delete/{id}', 'NewsController@deleteComment');
-    Route::get('comment/edit/{id}', 'NewsController@editComment');
-    Route::get('comment/reply/delete/{id}', 'CommentRepliesController@destroy');
-    Route::get('comment/reply/edit/{id}', 'CommentRepliesController@edit');
-    Route::get('comment/edit', 'NewsController@updateComment');
-    Route::get('comment/reply/edit', 'CommentRepliesController@update');
     Route::get('/the-hub/{slug}', ['as'=>'post.view', 'uses'=>'HubController@show']);
     Route::get('/messages', 'MessageController@index');
     Route::get('/messages/{id}', 'MessageController@index');

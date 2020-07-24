@@ -76,6 +76,10 @@ $grey:    #495357 !default;
     margin-left: 270px; /* Same as the width of the sidenav */
   }
 
+  nav.breadcrumbs{
+    margin-left: 0;
+  }
+
   @media screen and (max-width: 769.5px) {
     main {margin-left: 0;}
     nav {margin-left: 0;}
@@ -83,14 +87,18 @@ $grey:    #495357 !default;
 
   /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 
-.card-img-top {
-    width: 100%;
-    height: 30vw;
-    object-fit: cover;
-}
+// .card-img-top {
+//     width: 100%;
+//     height: 30vw;
+//     object-fit: cover;
+// }
 
 .news-img {
     width: 100%;
     height: 15vw;
     object-fit: cover;
+}
+
+.card-body a:hover{
+  text-decoration: none !important;
 }

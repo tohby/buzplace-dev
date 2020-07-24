@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Styles -->
+    <link href="{{ asset('css/theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/buz4564.css')}}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
@@ -49,7 +50,7 @@
                         </li>
                         <li class="nav-item">
                             @if (Route::has('register'))
-                            <a class="nav-link btn btn-primary text-white btn-lg" href="{{ route('register') }}">{{ __('Register') }}</a>                            @endif
+                            <a class="nav-link btn btn-primary text-white px-3" href="{{ route('register') }}">{{ __('Register') }}</a>                            @endif
                         </li>
                         @else
                         <li class="nav-item dropdown">
@@ -57,9 +58,9 @@
                                 <a class="nav-link" href="/the-hub">The Hub</a>
                                 <a class="nav-link" href="/profile/{{Auth::user()->slug}}">Profile</a>
                                 <a class="nav-link" href="/news">News</a>
-                                <a class="nav-link" href="/messages">Conversations</a>
+                                {{-- <a class="nav-link" href="/messages">Conversations</a> --}}
                                 <a class="nav-link" href="/directories">Directories</a>
-                                {{--  <a class="nav-link" href="/the-hub">Consultation</a>  --}}
+                                 <a class="nav-link" href="/consultation">Consultation</a> 
                             </div>
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" v-pre>
@@ -92,9 +93,12 @@
             <a href="/the-hub" class="{{ request()->is('the-hub') || request()->is('the-hub/*') ? 'active' : '' }}"> The Hub</a>
             <a href="/profile/{{Auth::user()->slug}}" class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"></i>Profile</a>
             <a href="/news" class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
-            <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a>
+            @if ((request()->is('news') || request()->is('news/*')) && Auth::user()->is_admin)
+                <a href="/canvas" class="ml-4" target="_blank">Canvas</a>
+            @endif
+            {{-- <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a> --}}
             <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
-            {{--  <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>  --}}
+             <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a> 
             </div>
         </div>
         @endauth
@@ -109,7 +113,7 @@
     <script>
         CKEDITOR.replace( 'news-content' );
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
     <script src="{{ asset('js/bs-custom-file-input.js') }}"></script>
@@ -117,6 +121,8 @@
     <!-- Please ensure that this script is the last to load,
     some script might be overriding it which may prevent react
     from rendering -->
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -129,5 +135,6 @@
           });
     </script>
     @yield('scripts')
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bec3b168829ed15"></script>
 </body>
 </html>
