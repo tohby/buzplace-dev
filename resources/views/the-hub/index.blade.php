@@ -18,50 +18,70 @@
                     </div>
                 </div>
             </div> --}}
+            {{-- {!!Auth::user()->avatar!!} --}}
+            @if (Auth::user()->hasVerifiedEmail())
             <div class="card">
                 <div class="card-body">
-            
+
                     <!-- Form -->
                     <form>
                         <div class="form-group">
-                            <textarea class="form-control form-control-flush form-control-auto" data-toggle="autosize" rows="3"
-                                placeholder="Start a post..."
+                            <textarea class="form-control form-control-flush form-control-auto" data-toggle="autosize"
+                                rows="3" placeholder="Start a post..."
                                 style="overflow: hidden; overflow-wrap: break-word; height: 69px;"></textarea>
                         </div>
-                    </form>
-            
-                    <!-- Footer -->
-                    <div class="row align-items-center">
-                        <div class="col">
-            
-                            <!-- Symbols -->
-                            <small class="text-muted">
-                                0/500
-                            </small>
-            
-                        </div>
-                        <div class="col-auto">
-            
-                            <!-- Icons -->
-                            <div class="text-muted">
-                                <a class="text-reset mr-3" href="#!" data-toggle="tooltip" title="" data-original-title="Add photo">
-                                    <i class="fas fa-camera"></i>
-                                    <input name="Select File" type="file" />
-                                </a>
-                                <a class="text-reset mr-3" href="#!" data-toggle="tooltip" title=""
-                                    data-original-title="Attach file">
-                                    <i class="fe fe-paperclip"></i>
-                                </a>
-                                <a class="text-reset" href="#!" data-toggle="tooltip" title="" data-original-title="Record audio">
-                                    <i class="fe fe-mic"></i>
-                                </a>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <!-- Icons -->
+                                <div id="upload">
+                                    <label for="image-input" class="text-reset mr-3 upload">
+                                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-images"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M12.002 4h-10a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10z" />
+                                            <path
+                                                d="M10.648 8.646a.5.5 0 0 1 .577-.093l1.777 1.947V14h-12v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z" />
+                                            <path fill-rule="evenodd"
+                                                d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z" />
+                                        </svg><span class="text-muted font-weight-light"> Add Images</span>
+                                    </label>
+                                    <input id="image-input" name="images[]" type="file" class="d-none" multiple
+                                        accept="image/*" />
+                                </div>
                             </div>
-            
+                            <div class="col-auto">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
                         </div>
-                    </div>
-            
+                    </form>
+
                 </div>
             </div>
+            @else
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                        class="bi bi-exclamation-triangle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.938 2.016a.146.146 0 0 0-.054.057L1.027 13.74a.176.176 0 0 0-.002.183c.016.03.037.05.054.06.015.01.034.017.066.017h13.713a.12.12 0 0 0 .066-.017.163.163 0 0 0 .055-.06.176.176 0 0 0-.003-.183L8.12 2.073a.146.146 0 0 0-.054-.057A.13.13 0 0 0 8.002 2a.13.13 0 0 0-.064.016zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                        <path
+                            d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                    </svg> Your account is not verified!</h4>
+                <p>As a precaution towards protecting this community, you are not allowed to post unless your
+                    account has been verified.
+                </p>
+                <hr>
+                <p class="mb-0">
+                    {{ __('Before proceeding, please check your email for a verification link.') }}
+                    {{ __('If you did not receive the email') }},
+                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                        @csrf
+                        <button type="submit"
+                            class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                    </form>
+                </p>
+            </div>
+            @endif
+
 
             @if ($posts)
             @foreach ($posts as $post)
@@ -143,30 +163,3 @@
     </div>
 
     @endsection
-
-    @section('scripts')
-    <script>
-        setTimeout(() => {
-    let btns = document.getElementsByClassName('contact');
-    Array.from(btns).forEach(el => {
-    el.addEventListener('click', () => {
-    let id = el.classList[1];
-    let slug = document.querySelector(`.hidden-${id}`).value;
-    window.location.href = `messages/${slug}`;
-    });
-    });
-    }, 1000);
-    </script>
-    @endsection
-    <script>
-        setTimeout(() => {
-        let btns = document.getElementsByClassName('contact');
-        Array.from(btns).forEach(el => {
-        el.addEventListener('click', () => {
-            let id = el.classList[1];
-            let slug = document.querySelector(`.hidden-${id}`).value;
-            window.location.href = `messages/${slug}`;
-            });
-        });
-    }, 1000);
-    </script>

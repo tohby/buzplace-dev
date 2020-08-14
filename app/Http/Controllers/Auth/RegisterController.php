@@ -66,13 +66,12 @@ class RegisterController extends Controller
     {
         $random = Str::random(6);
         $slugCreate = Str::slug($data['name'], '-');
-        $slug = $slugCreate.$random;
+        $slug = $slugCreate.'-'.$random;
         return User::create([
             'name' => $data['name'],
             'slug' => $slug,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'avatar' => 'img-placeholder.png',
         ]);
         event(new Registered($user));
     }

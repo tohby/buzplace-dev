@@ -96,3 +96,50 @@ nav.breadcrumbs {
   text-decoration: none !important;
 }
 
+.avatar-image-wrapper {
+  position: relative;
+  height: 38px;
+  width: 38px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  font-size: .85rem;
+}
+
+.avatar-image {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.avatar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 100%;
+}
+
+.form-control {
+  overflow: auto !important;
+}
+
+.form-control-flush {
+  padding-left: 0;
+  border-color: transparent !important;
+  background-color: transparent !important;
+}
+
+.form-control:focus {
+  border-color: transparent !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.upload {
+  cursor: pointer;
+}
+

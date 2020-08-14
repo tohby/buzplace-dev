@@ -13,20 +13,21 @@
         "@babel/preset-react": "^7.10.4",
         "axios": "^0.19.2",
         "babel-preset-react": "^6.24.1",
-        "bootstrap": "^4.5.0",
+        "bootstrap": "^4.5.2",
         "cross-env": "^5.1",
         "jquery": "^3.5.1",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.20",
         "popper.js": "^1.16.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
     },
     "dependencies": {
+        "@popperjs/core": "^2.4.4",
         "animate.css": "^3.7.2",
         "aos": "^2.3.4",
         "bootstrap-icons": "^1.0.0-alpha5",
-        "laravel-echo": "^1.8.0",
+        "laravel-echo": "^1.8.1",
         "pusher-js": "^4.4.0"
     }
 }
