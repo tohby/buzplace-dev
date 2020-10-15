@@ -20,7 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme.min.css') }}" rel="stylesheet">
+    @yield('styles')
     <link rel="stylesheet" href="{{ asset('css/buz4564.css')}}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -92,7 +92,7 @@
             </div>
         </nav>
         @auth
-        <div class="sidenav d-none d-md-block">
+        <div class="sidenav">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="/images/logo2.png" alt="Buzplace">
             </a>
@@ -117,9 +117,12 @@
         </div>
         @endauth
         <main class="py-5 px-2">
+            @if(count($errors) > 0){
             <div class="container my-3">
                 @include('layouts/messages')
             </div>
+            }
+            @endif
             @yield('content')
         </main>
     </div>
@@ -127,9 +130,6 @@
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="{{ asset('js/bs-custom-file-input.js') }}"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- Please ensure that this script is the last to load,
-    some script might be overriding it which may prevent react
-    from rendering -->
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">

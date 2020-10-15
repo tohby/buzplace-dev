@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\PostImages;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class HubController extends Controller
 {
@@ -17,21 +18,10 @@ class HubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Notification $notification)
+    public function index(Request $request)
     {
-        //
-        $unreadNotifications = $this->notifications($request, $notification);
-        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(12);
-        foreach ($posts as $post) {
-            $facebook = $post->getShareUrl();
-            $twitter = $post->getShareUrl('twitter');
-            $linkedin = $post->getShareUrl('linkedin');
-        }
-        return view('the-hub/index',
-            compact('posts',
-                'unreadNotifications'
-            )
-        );
+        $posts = Post::orderBy('created_at', 'desc')->paginate(1);
+        return view('the-hub/index', compact('posts'));
     }
 
     /**
@@ -41,7 +31,7 @@ class HubController extends Controller
      */
     public function create()
     {
-        return view('the-hub.create');
+        // return view('the-hub.create');
         //now uses modal for this function
         // return view('the-hub.create');
     }
@@ -54,20 +44,20 @@ class HubController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $this->validate($request, [
-            'title' => 'required',
-            'image.*' => 'image|nullable|mimes:jpeg,png',
+            'images.*' => 'image|nullable|mimes:jpeg,png',
             'description'  => 'required',
         ]);
+        $title = Str::words($request->input('description'), 15, ' >>>');
         $post = Post::create([
             'user_id' => Auth::user()->id,
-            'title' => $request->input('title'),
+            'title' => $title,
             'content' => $request->input('description'),
+            'slug' => Str::of($title)->slug('-'),
         ]);
         //get file name with the extension
-        if($request->hasFile('image')){
-                foreach ($request->file('image') as $image) {
+        if($request->hasFile('images')){
+                foreach ($request->file('images') as $image) {
                 $fileNameWithExt = $image->getClientOriginalName();
                 //get just file name
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);

@@ -1,4 +1,7 @@
-@extends('layouts/master') 
+@extends('layouts/master')
+@section('styles')
+<link href="{{ asset('css/theme.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <section class="py-6">
     <div class="container">

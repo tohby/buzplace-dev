@@ -1,4 +1,7 @@
 @extends('layouts/master')
+@section('styles')
+<link href="{{ asset('css/theme.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <section class="pb-0">
     <div class="container">
