@@ -18,8 +18,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('images/logo.png')}}" type="image/x-icon">
+    
 </head>
 
 <body>
@@ -52,7 +54,7 @@
                         </li>
                         <li class="nav-item">
                             @if (Route::has('register'))
-                            <a class="nav-link btn btn-primary text-white btn-lg" href="{{ route('register') }}">{{ __('Register') }}</a>                            @endif
+                            <a class="nav-link btn btn-primary text-white px-3" href="{{ route('register') }}">{{ __('Register') }}</a>                            @endif
                         </li>
                         @else
                         <li class="nav-item dropdown">
@@ -91,9 +93,7 @@
     <script>
         AOS.init();
     </script>
-    <script>
-        CKEDITOR.replace( 'summary-ckeditor' );
-    </script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bec3b168829ed15"></script>
 </body>
 
 </html>

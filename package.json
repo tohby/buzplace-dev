@@ -24,9 +24,12 @@
         "sass-loader": "^12.1.0"
     },
     "dependencies": {
+        "@popperjs/core": "^2.4.4",
         "animate.css": "^3.7.2",
         "aos": "^2.3.4",
-        "laravel-echo": "^1.5.3",
+        "bootstrap-icons": "^1.0.0-alpha5",
+        "jscroll": "^2.4.1",
+        "laravel-echo": "^1.8.1",
         "pusher-js": "^4.4.0"
     }
 }

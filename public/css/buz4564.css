@@ -65,6 +65,10 @@ nav {
   /* Same as the width of the sidenav */
 }
 
+nav.breadcrumbs {
+  margin-left: 0;
+}
+
 @media screen and (max-width: 769.5px) {
   main {
     margin-left: 0;
@@ -75,16 +79,145 @@ nav {
   }
 }
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-.card-img-top {
-  width: 100%;
-  height: 30vw;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 .news-img {
   width: 100%;
   height: 15vw;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.card-body a:hover {
+  text-decoration: none !important;
+}
+
+.avatar-image-wrapper {
+  position: relative;
+  height: 38px;
+  width: 38px;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.avatar-image {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.form-control {
+  overflow: auto !important;
+}
+
+.form-control-flush {
+  padding-left: 0;
+  border-color: transparent !important;
+  background-color: transparent !important;
+}
+
+.form-control:focus {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.upload {
+  cursor: pointer;
+}
+
+/*Copied from bootstrap to handle input file multiple*/
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+/*Also */
+.btn-success {
+  border: 1px solid #c5dbec;
+  background: #d0e5f5;
+  font-weight: bold;
+  color: #2e6e9e;
+}
+
+/* This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: "alpha(opacity=0)";
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+.thumb {
+  height: 80px;
+  width: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+ul.thumb-Images li {
+  width: 120px;
+  float: left;
+  display: inline-block;
+  vertical-align: top;
+  height: 100px;
+}
+
+.img-wrap {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+}
+
+.img-wrap .close {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 100;
+  padding: 4px;
+  color: #000;
+  font-weight: bolder;
+  cursor: pointer;
+  opacity: 0.3;
+  font-size: 23px;
+  line-height: 10px;
+  border-radius: 50%;
+}
+
+.img-wrap:hover .close {
+  opacity: 1;
+}
+
+.FileNameCaptionStyle {
+  font-size: 12px;
 }

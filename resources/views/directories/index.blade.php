@@ -17,7 +17,7 @@
                                     placeholder="Press Enter To Search">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        Powered by &nbsp; <i class="fab fa-algolia" style="font-size:18px"></i>
+                                        Powered by &nbsp; <i class="fab fa-algolia" style="font-size:14px"></i>
                                     </span>
                                 </div>
                             </div>

@@ -9,6 +9,8 @@ use Socialite;
 use Auth;
 use App\Profile;
 use App\User;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class LoginController extends Controller
 {
@@ -61,6 +63,7 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $google_user = Socialite::driver('google')->user();
+        
         $user = $this->userFindOrCreate($google_user);
 
         //login
@@ -73,16 +76,17 @@ class LoginController extends Controller
         $user = User::where('email', $google_user->email)->first();
         $random = Str::random(6);
         $slugCreate = Str::slug($google_user->getName(), '-');
-        $slug = $slugCreate.$random;
+        $slug = $slugCreate.'-'.$random;
         if(!$user){
             $user = new User;
             $user->name = $google_user->getName();
             $user->email = $google_user->getEmail();
             $user->provider_id = $google_user->getId();
             $user->slug = $slug;
-            $user->avatar = "img-placeholder.png";
+            $user->avatar = $google_user->getAvatar();
             $user->save();
             $id = $user->id;
+            event(new Registered($user));
         } elseif(!($user->provider_id)){
             $user->provider_id = $google_user->getId();
             $user->save();

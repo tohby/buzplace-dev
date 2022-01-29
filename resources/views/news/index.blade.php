@@ -1,41 +1,127 @@
-@extends('layouts/master') 
+@extends('layouts/master')
+@section('styles')
+<link href="{{ asset('css/theme.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
-<div class="container-fluid">
-    <div class="card border-0 shadow">
-        <div class="card-body">
-            <div class="card-title">
-                <div class="row">
-                    <div class="col-lg-6"><h2 class="font-weight-bold">News</h2></div>
-                    <div class="col-lg-6">
-                        @if (Auth::user() != NULL && Auth::user()->is_admin == true)
-                        <a href="/news/create" class="btn btn-primary btn-lg float-right" role="button" aria-pressed="true"><i class="fas fa-plus"></i>&nbsp; Create</a>
-                        @endif
-                    </div>
-                </div>            
-            </div>
-        </div>
-    </div>
-    <br> @if (count($news) >= 1)
-    <div class="card-columns">
-        @foreach ($news as $news_item)
-        <div class="card border-0 transparent">
-            <img src="/storage/news-images/{{$news_item->image}}" class="card-img-top news-img rounded-lg" alt="...">
-            <div class="card-body">
-                <a href="/news/{{$news_item->id}}">
-                    <h3 class="card-title font-weight-bold">{{$news_item->headline}}</h3>
+<section class="py-6">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="#"
+                    class="bg-primary-3-alt rounded p-4 d-flex align-items-center justify-content-center min-vh-20">
+                    <span class="text-small text-primary-3">Advertisement</span>
                 </a>
-                <p class="card-text">{!!str_limit($news_item->content, 200, '...')!!}</p>
-                <div class="float-right">
-                    <small>{{$news_item->created_at->diffForHumans()}}</small>
-                </div>
             </div>
         </div>
-        @endforeach
     </div>
-    <div class="float-right">
-        {{$news->links()}}
+</section>
+<section class="pt-0 pb-4 mt-2">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="h2">Featured</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-lg-8 d-flex">
+                <a href="news/{{$headlines[0]->slug}}"
+                    class="card card-body overlay border-0 text-light mb-md-0 justify-content-end">
+                    <div class="position-relative">
+                        <span class="badge badge-primary">Business</span>
+                        <div class="my-3">
+                            <h2>{{$headlines[0]->title}}</h2>
+                        </div>
+                    </div>
+                    <img src="{{$headlines[0]->featured_image}}" alt="Image" class="rounded bg-image">
+                </a>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <ul class="list-unstyled list-articles">
+                    @foreach ($headlines as $headline)
+                    @if (!$loop->first)
+                    <li class="row row-tight">
+                        <a href="news/{{$headline->slug}}" class="col-3 col-md-4">
+                            @if ($headline->featured_image != null)
+                            <img src="{{$headline->featured_image}}" alt="Image" class="rounded">
+                            @else
+                            <img src="/storage/canvas/images/default.png" alt="Image" class="rounded">
+                            @endif
+                        </a>
+                        <div class="col d-flex flex-column justify-content-center">
+                            <div>
+                                <a href="news/{{$headline->slug}}">
+                                    <h6 class="mb-1">{{$headline->title}}</h6>
+                                </a>
+                                <div class="d-flex text-small">
+                                    <a href="news/{{$headline->slug}}">Business</a>
+                                    <span class="text-muted ml-1">{{$headline->published_at->diffForHumans()}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    @endif
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
-    @endif
-
-</div>
+</section>
+@if($news)
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="h2">Latest</h3>
+            </div>
+        </div>
+        <div class="row mb-4">
+            @foreach ($news as $news_item)
+            <div class="col-md-6 col-lg-4 d-flex">
+                @if ($news_item->featured_image != null)
+                <div class="card">
+                    <a href="news/{{$news_item->slug}}">
+                        <img src="{{$news_item->featured_image}}" alt="Image" class="card-img-top">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="text-small d-flex">
+                                <div class="mr-2">
+                                    <span class="text-primary">Business</span>
+                                </div>
+                                <span class="text-muted">{{$headline->published_at->diffForHumans()}}</span>
+                            </div>
+                        </div>
+                        <a href="news/{{$news_item->slug}}">
+                            <h4>{{$news_item->title}}</h4>
+                        </a>
+                        <p class="flex-grow-1">
+                            {{Str::words($news_item->summary, 10, ' ...')}}
+                        </p>
+                    </div>
+                </div>
+                @else
+                <a href="news/{{$news_item->slug}}"
+                    class="card card-body justify-content-between bg-primary text-light">
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="text-small d-flex">
+                            <div class="mr-2">
+                                Business
+                            </div>
+                            <span class="opacity-70">{{$news_item->published_at->diffForHumans()}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h2>{{$news_item->title}}</h2>
+                        <p class="flex-grow-1">
+                            {{Str::words($news_item->summary, 10, ' ...')}}
+                        </p>
+                    </div>
+                </a>
+                @endif
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 @endsection

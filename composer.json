@@ -10,6 +10,7 @@
         "algolia/algoliasearch-client-php": "3.2",
         "austintoddj/canvas": "^6.0",
         "doctrine/dbal": "^2.9",
+        "facade/ignition": "^2.3",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^8.0",
         "laravel/legacy-factories": "^1.3",

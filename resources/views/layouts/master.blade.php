@@ -15,10 +15,12 @@
     <!-- Fonts -->
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('styles')
     <link rel="stylesheet" href="{{ asset('css/buz4564.css')}}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -29,8 +31,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light fixed-top">
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -49,7 +52,8 @@
                         </li>
                         <li class="nav-item">
                             @if (Route::has('register'))
-                            <a class="nav-link btn btn-primary text-white btn-lg" href="{{ route('register') }}">{{ __('Register') }}</a>                            @endif
+                            <a class="nav-link btn btn-primary text-white px-3"
+                                href="{{ route('register') }}">{{ __('Register') }}</a> @endif
                         </li>
                         @else
                         <li class="nav-item dropdown">
@@ -57,24 +61,29 @@
                                 <a class="nav-link" href="/the-hub">The Hub</a>
                                 <a class="nav-link" href="/profile/{{Auth::user()->slug}}">Profile</a>
                                 <a class="nav-link" href="/news">News</a>
-                                <a class="nav-link" href="/messages">Conversations</a>
+                                {{-- <a class="nav-link" href="/messages">Conversations</a> --}}
                                 <a class="nav-link" href="/directories">Directories</a>
-                                {{--  <a class="nav-link" href="/the-hub">Consultation</a>  --}}
+                                <a class="nav-link" href="/consultation">Consultation</a>
                             </div>
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                            <div class="avatar">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <span class="avatar-image-wrapper">
+                                        <img alt="" class="avatar-image" src="{{ Auth::user()->avatar }}">
+                                    </span> &nbsp;{{ Auth::user()->first_name }}
+                                </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
                             </div>
                         </li>
                         @endguest
@@ -83,51 +92,52 @@
             </div>
         </nav>
         @auth
-        <div class="sidenav d-none d-md-block">
+        <div class="sidenav">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="/images/logo2.png"  alt="Buzplace">
+                <img src="/images/logo2.png" alt="Buzplace">
             </a>
             <hr>
             <div id="menu" class="px-3">
-            <a href="/the-hub" class="{{ request()->is('the-hub') || request()->is('the-hub/*') ? 'active' : '' }}"> The Hub</a>
-            <a href="/profile/{{Auth::user()->slug}}" class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"></i>Profile</a>
-            <a href="/news" class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
-            <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a>
-            <a href="/directories" class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
-            {{--  <a href="/consultation" class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>  --}}
+                <a href="/the-hub" class="{{ request()->is('the-hub') || request()->is('the-hub/*') ? 'active' : '' }}">
+                    The Hub</a>
+                <a href="/profile/{{Auth::user()->slug}}"
+                    class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"></i>Profile</a>
+                <a href="/news"
+                    class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
+                @if ((request()->is('news') || request()->is('news/*')) && Auth::user()->is_admin)
+                <a href="/canvas" class="ml-4" target="_blank">Canvas</a>
+                @endif
+                {{-- <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a>
+                --}}
+                <a href="/directories"
+                    class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"></i>Directories</a>
+                <a href="/consultation"
+                    class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
             </div>
         </div>
         @endauth
-        <main class="py-4 px-2">
+        <main class="py-5 px-2">
+            @if(count($errors) > 0){
             <div class="container my-3">
                 @include('layouts/messages')
             </div>
+            }
+            @endif
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-    <script>
-        CKEDITOR.replace( 'news-content' );
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+
     <script src="{{ asset('js/aos.js') }}"></script>
-    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
     <script src="{{ asset('js/bs-custom-file-input.js') }}"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- Please ensure that this script is the last to load,
-    some script might be overriding it which may prevent react
-    from rendering -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            bsCustomFileInput.init()
-            var btn = document.getElementById('btnResetForm')
-            var form = document.querySelector('form')
-            btn.addEventListener('click', function () {
-              form.reset()
-            })
-          });
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/buzplace.js') }}"></script>
     @yield('scripts')
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bec3b168829ed15"></script>
 </body>
+
 </html>

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-
-    protected $fillable = ['user_id', 'image', 'title', 'content'];
+    protected $fillable = ['user_id', 'image', 'title', 'content', 'slug'];
 
     public function user() {
         return $this->belongsTo('App\User');
@@ -17,7 +16,7 @@ class Post extends Model
         return $this->hasMany('App\PostImages');
     }
 
-    public function getUrlAttribute() {
-        return route('post.view', $this->attributes['slug']);
+    public function getRouteKeyName(){
+        return 'slug';
     }
 }
