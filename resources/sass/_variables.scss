@@ -1,11 +1,14 @@
 // font
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap");
+@font-face {
+    font-family: "Circular";
+    src: url("/fonts/circular-std.ttf");
+}
 // Body
-$body-bg: #FFFFFF;
+$body-bg: #ffffff;
 
 // Typography
-$font-family-sans-serif: "Roboto",
-sans-serif;
+$font-family-sans-serif: "Circular", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
@@ -13,7 +16,7 @@ $line-height-base: 1.6;
 // $blue: #3d3b45;
 $indigo: #6574cd;
 $purple: #9561e2;
-$pink: #f66D9b;
+$pink: #f66d9b;
 $red: #e3342f;
 $orange: #f6993f;
 $yellow: #ffed4a;

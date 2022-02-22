@@ -14,6 +14,7 @@
     </div>
 </section>
 <section class="pt-0 m-5">
+    @if ($headlines->count() > 0)
     <div class="container">
         <div class="row">
             <div class="col">
@@ -33,6 +34,8 @@
                     <img src="{{$headlines[0]->featured_image}}" alt="Image" class="rounded bg-image">
                 </a>
             </div>
+            
+            
             <div class="col-md-5 col-lg-4">
                 <ul class="list-unstyled list-articles">
                     @foreach ($headlines as $headline)
@@ -63,8 +66,9 @@
             </div>
         </div>
     </div>
+    @endif
 </section>
-@if($news)
+@if($news->count() > 0)
 <section>
     <div class="container">
         <div class="row">

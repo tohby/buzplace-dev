@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-8">
             {{-- {!!Auth::user()->avatar!!} --}}
-            @if (Auth::user()->hasVerifiedEmail())
+            {{-- @if (Auth::user()->hasVerifiedEmail()) --}}
             <div class="card mb-5">
                 <div class="card-body">
 
@@ -47,7 +47,7 @@
             <div id="msg" class="mt-n3 ml-2">
 
             </div>
-            @else
+            {{-- @else
             <div class="alert alert-warning" role="alert">
                 <h4 class="alert-heading"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16"
                         class="bi bi-exclamation-triangle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@
                     </form>
                 </p>
             </div>
-            @endif
+            @endif --}}
 
             <div class="infinite-scroll">
                 @if ($posts)
@@ -156,20 +156,5 @@
     @endsection
 
     @section('scripts')
-    <script src="/js/jquery.jscroll.min.js"></script>
-    <script type="text/javascript">
-        $('ul.pagination').hide();
-                $(function() {
-                    $('.infinite-scroll').jscroll({
-                        autoTrigger: true,
-                        loadingHtml: '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>',
-                        padding: 0,
-                        nextSelector: '.pagination li.active + li a',
-                        contentSelector: 'div.infinite-scroll',
-                        callback: function() {
-                            $('ul.pagination').remove();
-                        }
-                    });
-                });
-    </script>
+    
     @endsection

@@ -39,21 +39,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Products');
     }
 
-    public function getGravatarAttribute() {
-        $hash = md5(strtolower(trim($this->attributes['email'])));
-        return "http://www.gravatar.com/avatar/$hash";
-    }
-
     public function posts() {
         return $this->hasMany('App\Posts');
     }
 
     public function consultations() {
         return $this->hasMany('App\Consultation');
-    }
-
-    public function getAvatar( $size = 64 ) {
-        return $this->getGravatar( $this->email, $size );
     }
 
     public function getFirstNameAttribute()
@@ -64,6 +55,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatarAttribute(){
         if ($this->attributes['avatar'] != null){
             return $this->attributes['avatar'];
+        }
+    }
+
+    public function getProfileImageAttribute() {
+        if ($this->attributes['avatar'] != null){
+            return $this->attributes['avatar'];
+        }else {
+
         }
     }
 
