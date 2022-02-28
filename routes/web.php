@@ -11,13 +11,6 @@
 |
 */
 
-
-// Route::get('/blank', function () {
-//     return view('pages/blankpage');
-// });
-// Route::get('/chat', function () {
-//     return view('pages/chat');
-// });
 Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
@@ -32,20 +25,14 @@ Route::get('/news/{canvas}', 'NewsController@show');
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('/the-hub', 'HubController');
     Route::resource('/directories', 'DirectoriesController');
-    // Route::resource('/news', 'NewsController')->except([
-    //     'index',
-    // ]);
+
     Route::get('/profile/{user}', 'ProfileController@show');
     Route::get('/profile/{user}/edit', 'ProfileController@edit');
     Route::resource('/profile', 'ProfileController', ['names'=>[
         'view'=>'profile.view',
         'edit'=>'profile.edit'
     ]]);
-    Route::get('/profile/{user}/add_product', 'ProfileController@create_product');
-    Route::post('add_product', 'ProfileController@store_product');
-    Route::resource('/product', 'ProductsController', ['names'=>[
-        'edit'=>'profile.edit_product'
-    ]]);
+  
     Route::get('/the-hub/{slug}', ['as'=>'post.view', 'uses'=>'HubController@show']);
     Route::get('/messages', 'MessageController@index');
     Route::get('/messages/{id}', 'MessageController@index');
