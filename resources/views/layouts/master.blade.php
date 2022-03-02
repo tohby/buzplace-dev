@@ -10,13 +10,10 @@
 
     @yield('head')
 
-    <title>{{ config('app.name', 'Buzplace') }}</title>
+    <title>{{ config('app.name', 'Welcome to Buzplace') }}</title>
 
     <!-- Fonts -->
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,12 +21,12 @@
     <link rel="stylesheet" href="{{ asset('css/buz4564.css') }}">
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('/svg/logos/icon.svg') }}" type="image/x-icon">
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light fixed-top p-3">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top py-1">
             <div class="container-fluid px-5">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -63,24 +60,16 @@
                                     <a class="nav-link" href="/consultation">Consultation</a>
                                 </div>
                                 <div class="avatar">
-                                    <h4>{{ str_replace('-', ' ', Str::ucfirst(request()->segment(1)))}}</h4>
-                                    {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <span class="avatar-image-wrapper">
-                                            <img alt="" class="avatar-image" src="/images/{{ Auth::user()->avatar }}"
-                                                alt="Profile image">
-                                        </span> &nbsp;{{ Auth::user()->first_name }}
-                                    </a> --}}
+                                    <h4 class="mt-2">
+                                        {{ str_replace('-', ' ', Str::ucfirst(request()->segment(1))) }}</h4>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                                                             document.getElementById('logout-form').submit();">
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
@@ -91,11 +80,11 @@
                 </div>
             </div>
         </nav>
-        
+
         @auth
             <div class="sidenav">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/images/logo2.png" alt="Buzplace">
+                <a class="navbar-brand py-2" href="{{ url('/') }}">
+                    <img src="/svg/logos/logo_white.svg" alt="Buzplace">
                 </a>
                 <hr>
                 <div id="menu" class="px-3 scroll-area">
@@ -106,7 +95,7 @@
                         class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"></i>Profile</a>
                     <a href="/news"
                         class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"></i>News</a>
-                    @if ((request()->is('news') || request()->is('news/*')) && Auth::user()->is_admin)
+                    @if (Auth::user()->is_admin)
                         <a href="/canvas" class="ml-4" target="_blank">Canvas</a>
                     @endif
                     {{-- <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a> --}}
@@ -115,21 +104,38 @@
                     <a href="/consultation"
                         class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
                 </div>
-                <a class="user-container__2aQ3F" href="/buildings/user/settings">
-                    <span class="avatar">
-                        <span class="avatar-image-wrapper">
-                            <img alt="" class="avatar-image" src="/images/{{ Auth::user()->avatar }}">
+                <div class="dropup">
+                    <a class="user-container__2aQ3F dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                        href="#">
+                        <span class="avatar">
+                            <span class="avatar-image-wrapper">
+                                <img alt="" class="avatar-image" src="/images/{{ Auth::user()->avatar }}">
+                            </span>
+                            <span class="avatar-content">
+                                <span class="avatar-name">{{ Auth::user()->name }}</span>
+                            </span>
                         </span>
-                        <span class="avatar-content">
-                            <span class="avatar-name">{{ Auth::user()->name }}</span>
-                        </span>
-                    </span>
-                </a>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="/profile/{{ Auth::user()->slug }}">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
         @endauth
-        
+
         <main class="py-5 px-2">
-            @if (count($errors) > 0){
+            @if (count($errors) > 0)
+                {
                 <div class="container my-3">
                     @include('layouts/messages')
                 </div>

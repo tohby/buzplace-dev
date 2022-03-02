@@ -1,5 +1,4 @@
 // font
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap");
 @font-face {
     font-family: "Circular";
     src: url("/fonts/circular-std.ttf");
@@ -9,8 +8,8 @@ $body-bg: #ffffff;
 
 // Typography
 $font-family-sans-serif: "Circular", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// $font-size-base: 0.9rem;
+// $line-height-base: 1.6;
 
 // Colors
 // $blue: #3d3b45;
@@ -24,9 +23,31 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-$breakpoint-xs: 576px;
-$breakpoint-sm: 768px;
-$breakpoint-md: 992px;
-$breakpoint-lg: 1200px;
+// $breakpoint-xs: 576px;
+// $breakpoint-sm: 768px;
+// $breakpoint-md: 992px;
+// $breakpoint-lg: 1200px;
 
 $enable-caret: false !important;
+
+$btn-padding-y: 0.75rem;
+$btn-padding-x: 1.8rem;
+
+$btn-padding-y-lg: 0.85rem;
+
+$btn-border-radius: 0.8rem;
+$btn-border-radius-sm: 0.4rem;
+$btn-border-radius-lg: 1.1rem;
+
+$spacer: 2rem;
+
+$gutters: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+$font-size-base: 0.9rem;

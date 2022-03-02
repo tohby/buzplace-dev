@@ -19,6 +19,16 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
+    ];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -30,10 +40,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRouteKeyName(){
         return 'slug';
     }
-
-    protected $casts = [
-        'is_admin' => 'boolean',
-    ];
 
     public function products(){
         return $this->hasMany('App\Products');

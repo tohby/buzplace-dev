@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +12,19 @@
 |
 */
 
-Auth::routes(['verify' => true]);
+ 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/the-hub');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::group(['middleware' => 'guest'], function () {
@@ -43,8 +56,4 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('directories/search/{searchKey}', 'DirectoriesController@search');
     Route::post('directories/search', 'DirectoriesController@search');
     Route::resource('/consultation', 'ConsultationController');
-});
-Route::get('/migrate', function () {
-    $exitCode = Artisan::call('migrate', []);
-    echo $exitCode;
 });
