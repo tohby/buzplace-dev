@@ -5,7 +5,7 @@
         <div class="col-lg-8">
             {{-- {!!Auth::user()->avatar!!} --}}
             {{-- @if (Auth::user()->hasVerifiedEmail()) --}}
-            <div class="card mb-5">
+            <div class="card mb-3">
                 <div class="card-body">
 
                     <!-- Form -->
@@ -76,8 +76,8 @@
                 @if ($posts)
                 @foreach ($posts as $post)
                 <div class="justify-content-center">
-                    <div class="pt-5">
-                        <div class="card shadow">
+                    <div class="pt-2">
+                        <div class="card">
                             @if (count($post->postImages) > 0)
                             @if (count($post->postImages) > 1)
                             <div id="postImages{{$post->slug}}" class="carousel slide" data-ride="carousel"

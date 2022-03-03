@@ -105,7 +105,7 @@
                         class="{{ request()->is('consultation') ? 'active' : '' }}"></i>Consultations</a>
                 </div>
                 <div class="dropup">
-                    <a class="user-container__2aQ3F dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                    <a class="user-container__2aQ3F dropdown-toggle" id="dropdownMenuLink" role="button"  data-bs-toggle="dropdown" aria-expanded="false"
                         href="#">
                         <span class="avatar">
                             <span class="avatar-image-wrapper">
@@ -116,7 +116,7 @@
                             </span>
                         </span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="/profile/{{ Auth::user()->slug }}">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -133,7 +133,7 @@
             </div>
         @endauth
 
-        <main class="py-5 px-2">
+        <main class="py-4 px-2">
             @if (count($errors) > 0)
                 {
                 <div class="container my-3">

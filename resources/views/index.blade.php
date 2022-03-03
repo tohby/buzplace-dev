@@ -32,6 +32,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/news">News</a>
                     </li>
+                    <div class="vr align-self-center"></div>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Sign in</a>
                     </li>
@@ -91,7 +92,7 @@
                 </div>
                 <div class="row gx-sm-0 gx-lg-5">
                     <div class="col-md-6 py-5" data-aos="fade-up" data-aos-delay="100">
-                        <img src="/images/feature-communication.png" alt="Communication" class="rounded-3 img-fluid">
+                        <img src="/images/join-network.png" alt="Communication" class="rounded-3 img-fluid">
                     </div>
                     <div class="col-md-6 d-flex justify-content-center align-items-center flex-column" data-aos="fade-up" data-aos-delay="200">
                         <h2>Join a network of Manufacturers, Suppliers and Customers</h2>
@@ -102,7 +103,7 @@
                 </div>
                 <div class="row flex-md-row-reverse gx-sm-0 gx-lg-5">
                     <div class="col-md-6 py-5" data-aos="fade-up" data-aos-delay="100">
-                        <img src="/images/feature-knowledge.png" alt="Communication" class="rounded-3 img-fluid">
+                        <img src="/images/consultation.png" alt="Communication" class="rounded-3 img-fluid">
                     </div>
                     <div class="col-md-6 d-flex justify-content-center align-items-center flex-column" data-aos="fade-up" data-aos-delay="200">
                         <h2>Get consultations from our professionals</h2>
@@ -115,6 +116,16 @@
             </div>
         </section>
     </main>
+    <footer class="border-top">
+        <div class="container p-3">
+            <div class="my-2 w-10 mx-auto d-block">
+                <img src="/svg/logos/icon.svg" alt="Buzplace">
+            </div>
+            <h6 class="text-center">
+                &copy;2022 Buzplace
+            </h6>
+        </div>
+    </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({

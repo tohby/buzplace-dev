@@ -11,18 +11,6 @@ $teal: #20c997 !default;
 $cyan: #17a2b8 !default;
 $grey: #495357 !default;
 
-$enable-caret: false;
-
-$spacer: 2rem;
-$spacers: (
-  0: 0,
-  1: $spacer * .25,
-  2: $spacer * .5,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
-);
-
 .sidenav {
     height: 100%;
     width: 270px;
@@ -58,11 +46,12 @@ $spacers: (
         padding: 10px 8px 12px 20px;
         text-decoration: none;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 400;
         color: #fff;
         display: block;
         border: none;
         border-radius: 5px;
+        margin-bottom: 10px;
     }
 
     
@@ -136,14 +125,6 @@ nav.breadcrumbs {
         margin-left: 0;
     }
 }
-
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-
-// .card-img-top {
-//     width: 100%;
-//     height: 30vw;
-//     object-fit: cover;
-// }
 
 .news-img {
     width: 100%;

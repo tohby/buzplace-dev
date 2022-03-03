@@ -3556,7 +3556,7 @@ textarea.form-control-lg {
   position: absolute;
   z-index: 1000;
   display: none;
-  min-width: 10rem;
+  min-width: 100%;
   padding: 0.5rem 0;
   margin: 0;
   font-size: 0.9rem;
@@ -11388,4 +11388,8 @@ body {
 }
 .main-content #features h2 strong, .main-content #features .h2 strong {
   color: #7c7884;
+}
+
+.w-10 {
+  width: 5% !important;
 }

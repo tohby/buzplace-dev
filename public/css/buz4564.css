@@ -31,11 +31,12 @@
   padding: 10px 8px 12px 20px;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   color: #fff;
   display: block;
   border: none;
   border-radius: 5px;
+  margin-bottom: 10px;
 }
 .sidenav a.active {
   color: #fff;
@@ -101,7 +102,6 @@ nav.breadcrumbs {
     margin-left: 0;
   }
 }
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 .news-img {
   width: 100%;
   height: 15vw;
