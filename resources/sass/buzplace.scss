@@ -46,7 +46,6 @@ body {
     align-items: center;
 
     .nav-item {
-        padding: 15px;
         font-size: 18px;
         font-weight: 600;
         letter-spacing: 0;
@@ -67,9 +66,9 @@ body {
     }
 
     .title-xxl {
-        font-size: $font-size-base * 4.5;
-        line-height: 84px;
-        letter-spacing: -1.5px;
+        font-size: calc(3.5294117647vw + 38.7058823529px);
+        line-height: calc(3.0588235294vw + 48.2117647059px);
+        letter-spacing: calc(-.0588235294vw + -.8117647059px);
     }
     .hero_row {
         display: flex;

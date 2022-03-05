@@ -14,26 +14,23 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Buzplace') }}</title>
-    {{-- <script src="https://kit.fontawesome.com/4cc6387cd5.js"></script> --}}
-
 </head>
 
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-sm navbar-light bg-white px-2">
+        <nav class="navbar navbar-expand-md navbar-light bg-white px-2">
             <a class="navbar-brand"><img src="/svg/logos/logo.svg" alt="Buzplace"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                    <li class="nav-item px-3">
                         <a class="nav-link" href="/news">News</a>
                     </li>
-                    <div class="vr align-self-center"></div>
-                    <li class="nav-item">
+                    <span class="vr align-self-center d-none d-sm-block"></span>
+                    <li class="nav-item px-3">
                         <a class="nav-link" href="{{ route('login') }}">Sign in</a>
                     </li>
                     <a href="{{ route('register') }}" class="btn btn-primary">Join us</a>
@@ -94,7 +91,8 @@
                     <div class="col-md-6 py-5" data-aos="fade-up" data-aos-delay="100">
                         <img src="/images/join-network.png" alt="Communication" class="rounded-3 img-fluid">
                     </div>
-                    <div class="col-md-6 d-flex justify-content-center align-items-center flex-column" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-md-6 d-flex justify-content-center align-items-center flex-column"
+                        data-aos="fade-up" data-aos-delay="200">
                         <h2>Join a network of Manufacturers, Suppliers and Customers</h2>
                         <p class="mt-3">Connect quickly and easily with other businesses and services across
                             the globe. Build
@@ -105,7 +103,8 @@
                     <div class="col-md-6 py-5" data-aos="fade-up" data-aos-delay="100">
                         <img src="/images/consultation.png" alt="Communication" class="rounded-3 img-fluid">
                     </div>
-                    <div class="col-md-6 d-flex justify-content-center align-items-center flex-column" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-md-6 d-flex justify-content-center align-items-center flex-column"
+                        data-aos="fade-up" data-aos-delay="200">
                         <h2>Get consultations from our professionals</h2>
                         <p class="mt-3">Let our team of experts and consultancy team locate your needs and
                             products for you. Our goal is to contact busineses, get you the best offers, research
