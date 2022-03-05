@@ -71,12 +71,12 @@
         <section id="buz_partners">
             <div class="container py-4">
                 <h2 class="text-center">Join thousands of global businesses who trust in us</h2>
-                <div class="row justify-content-center mt-5">
-                    <div class="col"><img src="/partners/9round-logo-white.png" alt="9ground"></div>
-                    <div class="col"><img src="/partners/9round-logo-white.png" alt="9ground"></div>
-                    <div class="col"><img src="/partners/9round-logo-white.png" alt="9ground"></div>
-                    <div class="col"><img src="/partners/9round-logo-white.png" alt="9ground"></div>
-                    <div class="col"><img src="/partners/9round-logo-white.png" alt="9ground"></div>
+                <div class="row justify-content-center mt-3 gy-4">
+                    <div class="col"><img src="/partners/9round-logo-white.png" class="mx-auto d-block" alt="9ground"></div>
+                    <div class="col"><img src="/partners/9round-logo-white.png" class="mx-auto d-block" alt="9ground"></div>
+                    <div class="col"><img src="/partners/9round-logo-white.png" class="mx-auto d-block" alt="9ground"></div>
+                    <div class="col"><img src="/partners/9round-logo-white.png" class="mx-auto d-block" alt="9ground"></div>
+                    <div class="col"><img src="/partners/9round-logo-white.png" class="mx-auto d-block" alt="9ground"></div>
                 </div>
             </div>
         </section>
