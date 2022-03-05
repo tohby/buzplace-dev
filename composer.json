@@ -20,7 +20,8 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
-        "spatie/laravel-cookie-consent": "^3.2"
+        "spatie/laravel-cookie-consent": "^3.2",
+        "spatie/laravel-honeypot": "^4.1"
     },
     
     "require-dev": {

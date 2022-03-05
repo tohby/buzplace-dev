@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Spatie\Honeypot\ProtectAgainstSpam;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +26,10 @@ Route::post('/email/verification-notification', function (Request $request) {
  
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-Auth::routes();
+
+Route::middleware(ProtectAgainstSpam::class)->group(function() {
+    Auth::routes();
+});
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::group(['middleware' => 'guest'], function () {
