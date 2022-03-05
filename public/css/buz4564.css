@@ -10,7 +10,6 @@
   border: none;
   padding-top: 10px;
 }
-
 .sidenav a {
   padding: 10px 8px 12px 20px;
   text-decoration: none;
@@ -21,19 +20,16 @@
   border: none;
   border-radius: 5px;
 }
-
 .sidenav a:hover {
   color: #fff;
   background-color: #495357;
   border: none;
 }
-
 .sidenav a.active {
   color: #fff;
   background-color: #007bff;
   font-weight: 500;
 }
-
 .sidenav .navbar-brand {
   padding: 10px 8px 12px 20px;
 }
@@ -82,9 +78,7 @@ nav.breadcrumbs {
     margin-left: 0;
   }
 }
-
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-
 .news-img {
   width: 100%;
   height: 15vw;
@@ -100,9 +94,8 @@ nav.breadcrumbs {
   position: relative;
   height: 38px;
   width: 38px;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
-  font-size: .85rem;
+  flex-shrink: 0;
+  font-size: 0.85rem;
 }
 
 .avatar-image {
@@ -114,12 +107,8 @@ nav.breadcrumbs {
 }
 
 .avatar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   max-width: 100%;
 }
 
@@ -135,8 +124,7 @@ nav.breadcrumbs {
 
 .form-control:focus {
   border-color: transparent !important;
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .upload {
@@ -144,7 +132,6 @@ nav.breadcrumbs {
 }
 
 /*Copied from bootstrap to handle input file multiple*/
-
 .btn {
   display: inline-block;
   padding: 6px 12px;
@@ -166,7 +153,6 @@ nav.breadcrumbs {
 }
 
 /*Also */
-
 .btn-success {
   border: 1px solid #c5dbec;
   background: #d0e5f5;
@@ -175,7 +161,6 @@ nav.breadcrumbs {
 }
 
 /* This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
-
 .fileinput-button {
   position: relative;
   overflow: hidden;
@@ -236,4 +221,3 @@ ul.thumb-Images li {
 .FileNameCaptionStyle {
   font-size: 12px;
 }
-
