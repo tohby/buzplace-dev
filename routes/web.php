@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Spatie\Honeypot\ProtectAgainstSpam;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +26,11 @@ Route::post('/email/verification-notification', function (Request $request) {
  
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::middleware(ProtectAgainstSpam::class)->group(function() {
+    Auth::routes();
+});
+
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login/google', 'Auth\LoginController@redirectToProvider');
     Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
@@ -47,12 +51,6 @@ Route::group(['middleware' => 'auth'], function() {
     ]]);
   
     Route::get('/the-hub/{slug}', ['as'=>'post.view', 'uses'=>'HubController@show']);
-    Route::get('/messages', 'MessageController@index');
-    Route::get('/messages/{id}', 'MessageController@index');
-    Route::get('/loadMessage', 'MessageController@message');
-    Route::get('/loadMessage/{id}', 'MessageController@message');
-    Route::post('/messages/getMessage/{id}', 'MessageController@getMessage');
-    Route::get('/messages/sendMessage/{id}', 'MessageController@sendMessage');
     Route::get('directories/search/{searchKey}', 'DirectoriesController@search');
     Route::post('directories/search', 'DirectoriesController@search');
     Route::resource('/consultation', 'ConsultationController');

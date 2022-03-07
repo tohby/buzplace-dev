@@ -3007,7 +3007,7 @@ textarea.form-control-lg {
   border: 1px solid transparent;
   padding: 0.75rem 1.8rem;
   font-size: 0.9rem;
-  border-radius: 0.8rem;
+  border-radius: 0.6rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3482,7 +3482,7 @@ textarea.form-control-lg {
 .btn-lg, .btn-group-lg > .btn {
   padding: 0.85rem 1rem;
   font-size: 1.125rem;
-  border-radius: 1.1rem;
+  border-radius: 0.8rem;
 }
 
 .btn-sm, .btn-group-sm > .btn {
@@ -4087,7 +4087,7 @@ textarea.form-control-lg {
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 0.8rem;
+  border-radius: 0.6rem;
   transition: box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -11325,7 +11325,6 @@ body {
   align-items: center;
 }
 .navbar-nav .nav-item {
-  padding: 15px;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 0;
@@ -11342,9 +11341,9 @@ body {
   height: auto;
 }
 .main-content .title-xxl {
-  font-size: 4.05rem;
-  line-height: 84px;
-  letter-spacing: -1.5px;
+  font-size: calc(3.5294117647vw + 38.7058823529px);
+  line-height: calc(3.0588235294vw + 48.2117647059px);
+  letter-spacing: calc(-0.0588235294vw - 0.8117647059px);
 }
 .main-content .hero_row {
   display: flex;
