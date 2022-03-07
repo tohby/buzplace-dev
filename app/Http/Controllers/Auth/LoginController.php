@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use App\User;
+use Socialite;
+use App\Profile;
+use Illuminate\Http\File;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Str;
-use Socialite;
-use Auth;
-use App\Profile;
-use App\User;
-use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Auth\Events\Registered;
 
 class LoginController extends Controller
 {
