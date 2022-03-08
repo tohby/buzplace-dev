@@ -1,6 +1,6 @@
 @extends('layouts/master')
 @section('styles')
-<link href="{{ asset('css/theme.min.css') }}" rel="stylesheet">
+{{-- <link href="{{ asset('css/theme.min.css') }}" rel="stylesheet"> --}}
 @endsection
 @section('content')
 <section class="py-6">
