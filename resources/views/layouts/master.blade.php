@@ -90,26 +90,26 @@
                 <div id="menu" class="px-3 scroll-area">
                     <a href="/the-hub"
                         class="{{ request()->is('the-hub') || request()->is('the-hub/*') ? 'active' : '' }}">
-                        <img src="/svg/icons/home.svg" class="me-2" alt=""> The Hub</a>
+                        <img src="/svg/icons/Category.svg" class="me-2" alt=""> The Hub</a>
                     <a href="/profile/{{ Auth::user()->slug }}"
-                        class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"><img src="/svg/icons/user.svg" class="me-2" alt=""> Profile</a>
+                        class="{{ request()->is('profile/*') || request()->is('profile/*/edit') || request()->is('product/*') ? 'active' : '' }}"><img src="{{ asset('/svg/icons/User.svg') }}" class="me-2" alt=""> Profile</a>
                     <a href="/news"
-                        class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"><img src="/svg/icons/paper-note.svg" class="me-2" alt=""> News</a>
+                        class="{{ request()->is('news') || request()->is('news/*') ? 'active' : '' }}"><img src="{{ asset('/svg/icons/Paper-Note.svg') }}" class="me-2" alt=""> News</a>
                     @if (Auth::user()->is_admin)
                         <a href="/canvas" class="ml-4" target="_blank">Canvas</a>
                     @endif
                     {{-- <a href="/messages" class="{{ request()->is('messages') || request()->is('messages/*') ? 'active' : '' }}"></i>Conversations</a> --}}
                     <a href="/directories"
-                        class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"><img src="/svg/icons/drawer-done.svg" class="me-2" alt="">Directories</a>
+                        class="{{ request()->is('directories') || request()->is('directories/*') ? 'active' : '' }}"><img src="{{ asset('/svg/icons/Drawer-Done.svg') }}" class="me-2" alt="">Directories</a>
                     <a href="/consultation"
-                        class="{{ request()->is('consultation') ? 'active' : '' }}"><img src="/svg/icons/question-circle.svg" class="me-2" alt="">Consultations</a>
+                        class="{{ request()->is('consultation') ? 'active' : '' }}"><img src="{{ asset('/svg/icons/Question-Circle.svg') }}" class="me-2" alt="">Consultations</a>
                 </div>
                 <div class="dropup">
                     <a class="user-container__2aQ3F dropdown-toggle" id="dropdownMenuLink" role="button"  data-bs-toggle="dropdown" aria-expanded="false"
                         href="#">
                         <span class="avatar">
                             <span class="avatar-image-wrapper">
-                                <img alt="" class="avatar-image" src="/images/{{ Auth::user()->avatar }}">
+                                <img alt="" class="avatar-image" src="{{ Auth::user()->avatar }}">
                             </span>
                             <span class="avatar-content">
                                 <span class="avatar-name">{{ Auth::user()->name }}</span>
@@ -117,13 +117,13 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="/profile/{{ Auth::user()->slug }}"> <img src="/svg/icons/user.svg" class="me-2" alt="">Profile</a></li>
+                        <li><a class="dropdown-item" href="/profile/{{ Auth::user()->slug }}"> <img src="{{ asset('/svg/icons/User.svg') }}" class="me-2" alt="">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="/svg/icons/logout.svg" class="me-2" alt="">Logout</a>
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="{{ asset('/svg/icons/Logout.svg') }}" class="me-2" alt="">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
