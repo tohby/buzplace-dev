@@ -23,18 +23,6 @@
             </div>
         </div>
         <div class="row">
-            {{-- <div class="col-md-7 col-lg-8 d-flex">
-                <a href="news/{{$headlines[0]->slug}}"
-                    class="card card-body overlay border-0 text-light mb-md-0 justify-content-end">
-                    <div class="position-relative">
-                        <span class="badge badge-primary">Business</span>
-                        <div class="my-3">
-                            <h2>{{$headlines[0]->title}}</h2>
-                        </div>
-                    </div>
-                    <img src="{{$headlines[0]->featured_image}}" alt="Image" class="rounded bg-image">
-                </a>
-            </div> --}}
             <div class="col-md-5 col-lg-4">
                 <ul class="list-unstyled list-articles">
                     @foreach ($headlines as $headline)

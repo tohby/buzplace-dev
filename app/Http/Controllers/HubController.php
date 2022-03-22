@@ -20,7 +20,7 @@ class HubController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(1);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         return view('the-hub/index', compact('posts'));
     }
 

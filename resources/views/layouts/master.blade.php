@@ -17,11 +17,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @yield('styles')
     <link rel="stylesheet" href="{{ asset('css/buz4564.css') }}">
-    <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('/svg/logos/icon.svg') }}" type="image/x-icon">
+    @livewireStyles
 </head>
 
 <body>
@@ -156,7 +155,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/buzplace.js') }}"></script>
     @yield('scripts')
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bec3b168829ed15"></script>
+    @livewireScripts
+    {{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bec3b168829ed15"></script> --}}
 </body>
 
 </html>

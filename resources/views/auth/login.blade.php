@@ -38,6 +38,7 @@
                 <!-- Form -->
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
+                    @honeypot
                     <!-- Email address -->
                     <div class="form-group">
 
