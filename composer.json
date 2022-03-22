@@ -22,6 +22,7 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
+        "livewire/livewire": "^2.10",
         "meilisearch/meilisearch-php": "^0.22.0",
         "spatie/laravel-cookie-consent": "^3.2",
         "spatie/laravel-honeypot": "^4.1"
